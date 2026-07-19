@@ -1,0 +1,290 @@
+==========================================================================================
+REDTAIL REGIONAL FREIGHT — INDEPENDENT DATA ANALYSIS
+==========================================================================================
+
+
+### 1. FLEET FUEL EFFICIENCY (MPG) BY TRUCK ###
+Fleet average MPG across all trips: 6.90
+
+Worst 5 trucks by average MPG:
+truck_id  mean  count  std          make    model  year  current_odometer status
+ TRK-014  5.04    528 0.21  Freightliner Cascadia  2013            781400 active
+ TRK-012  6.91    591 0.37     Peterbilt      389  2024            233517 active
+ TRK-033  6.92    590 0.37     Peterbilt      389  2020            600204 active
+ TRK-016  6.92    611 0.37 International       LT  2016            650000   shop
+ TRK-001  6.92    615 0.37     Peterbilt      579  2018            650000 active
+
+Best 5 trucks by average MPG:
+truck_id  mean  count  std          make model  year  current_odometer status
+ TRK-027  6.96    571 0.37     Peterbilt   579  2022            497787 active
+ TRK-038  6.96    565 0.37     Peterbilt   579  2018            650000 active
+ TRK-008  6.97    546 0.37 International    LT  2023            344160 active
+ TRK-028  6.97    569 0.38     Peterbilt   579  2020            650000 active
+ TRK-005  6.99    569 0.36 International    LT  2018            650000 active
+
+>>> Worst truck: TRK-014 (2013 Freightliner Cascadia), 5.04 MPG vs fleet avg 6.90 MPG -> 27.0% below fleet average, odometer 781,400 mi, n=528 trips
+
+
+### 2. FUEL EFFICIENCY BY DRIVER ###
+Worst 5 drivers by MPG (min 20 trips):
+driver_id  mean  count
+  DRV-033  6.85    554
+  DRV-051  6.87    566
+  DRV-004  6.87    604
+  DRV-039  6.87    535
+  DRV-022  6.88    593
+
+Best 5 drivers by MPG (min 20 trips):
+driver_id  mean  count
+  DRV-021  6.92    526
+  DRV-040  6.92    565
+  DRV-034  6.93    515
+  DRV-017  6.93    568
+  DRV-026  6.95    559
+
+
+### 3. MAINTENANCE COST & DOWNTIME BY TRUCK ###
+Fleet-wide avg maintenance cost per truck: $10,765.31
+Fleet-wide avg downtime hours per truck: 76.3
+
+Top 5 trucks by total maintenance cost:
+truck_id  total_cost  n_records  total_downtime_hrs  avg_cost          make    model  year  current_odometer
+ TRK-014  123,169.91         25            1,097.90  4,926.80  Freightliner Cascadia  2013            781400
+ TRK-026   16,664.27         10               96.70  1,666.43     Peterbilt      579  2024            240116
+ TRK-007   13,720.94         12              110.30  1,143.41      Kenworth     T680  2022            406315
+ TRK-016   13,605.67          9               61.20  1,511.74 International       LT  2016            650000
+ TRK-038   12,845.31         10               40.40  1,284.53     Peterbilt      579  2018            650000
+
+Maintenance in last 18 months (since 2025-01-01), top 5 trucks:
+              cost  downtime   n
+truck_id                        
+TRK-014  89,438.75    634.50  17
+TRK-026  13,905.51     66.70   7
+TRK-007  13,004.49    105.80  10
+TRK-038  12,295.45     37.10   9
+TRK-027  12,110.15     55.10  10
+
+
+### 4. REVENUE PER MILE / PROFITABILITY BY ROUTE ###
+        route_id  n_loads  avg_revenue  avg_fsc  distance  base_rate  avg_rev_per_mile  total_revenue
+AMA-OKC-BACKHAUL     2919       496.02   107.84       261       1.90              2.31   1,447,872.81
+DEN-AMA-BACKHAUL     1941       843.20   178.72       432       1.95              2.37   1,636,656.09
+  AMA-DEN-REEFER     1970       928.71   179.39       432       2.15              2.57   1,829,565.27
+     AMA-OKC-VAN     2837       613.76   107.99       261       2.35              2.77   1,741,239.23
+     LUB-ABQ-VAN     2265       682.13   117.60       284       2.40              2.82   1,545,024.10
+     AMA-LUB-VAN     3932       313.07    50.92       123       2.55              2.96   1,231,006.19
+      PLV-AMA-AG     3116       200.84    28.29        68       2.95              3.37     625,811.07
+      AMA-HFD-AG     3020       158.02    21.05        51       3.10              3.51     477,232.47
+
+Net revenue per mile by route (revenue + FSC - fuel cost), vs $2.05/mi reference breakeven:
+        route_id    n  avg_gross_rev_per_mile  avg_fuel_cost  avg_net_revenue  avg_net_per_mile  avg_detention_min  pct_loads_below_205
+AMA-OKC-BACKHAUL 2885                    1.90         156.35           447.47              1.69              21.11                99.97
+DEN-AMA-BACKHAUL 1923                    1.95         257.65           764.21              1.74              21.16                99.53
+  AMA-DEN-REEFER 1950                    2.15         258.40           849.69              1.94              21.11                79.59
+     AMA-OKC-VAN 2807                    2.35         155.94           565.85              2.14              21.00                27.15
+     LUB-ABQ-VAN 2243                    2.40         169.91           629.91              2.19              93.23                15.69
+     AMA-LUB-VAN 3887                    2.55          73.45           290.53              2.33              62.39                 2.78
+      PLV-AMA-AG 3088                    2.95          40.78           188.35              2.73              21.16                 0.00
+      AMA-HFD-AG 2991                    3.10          30.43           148.64              2.87              21.20                 0.00
+
+
+### 5. REVENUE / PROFIT BY CUSTOMER ###
+customer_id                 customer_name  n_loads  total_revenue  avg_revenue  total_fsc  pct_of_revenue
+   CUST-004 Sangre de Cristo Distribution     3911   3,466,221.36       886.27 700,292.71           32.90
+   CUST-001     Panhandle Beef Processors     5216   2,485,423.54       476.50 467,490.33           23.59
+   CUST-002          Llano Estacado Foods     4522   2,252,014.62       498.01 381,914.48           21.38
+   CUST-006            Sooner State Foods     2215   1,227,704.17       554.27 238,324.61           11.65
+   CUST-003    High Plains Ag Cooperative     3479     625,553.93       179.81  85,675.16            5.94
+   CUST-005        Caprock Grain Exchange     2657     477,489.61       179.71  66,051.36            4.53
+
+
+### 6. DETENTION BY CUSTOMER ###
+Fleet-wide average detention per event: 18.0 min
+customer_id                 customer_name  avg_detention  total_detention_hrs  n_events  pct_on_time
+   CUST-002          Llano Estacado Foods          46.57             6,946.35      8950         0.00
+   CUST-005        Caprock Grain Exchange          10.63               933.60      5268         0.98
+   CUST-004 Sangre de Cristo Distribution          10.57             1,364.23      7746         0.98
+   CUST-006            Sooner State Foods          10.56               771.78      4386         0.98
+   CUST-003    High Plains Ag Cooperative          10.56             1,212.12      6890         0.98
+   CUST-001     Panhandle Beef Processors          10.52             1,806.53     10308         0.98
+
+Detention by facility type:
+facility_type
+consignee   17.97
+shipper     17.95
+
+
+### 7. ON-TIME PERFORMANCE ###
+Fleet-wide on-time rate (trips): 89.2%
+
+Worst 5 drivers by on-time %:
+driver_id  mean  count
+  DRV-034  0.86    515
+  DRV-039  0.87    535
+  DRV-004  0.87    604
+  DRV-002  0.87    576
+  DRV-028  0.88    533
+
+On-time % by route:
+route_id
+DEN-AMA-BACKHAUL   0.89
+AMA-LUB-VAN        0.89
+AMA-DEN-REEFER     0.89
+AMA-OKC-VAN        0.89
+PLV-AMA-AG         0.89
+AMA-HFD-AG         0.89
+AMA-OKC-BACKHAUL   0.90
+LUB-ABQ-VAN        0.90
+
+On-time % by customer:
+customer_name
+Sooner State Foods              0.89
+Sangre de Cristo Distribution   0.89
+Caprock Grain Exchange          0.89
+High Plains Ag Cooperative      0.89
+Panhandle Beef Processors       0.89
+Llano Estacado Foods            0.90
+
+
+### 8. DRIVER LOAD COUNT / UTILIZATION ###
+Trip count by driver — min: 515, max: 604, mean: 558.3, median: 563.0
+
+Bottom 5 drivers by trip count (possibly underutilized or recently hired/terminated):
+driver_id
+DRV-034    515
+DRV-027    518
+DRV-021    526
+DRV-015    527
+DRV-036    531
+
+
+### 9. DRIVER TENURE / TURNOVER ###
+employment_status
+active            39
+terminated         9
+voluntary_quit     3
+retired            1
+
+Terminated/quit drivers: 9 of 52 (17.3%)
+Avg tenure at hire for terminated (days): 1043
+
+Drivers hired since 2024-11-03 (last ~18 months): 12
+employment_status
+terminated        7
+active            4
+voluntary_quit    1
+Termination rate among recent hires: 58.3% vs older hires: 5.0%
+
+
+### 10. MONTHLY TRENDS — LOAD VOLUME, REVENUE, FUEL COST ###
+  month  n_loads    revenue
+2024-07      917 441,623.02
+2024-08      916 443,814.73
+2024-09      925 440,637.03
+2024-10     1019 487,978.37
+2024-11      916 440,797.71
+2024-12      903 422,892.75
+2025-01      939 440,980.18
+2025-02      826 387,741.03
+2025-03      900 440,767.26
+2025-04      876 421,326.79
+2025-05      934 448,747.19
+2025-06      939 440,623.39
+2025-07      940 441,938.47
+2025-08      905 434,522.27
+2025-09      915 444,346.54
+2025-10      905 438,407.03
+2025-11      878 429,588.86
+2025-12      906 432,717.91
+2026-01      945 447,450.53
+2026-02      852 410,887.91
+2026-03      944 446,981.63
+2026-04      918 447,675.75
+2026-05      915 440,711.83
+2026-06      918 439,140.08
+2026-07       49  22,108.97
+
+Monthly fuel price/cost trend:
+  month  avg_price  total_gallons  total_cost
+2024-07       3.97      28,801.99  114,382.96
+2024-08       3.96      28,772.24  114,076.74
+2024-09       3.84      28,716.27  110,167.79
+2024-10       3.83      31,558.67  121,010.32
+2024-11       4.04      28,731.98  115,976.04
+2024-12       4.00      27,462.82  109,814.53
+2025-01       3.95      28,531.46  112,749.39
+2025-02       3.86      24,956.23   96,296.29
+2025-03       4.03      28,797.63  116,149.14
+2025-04       4.07      27,220.75  110,929.88
+2025-05       4.07      29,233.24  119,080.88
+2025-06       3.91      28,343.86  110,904.60
+2025-07       3.92      28,540.75  111,934.94
+2025-08       4.10      28,351.45  116,119.29
+2025-09       4.00      29,025.00  116,027.84
+2025-10       4.06      28,678.73  116,494.51
+2025-11       4.10      28,020.93  114,947.93
+2025-12       4.19      28,365.26  118,905.89
+2026-01       4.08      28,983.68  118,214.46
+2026-02       4.27      26,924.00  114,837.67
+2026-03       4.25      29,274.88  124,296.56
+2026-04       4.14      29,213.88  121,073.92
+2026-05       4.18      28,567.80  119,404.68
+2026-06       4.27      28,582.99  122,101.17
+2026-07       4.33       1,333.54    5,777.68
+
+On-time % trend by month:
+month
+2024-07   0.89
+2024-08   0.90
+2024-09   0.90
+2024-10   0.89
+2024-11   0.88
+2024-12   0.89
+2025-01   0.89
+2025-02   0.89
+2025-03   0.90
+2025-04   0.89
+2025-05   0.88
+2025-06   0.88
+2025-07   0.90
+2025-08   0.88
+2025-09   0.90
+2025-10   0.90
+2025-11   0.90
+2025-12   0.88
+2026-01   0.89
+2026-02   0.89
+2026-03   0.89
+2026-04   0.90
+2026-05   0.90
+2026-06   0.90
+2026-07   0.89
+Freq: M
+
+
+### 11. PAYMENT TERMS BY CUSTOMER ###
+customer_id                 customer_name  payment_terms_days account_status
+   CUST-001     Panhandle Beef Processors                  30         active
+   CUST-002          Llano Estacado Foods                  30         active
+   CUST-003    High Plains Ag Cooperative                  15         active
+   CUST-004 Sangre de Cristo Distribution                  45         active
+   CUST-005        Caprock Grain Exchange                  15         active
+   CUST-006            Sooner State Foods                  30         active
+
+
+### 12. TRUCK AGE VS MAINTENANCE COST PER MILE ###
+truck_id          make    model  year  age  current_odometer  total_cost  cost_per_mile  total_downtime_hrs
+ TRK-014  Freightliner Cascadia  2013   13            781400  123,169.91           0.16            1,097.90
+ TRK-026     Peterbilt      579  2024    2            240116   16,664.27           0.07               96.70
+ TRK-036 International       LT  2024    2            260741   10,036.50           0.04               59.80
+ TRK-007      Kenworth     T680  2022    4            406315   13,720.94           0.03              110.30
+ TRK-010 International       LT  2023    3            412890   10,724.03           0.03               47.90
+ TRK-017      Kenworth     T680  2024    2            219737    5,509.67           0.03               38.80
+ TRK-027     Peterbilt      579  2022    4            497787   12,480.00           0.03               58.10
+ TRK-013 International       LT  2021    5            504913   11,320.78           0.02               78.20
+ TRK-016 International       LT  2016   10            650000   13,605.67           0.02               61.20
+ TRK-008 International       LT  2023    3            344160    7,142.57           0.02               35.00
+
+
+### 13. LOAD/REVENUE CONCENTRATION — CUSTOMER RISK ###
+Top 4 customers account for 89.5% of total revenue

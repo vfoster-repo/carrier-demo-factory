@@ -1,0 +1,8 @@
+route_id,origin_city,origin_state,destination_city,destination_state,distance_miles,base_rate_per_mile
+RTE-01,Mount Vernon,WA,Portland,OR,260,2.85
+RTE-02,Bellingham,WA,Oakland,CA,780,2.95
+RTE-03,Burlington,WA,Oakland,CA,800,3.05
+RTE-04,Mount Vernon,WA,Oakland,CA,810,2.6
+RTE-05,Oakland,CA,Mount Vernon,WA,815,1.65
+RTE-06,Portland,OR,Bellingham,WA,300,1.75
+RTE-07,Oakland,CA,Burlington,WA,805,1.55

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blue Heron Cold Chain — Data Analysis Report</title>
+<script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+<style>
+:root {
+  --navy:   #1B4F72;
+  --red:    #E74C3C;
+  --green:  #2ECC71;
+  --gray:   #95A5A6;
+  --light:  #F4F6F8;
+  --white:  #FFFFFF;
+  --text:   #2C3E50;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+       color: var(--text); background: var(--light); }
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+.metric-card { background: var(--white); border-radius: 12px; padding: 1.5rem;
+               box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.metric-value { font-size: 2.5rem; font-weight: 700; color: var(--navy); }
+.metric-label { color: var(--gray); font-size: 0.875rem; margin-top: 0.25rem; }
+.metric-delta.bad  { color: var(--red);   font-weight: 600; display:block; margin-top:0.5rem; }
+.metric-delta.good { color: var(--green); font-weight: 600; display:block; margin-top:0.5rem; }
+
+.section { padding: 3rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+.section-title { font-size: 1.75rem; font-weight: 700; color: var(--navy);
+                 margin-bottom: 0.5rem; }
+.section-subtitle { color: var(--gray); margin-bottom: 2rem; font-size: 1rem; }
+
+.finding-box { background: var(--navy); color: var(--white); border-radius: 12px;
+               padding: 1.5rem 2rem; margin: 2rem 0; font-size: 1.1rem; line-height: 1.6; }
+.finding-box strong { color: #F8C471; }
+
+.nav { position: sticky; top: 0; z-index: 100; background: var(--navy);
+       display: flex; gap: 0; overflow-x: auto; }
+.nav a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 1.25rem;
+         white-space: nowrap; font-size: 0.875rem; font-weight: 500; }
+.nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+
+.hero { background: var(--navy); color: white; padding: 4rem 1.5rem 3rem;
+        text-align: center; }
+.hero h1 { font-size: clamp(1.75rem, 5vw, 3rem); font-weight: 800; }
+.hero p  { opacity: 0.8; margin-top: 1rem; font-size: 1.1rem; max-width: 600px; margin-inline: auto; }
+.hero .badge { display: inline-block; background: rgba(255,255,255,0.15);
+               border-radius: 999px; padding: 0.35rem 1rem; font-size: 0.8rem;
+               margin-bottom: 1rem; }
+
+.chart-wrap { background: white; border-radius: 12px; padding: 1rem;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin: 1.5rem 0; }
+
+.pitch { background: var(--navy); color: white; padding: 3rem 1.5rem; text-align: center; }
+.pitch h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; }
+.pitch p  { opacity: 0.85; max-width: 640px; margin-inline: auto; line-height: 1.7; }
+.cta-btn  { display: inline-block; margin-top: 2rem; background: var(--green);
+            color: white; padding: 1rem 2.5rem; border-radius: 8px; font-weight: 700;
+            text-decoration: none; font-size: 1.1rem; }
+
+table.data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+table.data-table th, table.data-table td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #E5E9EC; }
+table.data-table th { color: var(--gray); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+table.data-table tr:last-child td { border-bottom: none; }
+
+@media (max-width: 600px) {
+  .section { padding: 2rem 1rem; }
+  .metric-value { font-size: 2rem; }
+  .hero { padding: 2.5rem 1rem 2rem; }
+  table.data-table { font-size: 0.78rem; }
+  table.data-table th, table.data-table td { padding: 0.45rem 0.4rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">Data Analysis Report · July 2, 2026</div>
+  <h1>Blue Heron Cold Chain</h1>
+  <p>Two years of trip, fuel, maintenance, and delivery data show a business that's genuinely profitable heading south and quietly losing money on four specific, fixable problems. This report puts real dollar figures on all four.</p>
+</div>
+
+<div class="nav">
+  <a href="#section-1">Truck Fuel Gap</a>
+  <a href="#section-2">Golden Gate Detention</a>
+  <a href="#section-3">Backhaul Margins</a>
+  <a href="#section-4">Maintenance Trend</a>
+  <a href="#section-5">Customer Concentration</a>
+  <a href="#whats-next">What's Next</a>
+</div>
+
+<!-- SECTION 1: Truck fuel inefficiency -->
+<section class="section" id="section-1">
+  <h2 class="section-title">TRK-01's Fuel Bill Is Quietly Draining the Business</h2>
+  <p class="section-subtitle">Marcus's 2016 Freightliner Cascadia (766K+ miles) burns fuel at a 26% worse rate than Renata's 2021 Kenworth T680 on the same lanes — and the gap shows up in every single trip.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">5.18 MPG</div>
+      <div class="metric-label">TRK-01 (Marcus) fleet-average MPG</div>
+      <span class="metric-delta bad">↓ 26% below TRK-02</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">7.01 MPG</div>
+      <div class="metric-label">TRK-02 (Renata) fleet-average MPG</div>
+      <span class="metric-delta good">On target for a modern reefer tractor</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">~$280</div>
+      <div class="metric-label">Estimated extra fuel cost per round trip for TRK-01</div>
+      <span class="metric-delta bad">≈ $50,000+/year at current load pattern</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-1" style="height:380px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>TRK-01 (Marcus) has averaged 5.18 MPG over the full data period vs. TRK-02's (Renata) 7.01 MPG — a gap that has held steady for two years, not improved.</strong>
+    On a typical ~680-mile southbound leg this costs roughly $140 more in diesel per leg, or about $280 per round trip — money that never shows up as a single alarming number, just a slow leak every single week.
+  </div>
+</section>
+
+<!-- SECTION 2: Golden Gate detention -->
+<section class="section" id="section-2">
+  <h2 class="section-title">Golden Gate Fresh Distributors Is a Detention Black Hole</h2>
+  <p class="section-subtitle">Blue Heron's highest-volume delivery point holds trucks nearly 5x longer than every other customer — and is on time to load out only 4.5% of the time.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">43.8 min</div>
+      <div class="metric-label">Avg detention at Golden Gate (Oakland, CA)</div>
+      <span class="metric-delta bad">vs. 8.9 min everywhere else</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$5,319</div>
+      <div class="metric-label">Estimated detention cost, 112 deliveries, at $65/hr</div>
+      <span class="metric-delta bad">81.8 total hours lost</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">4.5%</div>
+      <div class="metric-label">On-time rate at Golden Gate</div>
+      <span class="metric-delta bad">vs. 88% at every other customer</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-2" style="height:380px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Across 112 deliveries, Golden Gate Fresh Distributors has cost Blue Heron an estimated $5,300+ in detention time — 5x the wait experienced at every other customer, and consistent month after month, not an occasional bad day.</strong>
+    Because Golden Gate is also the company's #3 revenue customer, Marcus and Renata can't simply walk away — but they now have the hard numbers to bring to a rate or accessorial conversation.
+  </div>
+</section>
+
+<!-- SECTION 3: Backhaul margins -->
+<section class="section" id="section-3">
+  <h2 class="section-title">Northbound Backhauls Are Running Near Breakeven</h2>
+  <p class="section-subtitle">Southbound reefer freight is genuinely profitable. The load-board freight that fills the truck on the way home is a different story.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">$2.37/mi</div>
+      <div class="metric-label">Southbound net margin per mile</div>
+      <span class="metric-delta good">Healthy, core-customer freight</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$1.02/mi</div>
+      <div class="metric-label">Northbound backhaul net margin per mile</div>
+      <span class="metric-delta bad">Less than half of southbound</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">67.7%</div>
+      <div class="metric-label">Of northbound trips net under $1.10/mile</div>
+      <span class="metric-delta bad">Two out of every three return trips</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-3" style="height:400px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Northbound backhaul freight (Oakland/Portland → Mount Vernon/Bellingham) nets $1.02/mile on average vs. $2.37/mile southbound — and 67.7% of those return trips fall under a conservative $1.10/mile breakeven.</strong>
+    Southbound customer rates are effectively subsidizing the empty miles home; a lane-level view would let Marcus and Renata be pickier about load-board freight or push for southbound rate increases that reflect the true round-trip cost.
+  </div>
+</section>
+
+<!-- SECTION 4: Maintenance trend -->
+<section class="section" id="section-4">
+  <h2 class="section-title">TRK-01's Maintenance Costs Are Trending the Wrong Way</h2>
+  <p class="section-subtitle">The fuel penalty isn't TRK-01's only growing cost — service spend and downtime are both climbing as the truck crosses 600,000+ miles, while TRK-02's are falling.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">$18,254</div>
+      <div class="metric-label">TRK-01 total maintenance cost (13 events)</div>
+      <span class="metric-delta bad">vs. $9,679 for TRK-02 (9 events)</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">210.8 hrs</div>
+      <div class="metric-label">TRK-01 total downtime</div>
+      <span class="metric-delta bad">Nearly 3x TRK-02's 71.3 hrs</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">+9.6%</div>
+      <div class="metric-label">TRK-01 avg cost/event, first half → second half of data</div>
+      <span class="metric-delta bad">TRK-02's fell 25.6% over the same window</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-4" style="height:380px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>TRK-01's average maintenance cost per event rose from $1,335 to $1,463 across the data period while TRK-02's fell from $1,254 to $933 — the two trucks are moving in opposite directions.</strong>
+    Combined with the fuel penalty, TRK-01's all-in cost of operation is compounding, not staying flat — the kind of trend that's easy to miss without a running trendline in front of you.
+  </div>
+</section>
+
+<!-- SECTION 5: Customer concentration -->
+<section class="section" id="section-5">
+  <h2 class="section-title">Revenue Is Concentrated in Three Customers — Including the One Causing the Most Pain</h2>
+  <p class="section-subtitle">Bellingham Cold Storage, Cascade Berry Growers, and Golden Gate Fresh Distributors account for nearly two-thirds of all revenue.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">63.3%</div>
+      <div class="metric-label">Of total revenue from top 3 customers</div>
+      <span class="metric-delta bad">Concentration risk if any one relationship sours</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$257,185</div>
+      <div class="metric-label">Annual revenue from Golden Gate — also the worst detention offender</div>
+      <span class="metric-delta bad">45-day payment terms, the longest of any customer</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-5" style="height:380px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Golden Gate Fresh Distributors is simultaneously a top-3 revenue customer (19.8% of total) and the single worst detention offender — Blue Heron can't easily walk away from the relationship causing them the most operational pain.</strong>
+    That combination is exactly why a dollars-and-cents detention leverage report matters more here than a generic "be pickier about customers" recommendation.
+  </div>
+</section>
+
+<div class="pitch" id="whats-next">
+  <h2>What We'd Build For You</h2>
+  <p>
+    This report shows what we found in about an hour of analysis on data Blue Heron already has.
+    Imagine a live, always-current "two-truck command center" built specifically for Marcus and Renata —
+    real-time cost-per-mile and MPG trends by truck, a lane profitability view that isolates the
+    northbound backhaul drag, and a Golden Gate detention tracker with a running dollar total they
+    could screenshot and send straight to Oakland's traffic manager.
+  </p>
+  <p style="margin-top:1rem; opacity:0.75;">
+    No 100-truck TMS, no bloated platform — just three focused screens that turn what Marcus and Renata
+    already sense in their gut into hard evidence they can act on this quarter.
+  </p>
+  <a class="cta-btn" href="mailto:victorfoster@hotmail.com">Request Your Custom Platform</a>
+</div>
+
+<footer style="text-align:center; padding:2rem; color:#95A5A6; font-size:0.85rem;">
+  Generated by Carrier Demo Factory &middot;
+  <a href="https://your-domain.com" style="color:#95A5A6;">your-domain.com</a> &middot;
+  July 2, 2026
+</footer>
+
+<script>
+// ---------- Chart 1: MPG trend by truck ----------
+const data_1 = [{"truck_id": "TRK-01", "month": "2024-07", "mpg": 5.18}, {"truck_id": "TRK-01", "month": "2024-08", "mpg": 5.19}, {"truck_id": "TRK-01", "month": "2024-09", "mpg": 5.21}, {"truck_id": "TRK-01", "month": "2024-10", "mpg": 5.21}, {"truck_id": "TRK-01", "month": "2024-11", "mpg": 5.17}, {"truck_id": "TRK-01", "month": "2024-12", "mpg": 5.17}, {"truck_id": "TRK-01", "month": "2025-01", "mpg": 5.18}, {"truck_id": "TRK-01", "month": "2025-02", "mpg": 5.21}, {"truck_id": "TRK-01", "month": "2025-03", "mpg": 5.2}, {"truck_id": "TRK-01", "month": "2025-04", "mpg": 5.19}, {"truck_id": "TRK-01", "month": "2025-05", "mpg": 5.2}, {"truck_id": "TRK-01", "month": "2025-06", "mpg": 5.18}, {"truck_id": "TRK-01", "month": "2025-07", "mpg": 5.17}, {"truck_id": "TRK-01", "month": "2025-08", "mpg": 5.16}, {"truck_id": "TRK-01", "month": "2025-09", "mpg": 5.16}, {"truck_id": "TRK-01", "month": "2025-10", "mpg": 5.14}, {"truck_id": "TRK-01", "month": "2025-11", "mpg": 5.17}, {"truck_id": "TRK-01", "month": "2025-12", "mpg": 5.14}, {"truck_id": "TRK-01", "month": "2026-01", "mpg": 5.17}, {"truck_id": "TRK-01", "month": "2026-02", "mpg": 5.19}, {"truck_id": "TRK-01", "month": "2026-03", "mpg": 5.21}, {"truck_id": "TRK-01", "month": "2026-04", "mpg": 5.2}, {"truck_id": "TRK-01", "month": "2026-05", "mpg": 5.16}, {"truck_id": "TRK-01", "month": "2026-06", "mpg": 5.17}, {"truck_id": "TRK-02", "month": "2024-07", "mpg": 6.97}, {"truck_id": "TRK-02", "month": "2024-08", "mpg": 6.98}, {"truck_id": "TRK-02", "month": "2024-09", "mpg": 7.0}, {"truck_id": "TRK-02", "month": "2024-10", "mpg": 7.0}, {"truck_id": "TRK-02", "month": "2024-11", "mpg": 7.01}, {"truck_id": "TRK-02", "month": "2024-12", "mpg": 7.0}, {"truck_id": "TRK-02", "month": "2025-01", "mpg": 6.99}, {"truck_id": "TRK-02", "month": "2025-02", "mpg": 7.0}, {"truck_id": "TRK-02", "month": "2025-03", "mpg": 6.98}, {"truck_id": "TRK-02", "month": "2025-04", "mpg": 7.0}, {"truck_id": "TRK-02", "month": "2025-05", "mpg": 7.0}, {"truck_id": "TRK-02", "month": "2025-06", "mpg": 7.03}, {"truck_id": "TRK-02", "month": "2025-07", "mpg": 7.03}, {"truck_id": "TRK-02", "month": "2025-08", "mpg": 7.03}, {"truck_id": "TRK-02", "month": "2025-09", "mpg": 7.0}, {"truck_id": "TRK-02", "month": "2025-10", "mpg": 7.02}, {"truck_id": "TRK-02", "month": "2025-11", "mpg": 6.98}, {"truck_id": "TRK-02", "month": "2025-12", "mpg": 7.0}, {"truck_id": "TRK-02", "month": "2026-01", "mpg": 6.98}, {"truck_id": "TRK-02", "month": "2026-02", "mpg": 7.03}, {"truck_id": "TRK-02", "month": "2026-03", "mpg": 7.02}, {"truck_id": "TRK-02", "month": "2026-04", "mpg": 7.02}, {"truck_id": "TRK-02", "month": "2026-05", "mpg": 7.03}, {"truck_id": "TRK-02", "month": "2026-06", "mpg": 7.05}, {"truck_id": "TRK-02", "month": "2026-07", "mpg": 7.1}];
+const trucks_1 = ['TRK-01', 'TRK-02'];
+const names_1 = { 'TRK-01': 'TRK-01 (Marcus)', 'TRK-02': 'TRK-02 (Renata)' };
+const colors_1 = { 'TRK-01': '#E74C3C', 'TRK-02': '#1B4F72' };
+const traces_1 = trucks_1.map(tid => {
+  const rows = data_1.filter(d => d.truck_id === tid);
+  return {
+    type: 'scatter',
+    mode: 'lines',
+    name: names_1[tid],
+    x: rows.map(d => d.month),
+    y: rows.map(d => d.mpg),
+    line: { color: colors_1[tid], width: 3 }
+  };
+});
+Plotly.newPlot('chart-1', traces_1, {
+    title: 'TRK-01 has trailed TRK-02 by ~1.8 MPG every month for two years (3-mo rolling avg)',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 60, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Month' },
+    yaxis: { title: 'Miles per gallon' },
+    legend: { orientation: 'h', y: -0.2 }
+}, { responsive: true, displayModeBar: false });
+
+// ---------- Chart 2: Detention by customer ----------
+const data_2 = [{"customer_name": "Golden Gate Fresh Distributors", "avg_detention": 43.84, "events": 112, "total_hours": 81.8, "on_time_rate": 4.46}, {"customer_name": "Skagit Valley Produce", "avg_detention": 9.5, "events": 101, "total_hours": 16.0, "on_time_rate": 82.18}, {"customer_name": "Cascade Berry Growers", "avg_detention": 9.22, "events": 101, "total_hours": 15.5, "on_time_rate": 89.11}, {"customer_name": "Pacific Coast Load Board Spot", "avg_detention": 8.83, "events": 172, "total_hours": 25.3, "on_time_rate": 87.79}, {"customer_name": "Bellingham Cold Storage", "avg_detention": 8.68, "events": 119, "total_hours": 17.2, "on_time_rate": 89.92}, {"customer_name": "Evergreen Freight Match", "avg_detention": 8.68, "events": 184, "total_hours": 26.6, "on_time_rate": 89.67}];
+const sorted_2 = data_2.slice().sort((a,b) => a.avg_detention - b.avg_detention);
+Plotly.newPlot('chart-2', [{
+    type: 'bar',
+    orientation: 'h',
+    x: sorted_2.map(d => d.avg_detention),
+    y: sorted_2.map(d => d.customer_name),
+    marker: {
+        color: sorted_2.map(d => d.customer_name === 'Golden Gate Fresh Distributors' ? '#E74C3C' : '#1B4F72')
+    },
+    text: sorted_2.map(d => d.avg_detention.toFixed(1) + ' min'),
+    textposition: 'outside'
+}], {
+    title: 'Golden Gate holds trucks nearly 5x longer than any other customer',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 190, r: 40 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Avg detention (minutes)' },
+    yaxis: { title: '' }
+}, { responsive: true, displayModeBar: false });
+
+// ---------- Chart 3: Direction comparison (route margin) ----------
+const data_3 = [{"route_id": "RTE-03", "origin_city": "Burlington", "destination_city": "Oakland", "direction": "southbound", "trips": 101, "avg_rev_per_mile": 3.26, "avg_net_margin_per_mile": 2.58, "label": "Burlington \u2192 Oakland"}, {"route_id": "RTE-02", "origin_city": "Bellingham", "destination_city": "Oakland", "direction": "southbound", "trips": 119, "avg_rev_per_mile": 3.15, "avg_net_margin_per_mile": 2.49, "label": "Bellingham \u2192 Oakland"}, {"route_id": "RTE-01", "origin_city": "Mount Vernon", "destination_city": "Portland", "direction": "southbound", "trips": 101, "avg_rev_per_mile": 2.99, "avg_net_margin_per_mile": 2.31, "label": "Mount Vernon \u2192 Portland"}, {"route_id": "RTE-04", "origin_city": "Mount Vernon", "destination_city": "Oakland", "direction": "southbound", "trips": 112, "avg_rev_per_mile": 2.81, "avg_net_margin_per_mile": 2.13, "label": "Mount Vernon \u2192 Oakland"}, {"route_id": "RTE-06", "origin_city": "Portland", "destination_city": "Bellingham", "direction": "northbound_backhaul", "trips": 114, "avg_rev_per_mile": 1.76, "avg_net_margin_per_mile": 1.08, "label": "Portland \u2192 Bellingham"}, {"route_id": "RTE-05", "origin_city": "Oakland", "destination_city": "Mount Vernon", "direction": "northbound_backhaul", "trips": 130, "avg_rev_per_mile": 1.7, "avg_net_margin_per_mile": 1.02, "label": "Oakland \u2192 Mount Vernon"}, {"route_id": "RTE-07", "origin_city": "Oakland", "destination_city": "Burlington", "direction": "northbound_backhaul", "trips": 112, "avg_rev_per_mile": 1.64, "avg_net_margin_per_mile": 0.95, "label": "Oakland \u2192 Burlington"}];
+const sorted_3 = data_3.slice().sort((a,b) => a.avg_net_margin_per_mile - b.avg_net_margin_per_mile);
+Plotly.newPlot('chart-3', [{
+    type: 'bar',
+    orientation: 'h',
+    x: sorted_3.map(d => d.avg_net_margin_per_mile),
+    y: sorted_3.map(d => d.label),
+    marker: {
+        color: sorted_3.map(d => d.direction === 'southbound' ? '#1B4F72' : '#E74C3C')
+    },
+    text: sorted_3.map(d => '$' + d.avg_net_margin_per_mile.toFixed(2) + '/mi'),
+    textposition: 'outside'
+}], {
+    title: 'Every northbound backhaul route nets less than half of any southbound route',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 190, r: 60 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Net margin per mile ($)' },
+    yaxis: { title: '' }
+}, { responsive: true, displayModeBar: false });
+
+// ---------- Chart 4: Maintenance monthly trend ----------
+const data_4 = [{"truck_id": "TRK-01", "month": "2024-09", "cost": 903.89, "downtime": 14.8}, {"truck_id": "TRK-01", "month": "2024-10", "cost": 917.44, "downtime": 16.2}, {"truck_id": "TRK-01", "month": "2025-01", "cost": 2086.33, "downtime": 18.1}, {"truck_id": "TRK-01", "month": "2025-04", "cost": 780.39, "downtime": 14.8}, {"truck_id": "TRK-01", "month": "2025-05", "cost": 1520.55, "downtime": 9.7}, {"truck_id": "TRK-01", "month": "2025-06", "cost": 1802.67, "downtime": 19.6}, {"truck_id": "TRK-01", "month": "2025-07", "cost": 1244.3, "downtime": 7.4}, {"truck_id": "TRK-01", "month": "2025-09", "cost": 1007.85, "downtime": 4.0}, {"truck_id": "TRK-01", "month": "2025-10", "cost": 655.63, "downtime": 16.4}, {"truck_id": "TRK-01", "month": "2025-11", "cost": 704.02, "downtime": 12.1}, {"truck_id": "TRK-01", "month": "2026-03", "cost": 1907.16, "downtime": 29.0}, {"truck_id": "TRK-01", "month": "2026-05", "cost": 3234.46, "downtime": 19.6}, {"truck_id": "TRK-01", "month": "2026-06", "cost": 1488.89, "downtime": 29.1}, {"truck_id": "TRK-02", "month": "2024-09", "cost": 1429.94, "downtime": 8.5}, {"truck_id": "TRK-02", "month": "2024-11", "cost": 771.01, "downtime": 4.3}, {"truck_id": "TRK-02", "month": "2025-01", "cost": 1591.94, "downtime": 13.3}, {"truck_id": "TRK-02", "month": "2025-06", "cost": 1223.18, "downtime": 13.8}, {"truck_id": "TRK-02", "month": "2025-07", "cost": 439.12, "downtime": 3.2}, {"truck_id": "TRK-02", "month": "2025-09", "cost": 1769.1, "downtime": 4.4}, {"truck_id": "TRK-02", "month": "2025-11", "cost": 545.69, "downtime": 8.5}, {"truck_id": "TRK-02", "month": "2026-02", "cost": 1465.85, "downtime": 4.6}, {"truck_id": "TRK-02", "month": "2026-06", "cost": 443.46, "downtime": 10.7}];
+const trucks_4 = ['TRK-01', 'TRK-02'];
+const names_4 = { 'TRK-01': 'TRK-01 (Marcus)', 'TRK-02': 'TRK-02 (Renata)' };
+const colors_4 = { 'TRK-01': '#E74C3C', 'TRK-02': '#1B4F72' };
+const traces_4 = trucks_4.map(tid => {
+  const rows = data_4.filter(d => d.truck_id === tid);
+  return {
+    type: 'bar',
+    name: names_4[tid],
+    x: rows.map(d => d.month),
+    y: rows.map(d => d.cost),
+    marker: { color: colors_4[tid] }
+  };
+});
+Plotly.newPlot('chart-4', traces_4, {
+    title: 'TRK-01 maintenance spend is climbing; TRK-02\'s is trending down',
+    barmode: 'group',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 80, l: 60, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Month' },
+    yaxis: { title: 'Maintenance cost ($)' },
+    legend: { orientation: 'h', y: -0.3 }
+}, { responsive: true, displayModeBar: false });
+
+// ---------- Chart 5: Customer revenue concentration ----------
+const data_5 = [{"customer_name": "Bellingham Cold Storage", "total_revenue": 275614.05, "loads": 119, "pct_of_revenue": 22.9}, {"customer_name": "Cascade Berry Growers", "total_revenue": 248504.63, "loads": 101, "pct_of_revenue": 20.7}, {"customer_name": "Golden Gate Fresh Distributors", "total_revenue": 236257.98, "loads": 112, "pct_of_revenue": 19.7}, {"customer_name": "Evergreen Freight Match", "total_revenue": 189802.84, "loads": 184, "pct_of_revenue": 15.8}, {"customer_name": "Pacific Coast Load Board Spot", "total_revenue": 176163.78, "loads": 172, "pct_of_revenue": 14.7}, {"customer_name": "Skagit Valley Produce", "total_revenue": 75214.01, "loads": 101, "pct_of_revenue": 6.3}];
+const sorted_5 = data_5.slice().sort((a,b) => a.total_revenue - b.total_revenue);
+Plotly.newPlot('chart-5', [{
+    type: 'bar',
+    orientation: 'h',
+    x: sorted_5.map(d => d.total_revenue),
+    y: sorted_5.map(d => d.customer_name),
+    marker: {
+        color: sorted_5.map(d => d.customer_name === 'Golden Gate Fresh Distributors' ? '#E74C3C' : '#1B4F72')
+    },
+    text: sorted_5.map(d => d.pct_of_revenue.toFixed(1) + '%'),
+    textposition: 'outside'
+}], {
+    title: 'Three customers account for 63% of total revenue',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 210, r: 60 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Total revenue ($)' },
+    yaxis: { title: '' }
+}, { responsive: true, displayModeBar: false });
+</script>
+
+</body>
+</html>

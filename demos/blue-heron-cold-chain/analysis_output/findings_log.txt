@@ -1,0 +1,436 @@
+================================================================================
+DESCRIBE: loads
+           load_id customer_id route_id                   load_date                   freight_type  weight_lbs  revenue  fuel_surcharge load_status
+count          789         789      789                         789                            789      789.00   789.00          789.00         789
+unique         789           6        7                         NaN                              4         NaN      NaN             NaN           1
+top     LOAD-00001     CUST-06   RTE-05                         NaN  Refrigerated - Backhaul Mixed         NaN      NaN             NaN   delivered
+freq             1         184      130                         NaN                            356         NaN      NaN             NaN         789
+mean           NaN         NaN      NaN  2025-06-27 02:15:03.422053                            NaN   32,752.75 1,522.89          126.76         NaN
+min            NaN         NaN      NaN         2024-07-02 00:00:00                            NaN   15,110.00   447.00           30.18         NaN
+25%            NaN         NaN      NaN         2025-01-01 00:00:00                            NaN   23,102.00   766.26           72.28         NaN
+50%            NaN         NaN      NaN         2025-07-02 00:00:00                            NaN   38,550.00 1,342.11          130.92         NaN
+75%            NaN         NaN      NaN         2025-11-29 00:00:00                            NaN   41,598.00 2,251.65          167.44         NaN
+max            NaN         NaN      NaN         2026-07-02 00:00:00                            NaN   44,485.00 2,557.44          240.57         NaN
+std            NaN         NaN      NaN                         NaN                            NaN    9,893.02   710.39           57.84         NaN
+================================================================================
+DESCRIBE: trips
+            trip_id     load_id driver_id truck_id  actual_miles  fuel_gallons  actual_mpg              departure_time                arrival_time on_time_flag
+count           789         789       789      789        789.00        789.00      789.00                         789                         789          789
+unique          789         789         2        2           NaN           NaN         NaN                         NaN                         NaN            2
+top     TRIP-000001  LOAD-00001    DRV-02   TRK-02           NaN           NaN         NaN                         NaN                         NaN            Y
+freq              1           1       399      399           NaN           NaN         NaN                         NaN                         NaN          668
+mean            NaN         NaN       NaN      NaN        674.75        113.31        6.11  2025-06-27 08:34:15.133079  2025-06-27 22:03:45.731998          NaN
+min             NaN         NaN       NaN      NaN        252.00         34.57        4.90         2024-07-02 04:00:00  2024-07-02 20:24:43.025223          NaN
+25%             NaN         NaN       NaN      NaN        335.00         64.24        5.19         2025-01-01 06:20:00  2025-01-01 23:34:44.251696          NaN
+50%             NaN         NaN       NaN      NaN        807.00        117.81        6.71         2025-07-02 06:00:00  2025-07-02 22:29:02.058681          NaN
+75%             NaN         NaN       NaN      NaN        824.00        154.51        7.00         2025-11-29 05:45:00  2025-11-29 12:26:09.572810          NaN
+max             NaN         NaN       NaN      NaN        855.00        173.43        7.34         2026-07-02 08:05:00  2026-07-03 01:23:59.362220          NaN
+std             NaN         NaN       NaN      NaN        232.25         43.37        0.93                         NaN                         NaN          NaN
+================================================================================
+DESCRIBE: fuel
+        purchase_id      trip_id truck_id driver_id               purchase_date  gallons  price_per_gallon  total_cost                       location
+count           954          954      954       954                         954   954.00            954.00      954.00                            954
+unique          954          789        2         2                         NaN      NaN               NaN         NaN                              6
+top     FUEL-000001  TRIP-000002   TRK-02    DRV-02                         NaN      NaN               NaN         NaN  TA Travel Center, Redding, CA
+freq              1            2      486       486                         NaN      NaN               NaN         NaN                            181
+mean            NaN          NaN      NaN       NaN  2025-06-28 11:28:18.113207    93.72              4.05      379.03                            NaN
+min             NaN          NaN      NaN       NaN         2024-07-02 00:00:00    34.57              3.79      137.96                            NaN
+25%             NaN          NaN      NaN       NaN         2025-01-01 06:00:00    57.01              3.97      231.08                            NaN
+50%             NaN          NaN      NaN       NaN         2025-07-01 12:00:00    77.87              4.04      314.14                            NaN
+75%             NaN          NaN      NaN       NaN         2025-12-03 18:00:00   122.06              4.12      498.89                            NaN
+max             NaN          NaN      NaN       NaN         2026-07-02 00:00:00   173.43              4.33      719.91                            NaN
+std             NaN          NaN      NaN       NaN                         NaN    42.56              0.10      172.13                            NaN
+================================================================================
+DESCRIBE: maintenance
+          record_id truck_id                service_date         service_type     cost  downtime_hours  odometer_at_service
+count            22       22                          22                   22    22.00           22.00                22.00
+unique           22        2                         NaN                    8      NaN             NaN                  NaN
+top     MAINT-00001   TRK-01                         NaN  Oil & Filter Change      NaN             NaN                  NaN
+freq              1       13                         NaN                    5      NaN             NaN                  NaN
+mean            NaN      NaN  2025-07-24 09:49:05.454545                  NaN 1,269.68           12.82           513,962.45
+min             NaN      NaN         2024-09-03 00:00:00                  NaN   439.12            3.20           210,539.00
+25%             NaN      NaN         2025-02-14 12:00:00                  NaN   773.36            7.68           359,594.75
+50%             NaN      NaN         2025-07-26 00:00:00                  NaN 1,233.74           12.70           557,084.00
+75%             NaN      NaN         2025-11-24 18:00:00                  NaN 1,574.09           16.35           658,427.75
+max             NaN      NaN         2026-06-24 00:00:00                  NaN 3,234.46           29.10           766,273.00
+std             NaN      NaN                         NaN                  NaN   660.34            7.38           179,598.12
+================================================================================
+DESCRIBE: delivery_events
+          event_id     load_id      trip_id facility_type              scheduled_time                 actual_time  detention_minutes on_time
+count          789         789          789           789                         789                         789             789.00     789
+unique         789         789          789             1                         NaN                         NaN                NaN       2
+top     EVT-000001  LOAD-00001  TRIP-000001      receiver                         NaN                         NaN                NaN       Y
+freq             1           1            1           789                         NaN                         NaN                NaN     601
+mean           NaN         NaN          NaN           NaN  2025-06-27 22:33:43.678766  2025-06-27 22:21:24.363177              13.88     NaN
+min            NaN         NaN          NaN           NaN  2024-07-02 21:00:43.025223  2024-07-02 20:38:43.025223               0.00     NaN
+25%            NaN         NaN          NaN           NaN  2025-01-02 00:00:44.251696  2025-01-02 00:27:44.251696               6.00     NaN
+50%            NaN         NaN          NaN           NaN  2025-07-02 23:00:02.058681  2025-07-02 22:56:02.058681              10.00     NaN
+75%            NaN         NaN          NaN           NaN  2025-11-29 13:00:09.572810  2025-11-29 12:32:09.572810              14.00     NaN
+max            NaN         NaN          NaN           NaN  2026-07-03 02:00:59.362220  2026-07-03 01:32:59.362220              75.00     NaN
+std            NaN         NaN          NaN           NaN                         NaN                         NaN              13.72     NaN
+================================================================================
+MASTER TABLE SAMPLE
+       trip_id truck_id driver_id                  customer_name route_id  actual_miles  actual_mpg  total_revenue  fuel_cost  net_margin  rev_per_mile  net_margin_per_mile            direction
+0  TRIP-000001   TRK-01    DRV-01          Cascade Berry Growers   RTE-03           797        5.25       2,532.92     607.09    1,925.83          3.18                 2.42           southbound
+1  TRIP-000002   TRK-01    DRV-01        Bellingham Cold Storage   RTE-02           785        5.43       2,510.35     571.84    1,938.51          3.20                 2.47           southbound
+2  TRIP-000003   TRK-01    DRV-01        Evergreen Freight Match   RTE-07           823        5.39       1,377.91     607.71      770.20          1.67                 0.94  northbound_backhaul
+3  TRIP-000004   TRK-02    DRV-02        Bellingham Cold Storage   RTE-02           796        6.91       2,465.22     469.79    1,995.43          3.10                 2.51           southbound
+4  TRIP-000005   TRK-02    DRV-02          Cascade Berry Growers   RTE-03           821        6.84       2,569.00     482.88    2,086.12          3.13                 2.54           southbound
+5  TRIP-000006   TRK-02    DRV-02        Evergreen Freight Match   RTE-07           838        6.85       1,358.10     479.57      878.53          1.62                 1.05  northbound_backhaul
+6  TRIP-000007   TRK-01    DRV-01          Cascade Berry Growers   RTE-03           798        5.39       2,767.27     593.38    2,173.89          3.47                 2.72           southbound
+7  TRIP-000008   TRK-01    DRV-01          Cascade Berry Growers   RTE-03           797        4.99       2,543.88     617.16    1,926.72          3.19                 2.42           southbound
+8  TRIP-000009   TRK-01    DRV-01        Bellingham Cold Storage   RTE-02           784        5.31       2,606.70     564.76    2,041.94          3.32                 2.60           southbound
+9  TRIP-000010   TRK-01    DRV-01  Pacific Coast Load Board Spot   RTE-05           847        5.02       1,249.76     685.04      564.72          1.48                 0.67  northbound_backhaul
+
+================================================================================
+REVENUE PER MILE BY ROUTE
+                                        trips  avg_rev_per_mile  avg_net_margin_per_mile  total_revenue  total_net_margin
+route_id origin_city  destination_city                                                                                   
+RTE-07   Oakland      Burlington          112              1.64                     0.95     151,269.21         87,363.53
+RTE-05   Oakland      Mount Vernon        130              1.70                     1.02     184,893.18        110,737.90
+RTE-06   Portland     Bellingham          114              1.76                     1.08      64,480.20         39,721.60
+RTE-04   Mount Vernon Oakland             112              2.81                     2.13     257,185.13        195,220.76
+RTE-01   Mount Vernon Portland            101              2.99                     2.31      81,187.42         62,893.14
+RTE-02   Bellingham   Oakland             119              3.15                     2.49     296,364.46        233,583.25
+RTE-03   Burlington   Oakland             101              3.26                     2.58     266,194.80        210,463.22
+
+================================================================================
+PROFITABILITY BY DIRECTION (southbound vs northbound backhaul)
+                     trips  avg_rev_per_mile  avg_net_margin_per_mile  total_revenue  total_net_margin  avg_miles
+direction                                                                                                        
+northbound_backhaul    356              1.70                     1.02     400,642.59        237,823.03     667.92
+southbound             433              3.05                     2.37     900,931.81        702,160.37     680.38
+
+================================================================================
+NORTHBOUND BACKHAUL: % of trips below $1.65/mile breakeven-ish net margin
+Northbound trip count: 356
+  % northbound trips with rev_per_mile < $1.1: 0.0%
+  % northbound trips with rev_per_mile < $1.65: 37.6%
+Northbound avg net_margin_per_mile: 1.016882616759124
+Northbound avg rev_per_mile: 1.6995888974155247
+
+================================================================================
+REVENUE & MARGIN BY CUSTOMER
+                                loads  total_revenue  avg_rev_per_mile  total_net_margin  avg_net_margin_per_mile
+customer_name                                                                                                    
+Bellingham Cold Storage           119     296,364.46              3.15        233,583.25                     2.49
+Cascade Berry Growers             101     266,194.80              3.26        210,463.22                     2.58
+Golden Gate Fresh Distributors    112     257,185.13              2.81        195,220.76                     2.13
+Evergreen Freight Match           184     207,563.49              1.70        124,362.69                     1.03
+Pacific Coast Load Board Spot     172     193,079.10              1.69        113,460.34                     1.00
+Skagit Valley Produce             101      81,187.42              2.99         62,893.14                     2.31
+
+Customer revenue concentration (% of total revenue):
+customer_name
+Bellingham Cold Storage          22.80
+Cascade Berry Growers            20.50
+Golden Gate Fresh Distributors   19.80
+Evergreen Freight Match          15.90
+Pacific Coast Load Board Spot    14.80
+Skagit Valley Produce             6.20
+Name: total_revenue, dtype: float64
+
+================================================================================
+MONTHLY LOAD VOLUME & REVENUE TREND
+         loads  total_revenue  avg_rev_per_mile  total_net_margin
+month                                                            
+2024-07     37      62,100.63              2.54         46,204.42
+2024-08     34      61,569.04              2.48         45,251.18
+2024-09     41      66,188.82              2.45         48,027.07
+2024-10     37      62,107.75              2.46         45,545.23
+2024-11     16      26,463.44              2.38         18,852.07
+2024-12     31      49,559.87              2.41         35,890.48
+2025-01     20      30,106.59              2.47         22,210.94
+2025-02     25      34,309.71              2.37         23,715.21
+2025-03     32      50,466.50              2.39         36,186.41
+2025-04     43      74,048.09              2.47         54,070.06
+2025-05     43      69,623.48              2.38         49,250.89
+2025-06     33      57,973.89              2.47         41,731.40
+2025-07     50      81,671.71              2.42         59,068.31
+2025-08     35      53,514.09              2.38         38,713.74
+2025-09     48      72,660.43              2.42         51,714.68
+2025-10     46      82,267.35              2.39         58,756.07
+2025-11     21      33,853.49              2.48         24,697.86
+2025-12     23      38,488.51              2.45         27,485.61
+2026-01     18      32,266.02              2.45         23,260.02
+2026-02     20      32,040.79              2.36         22,898.07
+2026-03     27      48,435.67              2.57         35,386.63
+2026-04     30      52,458.98              2.47         38,054.29
+2026-05     36      56,048.94              2.41         39,375.94
+2026-06     38      62,914.54              2.48         45,509.51
+2026-07      5      10,436.07              2.59          8,127.31
+
+================================================================================
+FUEL EFFICIENCY (MPG) BY TRUCK
+          trips  avg_mpg  min_mpg  max_mpg  std_mpg
+truck_id                                           
+TRK-01      390     5.18     4.90     5.45     0.15
+TRK-02      399     7.01     6.70     7.34     0.18
+
+================================================================================
+FUEL EFFICIENCY (MPG) BY DRIVER
+           trips  avg_mpg  min_mpg  max_mpg
+driver_id                                  
+DRV-01       390     5.18     4.90     5.45
+DRV-02       399     7.01     6.70     7.34
+
+================================================================================
+FUEL COST PER LOADED MILE BY TRUCK
+          avg_fuel_cost_per_mile  total_fuel_cost  total_miles
+truck_id                                                      
+TRK-01                      0.78       208,049.27       266273
+TRK-02                      0.58       153,541.73       266108
+
+================================================================================
+ESTIMATED EXTRA FUEL COST PER ROUND TRIP: TRK-01 vs TRK-02 (matched lanes)
+truck_id
+TRK-01   5.21
+TRK-02   7.04
+Name: actual_mpg, dtype: float64
+Avg diesel price/gal across dataset: 4.046
+truck_id
+TRK-01   682.52
+TRK-02   678.26
+Name: actual_miles, dtype: float64
+TRK-01: avg southbound miles=683, mpg=5.21, est. gallons=130.9, est. fuel cost one-way=$529.88
+TRK-02: avg southbound miles=678, mpg=7.04, est. gallons=96.3, est. fuel cost one-way=$389.78
+
+================================================================================
+ON-TIME DELIVERY RATE BY CUSTOMER
+                                events  on_time_rate  avg_detention_min  max_detention_min
+customer_name                                                                             
+Golden Gate Fresh Distributors     112          4.46              43.84                 75
+Skagit Valley Produce              101         82.18               9.50                 24
+Cascade Berry Growers              101         89.11               9.22                 22
+Pacific Coast Load Board Spot      172         87.79               8.83                 18
+Evergreen Freight Match            184         89.67               8.68                 19
+Bellingham Cold Storage            119         89.92               8.68                 17
+
+================================================================================
+ON-TIME DELIVERY (trips.csv on_time_flag) BY DRIVER / TRUCK
+           trips  on_time_rate
+driver_id                     
+DRV-01       390         82.82
+DRV-02       399         86.47
+          trips  on_time_rate
+truck_id                     
+TRK-01      390         82.82
+TRK-02      399         86.47
+
+================================================================================
+ON-TIME PERFORMANCE TREND OVER TIME (monthly)
+         trips  on_time_rate
+month                       
+2024-07     37         86.49
+2024-08     34         85.29
+2024-09     41         85.37
+2024-10     37         89.19
+2024-11     16         87.50
+2024-12     31         83.87
+2025-01     20         80.00
+2025-02     25         84.00
+2025-03     32         90.62
+2025-04     43         83.72
+2025-05     43         88.37
+2025-06     33         84.85
+2025-07     50         78.00
+2025-08     35         82.86
+2025-09     48         87.50
+2025-10     46         82.61
+2025-11     21         80.95
+2025-12     23         86.96
+2026-01     18         88.89
+2026-02     20         80.00
+2026-03     27         85.19
+2026-04     30         76.67
+2026-05     36         86.11
+2026-06     38         84.21
+2026-07      5        100.00
+
+================================================================================
+DETENTION MINUTES BY FACILITY TYPE
+               count  mean  max
+facility_type                  
+receiver         789 13.88   75
+
+================================================================================
+TOTAL DETENTION HOURS & IMPLIED COST BY CUSTOMER (Golden Gate spotlight)
+                                events  avg_detention_min  total_detention_hours
+customer_name                                                                   
+Golden Gate Fresh Distributors     112              43.84                  81.83
+Skagit Valley Produce              101               9.50                  15.98
+Cascade Berry Growers              101               9.22                  15.52
+Pacific Coast Load Board Spot      172               8.83                  25.30
+Evergreen Freight Match            184               8.68                  26.63
+Bellingham Cold Storage            119               8.68                  17.22
+                                total_detention_hours  est_detention_cost
+customer_name                                                            
+Golden Gate Fresh Distributors                  81.83            5,319.17
+Evergreen Freight Match                         26.63            1,731.17
+Pacific Coast Load Board Spot                   25.30            1,644.50
+Bellingham Cold Storage                         17.22            1,119.08
+Skagit Valley Produce                           15.98            1,038.92
+Cascade Berry Growers                           15.52            1,008.58
+
+================================================================================
+MAINTENANCE RECORDS - ALL
+      record_id truck_id service_date            service_type     cost  downtime_hours  odometer_at_service
+0   MAINT-00001   TRK-01   2024-09-06  Alternator Replacement   903.89           14.80               529579
+2   MAINT-00003   TRK-01   2024-10-28     Reefer Unit Service   917.44           16.20               548463
+4   MAINT-00005   TRK-01   2025-01-05     Oil & Filter Change 2,086.33           18.10               565705
+6   MAINT-00007   TRK-01   2025-04-05           Brake Service   780.39           14.80               591644
+7   MAINT-00008   TRK-01   2025-05-13           Brake Service 1,520.55            9.70               612285
+9   MAINT-00010   TRK-01   2025-06-30    Transmission Service 1,802.67           19.60               628808
+10  MAINT-00011   TRK-01   2025-07-23     Reefer Unit Service 1,244.30            7.40               645572
+12  MAINT-00013   TRK-01   2025-09-05       DPF/Regen Service 1,007.85            4.00               662713
+14  MAINT-00015   TRK-01   2025-10-07           Brake Service   655.63           16.40               680442
+16  MAINT-00017   TRK-01   2025-11-30        Tire Replacement   704.02           12.10               699900
+18  MAINT-00019   TRK-01   2026-03-12       Air System Repair 1,907.16           29.00               726983
+19  MAINT-00020   TRK-01   2026-05-12        Tire Replacement 3,234.46           19.60               748424
+21  MAINT-00022   TRK-01   2026-06-24           Brake Service 1,488.89           29.10               766273
+1   MAINT-00002   TRK-02   2024-09-03     Oil & Filter Change 1,429.94            8.50               210539
+3   MAINT-00004   TRK-02   2024-11-14  Alternator Replacement   771.01            4.30               234617
+5   MAINT-00006   TRK-02   2025-01-29     Oil & Filter Change 1,591.94           13.30               255070
+8   MAINT-00009   TRK-02   2025-06-01  Alternator Replacement 1,223.18           13.80               303253
+11  MAINT-00012   TRK-02   2025-07-29       Air System Repair   439.12            3.20               332161
+13  MAINT-00014   TRK-02   2025-09-16       Air System Repair 1,769.10            4.40               354334
+15  MAINT-00016   TRK-02   2025-11-09     Oil & Filter Change   545.69            8.50               375377
+17  MAINT-00018   TRK-02   2026-02-26     Oil & Filter Change 1,465.85            4.60               398155
+20  MAINT-00021   TRK-02   2026-06-11    Transmission Service   443.46           10.70               436877
+
+================================================================================
+MAINTENANCE COST & DOWNTIME SUMMARY BY TRUCK
+          events  total_cost  avg_cost  total_downtime_hrs  avg_downtime_hrs
+truck_id                                                                    
+TRK-01        13   18,253.58  1,404.12              210.80             16.22
+TRK-02         9    9,679.29  1,075.48               71.30              7.92
+
+================================================================================
+MAINTENANCE COST TREND OVER TIME BY TRUCK (chronological)
+
+TRK-01:
+   service_date            service_type     cost  downtime_hours  odometer_at_service
+0    2024-09-06  Alternator Replacement   903.89           14.80               529579
+2    2024-10-28     Reefer Unit Service   917.44           16.20               548463
+4    2025-01-05     Oil & Filter Change 2,086.33           18.10               565705
+6    2025-04-05           Brake Service   780.39           14.80               591644
+7    2025-05-13           Brake Service 1,520.55            9.70               612285
+9    2025-06-30    Transmission Service 1,802.67           19.60               628808
+10   2025-07-23     Reefer Unit Service 1,244.30            7.40               645572
+12   2025-09-05       DPF/Regen Service 1,007.85            4.00               662713
+14   2025-10-07           Brake Service   655.63           16.40               680442
+16   2025-11-30        Tire Replacement   704.02           12.10               699900
+18   2026-03-12       Air System Repair 1,907.16           29.00               726983
+19   2026-05-12        Tire Replacement 3,234.46           19.60               748424
+21   2026-06-24           Brake Service 1,488.89           29.10               766273
+
+TRK-02:
+   service_date            service_type     cost  downtime_hours  odometer_at_service
+1    2024-09-03     Oil & Filter Change 1,429.94            8.50               210539
+3    2024-11-14  Alternator Replacement   771.01            4.30               234617
+5    2025-01-29     Oil & Filter Change 1,591.94           13.30               255070
+8    2025-06-01  Alternator Replacement 1,223.18           13.80               303253
+11   2025-07-29       Air System Repair   439.12            3.20               332161
+13   2025-09-16       Air System Repair 1,769.10            4.40               354334
+15   2025-11-09     Oil & Filter Change   545.69            8.50               375377
+17   2026-02-26     Oil & Filter Change 1,465.85            4.60               398155
+20   2026-06-11    Transmission Service   443.46           10.70               436877
+
+================================================================================
+MAINTENANCE COST TREND - FIRST HALF VS SECOND HALF OF DATASET (by truck)
+TRK-01: first-half avg cost=$1335.21, second-half avg cost=$1463.19, first-half avg downtime=15.5hrs, second-half avg downtime=16.8hrs
+TRK-02: first-half avg cost=$1254.02, second-half avg cost=$932.64, first-half avg downtime=10.0hrs, second-half avg downtime=6.3hrs
+
+================================================================================
+MAINTENANCE COST PER MILE BY TRUCK (total maint cost / current odometer)
+  truck_id      cost  current_odometer  year  cost_per_mile
+0   TRK-01 18,253.58            766273  2016           0.02
+1   TRK-02  9,679.29            446108  2021           0.02
+
+================================================================================
+DRIVER TENURE
+  driver_id first_name  last_name  hire_date  years_experience  tenure_years
+0    DRV-01       Dale  Kowalczyk 2017-03-01                18          9.34
+1    DRV-02     Renata  Kowalczyk 2019-05-15                 6          7.13
+
+================================================================================
+LOAD COUNT BY DRIVER
+driver_id
+DRV-01    390
+DRV-02    399
+Name: trip_id, dtype: int64
+
+================================================================================
+FUEL PRICE TREND OVER TIME (monthly avg $/gal)
+month
+2024-07   3.96
+2024-08   3.98
+2024-09   4.00
+2024-10   4.02
+2024-11   4.02
+2024-12   4.05
+2025-01   4.06
+2025-02   4.08
+2025-03   4.06
+2025-04   4.12
+2025-05   4.11
+2025-06   4.15
+2025-07   3.96
+2025-08   3.97
+2025-09   3.99
+2025-10   3.99
+2025-11   4.04
+2025-12   4.04
+2026-01   4.04
+2026-02   4.06
+2026-03   4.10
+2026-04   4.09
+2026-05   4.13
+2026-06   4.14
+2026-07   4.08
+Name: price_per_gallon, dtype: float64
+
+================================================================================
+MONTHLY LOADS BY FREIGHT TYPE (seasonality check)
+freight_type  Refrigerated - Backhaul Mixed  Refrigerated - Mixed  Refrigerated - Produce  Refrigerated - Seafood
+month                                                                                                            
+2024-07                                  15                     4                       9                       9
+2024-08                                  14                     6                       9                       5
+2024-09                                  19                     4                      14                       4
+2024-10                                  17                     5                      11                       4
+2024-11                                   8                     4                       1                       3
+2024-12                                  14                     6                      11                       0
+2025-01                                   9                     3                       5                       3
+2025-02                                  12                     4                       8                       1
+2025-03                                  15                     5                       8                       4
+2025-04                                  19                     6                      13                       5
+2025-05                                  20                     8                       8                       7
+2025-06                                  14                     5                       9                       5
+2025-07                                  24                     7                      11                       8
+2025-08                                  16                     8                       8                       3
+2025-09                                  23                     3                      15                       7
+2025-10                                  22                     7                       8                       9
+2025-11                                  10                     1                       7                       3
+2025-12                                  10                     3                       5                       5
+2026-01                                   8                     1                       3                       6
+2026-02                                   9                     6                       3                       2
+2026-03                                  10                     3                       7                       7
+2026-04                                  13                     4                       8                       5
+2026-05                                  16                     6                      10                       4
+2026-06                                  17                     3                      10                       8
+2026-07                                   2                     0                       1                       2
+
+================================================================================
+DATE RANGE OF DATA
+Loads: 2024-07-02 00:00:00 to 2026-07-02 00:00:00
+Maintenance: 2024-09-03 00:00:00 to 2026-06-24 00:00:00
+
+================================================================================
+CUSTOMER PAYMENT TERMS & REVENUE EXPOSURE
+                    customer_name  payment_terms_days  total_revenue  loads
+3  Golden Gate Fresh Distributors                  45     257,185.13    112
+0           Skagit Valley Produce                  30      81,187.42    101
+1         Bellingham Cold Storage                  30     296,364.46    119
+4   Pacific Coast Load Board Spot                  30     193,079.10    172
+5         Evergreen Freight Match                  30     207,563.49    184
+2           Cascade Berry Growers                  15     266,194.80    101

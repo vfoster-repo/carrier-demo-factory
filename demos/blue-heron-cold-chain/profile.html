@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blue Heron Cold Chain — Company Profile | Carrier Demo Factory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0f1117;color:#c9d1d9;line-height:1.65;min-height:100vh}
+a{color:#58a6ff;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Layout */
+.page{max-width:860px;margin:0 auto;padding:2.5rem 1.25rem 5rem}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#1a2744 0%,#1e2a3a 100%);border:1px solid #21262d;border-radius:16px;padding:2.5rem;margin-bottom:2rem}
+.hero-tag{font-size:0.72rem;font-weight:700;color:#58a6ff;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.75rem}
+.hero-company{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;color:#e6edf3;line-height:1.2;margin-bottom:0.5rem}
+.hero-meta{font-size:0.85rem;color:#8b949e;margin-bottom:1.25rem}
+.hero-tagline{font-size:1rem;color:#adbac7;line-height:1.7;max-width:680px;border-left:3px solid #1f6feb;padding-left:1rem}
+
+/* Stat strip */
+.stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-box{background:#161b22;border:1px solid #21262d;border-radius:12px;padding:1.1rem 1.25rem;text-align:center}
+.stat-value{font-size:1.6rem;font-weight:700;color:#e6edf3;line-height:1}
+.stat-label{font-size:0.72rem;color:#8b949e;margin-top:0.35rem;text-transform:uppercase;letter-spacing:0.06em}
+
+/* Sections */
+.section{margin-bottom:2.5rem}
+.section-title{font-size:1.05rem;font-weight:700;color:#e6edf3;margin-bottom:1.1rem;padding-bottom:0.5rem;border-bottom:1px solid #21262d;display:flex;align-items:center;gap:0.5rem}
+
+/* Pain point cards */
+.pain-card{background:#161b22;border:1px solid #21262d;border-radius:12px;padding:1.3rem 1.5rem;margin-bottom:0.85rem}
+.pain-card-title{font-size:0.95rem;font-weight:600;color:#e6edf3;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
+.pain-card-body{font-size:0.875rem;color:#8b949e;line-height:1.65}
+.pain-number{background:#1f6feb;color:white;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0}
+
+/* Data table */
+.data-table{width:100%;border-collapse:collapse;font-size:0.85rem}
+.data-table th{text-align:left;font-size:0.72rem;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:0.06em;padding:0.5rem 0.75rem;border-bottom:1px solid #21262d}
+.data-table td{padding:0.65rem 0.75rem;border-bottom:1px solid #161b22;color:#c9d1d9;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table .col-tag{background:#21262d;border-radius:4px;padding:1px 6px;font-size:0.7rem;display:inline-block;margin:1px}
+
+/* Product cards */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.product-card{background:#161b22;border:1px solid #21262d;border-radius:12px;padding:1.5rem;display:flex;flex-direction:column;gap:0.75rem;transition:border-color 0.15s}
+.product-card:hover{border-color:#58a6ff}
+.product-card-icon{font-size:1.75rem}
+.product-card-type{font-size:0.7rem;font-weight:700;color:#58a6ff;text-transform:uppercase;letter-spacing:0.08em}
+.product-card-title{font-size:1rem;font-weight:700;color:#e6edf3}
+.product-card-desc{font-size:0.85rem;color:#8b949e;line-height:1.6;flex:1}
+.product-card-link{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.85rem;font-weight:600;color:#58a6ff;margin-top:0.25rem}
+
+/* Fact highlight */
+.fact-highlight{background:#1a2744;border:1px solid #1f6feb33;border-radius:10px;padding:0.85rem 1.1rem;margin-bottom:0.6rem;font-size:0.9rem;color:#adbac7;line-height:1.6}
+.fact-highlight strong{color:#e6edf3}
+
+/* Footer */
+.footer{text-align:center;font-size:0.75rem;color:#484f58;margin-top:4rem;padding-top:1.5rem;border-top:1px solid #21262d}
+
+/* Mobile */
+@media(max-width:600px){
+  .hero{padding:1.5rem}
+  .hero-company{font-size:1.5rem}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Company Profile · Carrier Demo Factory</div>
+    <div class="hero-company">Blue Heron Cold Chain</div>
+    <div class="hero-meta">Owner-Operator Reefer Carrier · Mount Vernon, Washington</div>
+    <div class="hero-tagline">A husband-and-wife reefer team hauling Skagit Valley produce and Bellingham seafood south to Portland and the Bay Area — profitable heading south, bleeding money on the way back.</div>
+  </div>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat-box"><div class="stat-value">2</div><div class="stat-label">Trucks</div></div>
+    <div class="stat-box"><div class="stat-value">2</div><div class="stat-label">Drivers</div></div>
+    <div class="stat-box"><div class="stat-value">4</div><div class="stat-label">Core Customers</div></div>
+    <div class="stat-box"><div class="stat-value">$1.2M</div><div class="stat-label">Revenue (2-yr data)</div></div>
+    <div class="stat-box"><div class="stat-value">9</div><div class="stat-label">Years in Business</div></div>
+    <div class="stat-box"><div class="stat-value">7</div><div class="stat-label">Active Lanes</div></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section">
+    <div class="section-title">🏢 About This Company</div>
+    <p>Marcus Kowalczyk drove reefer for a mid-size Yakima carrier for eleven years before he and his wife, Renata, bought their first truck in 2017 — a used Freightliner Cascadia they financed against their house. They built Blue Heron Cold Chain around a simple pitch to Skagit Valley farmers and Bellingham seafood processors: same-day pickup, a driver who actually shows up on time, and a level of care with temperature logs that the big carriers couldn't be bothered with. It worked. Within two years they'd added a second truck, and Renata — a former dispatcher — came on full-time to drive it and run the books.</p>
+    <p style="margin-top:1rem">The business runs on a tight seasonal rhythm. From April through October, Blue Heron hauls Skagit Valley produce — potatoes, berries, and tulip-adjacent specialty crops — and Bellingham Cold Storage seafood south out of the Pacific Northwest to distribution centers in Portland and the Bay Area. Northbound, they scrape together whatever backhaul freight they can find off a load board, because none of their core customers ship much north into Washington. Marcus drives TRK-01, the original 2016 Freightliner Cascadia, now pushing 766,000 miles. Renata drives TRK-02, a 2021 Kenworth T680 bought once the business was stable enough to finance new equipment, now at roughly 446,000 miles.</p>
+    <p style="margin-top:1rem">Their three anchor customers — Skagit Valley Produce, Bellingham Cold Storage, and Cascade Berry Growers — all ship south on a predictable schedule. A fourth relationship, Golden Gate Fresh Distributors in Oakland, receives the bulk of their southbound loads and is their highest-volume delivery point, but it's also grown notorious around the yard for how long it takes to get a trailer unloaded.</p>
+    <p style="margin-top:1rem">Blue Heron is a textbook example of the two-truck carrier whose owners "know" something is wrong in their gut — Marcus's truck feels thirstier, the Oakland stop feels like it eats the whole afternoon, the trip back north never feels worth it — but have never had the numbers laid out to prove it, size it in dollars, or act on it. That gap between gut feel and hard evidence is exactly what this analysis was built to close.</p>
+  </div>
+
+  <!-- WHAT WE FOUND -->
+  <div class="section">
+    <div class="section-title">🔍 What We Found in the Data</div>
+    <div class="fact-highlight"><strong>TRK-01 burns 26% more fuel per mile than TRK-02</strong> — Marcus's 2016 Freightliner averages 5.18 MPG vs. Renata's 2021 Kenworth at 7.01 MPG on the same lanes, an estimated $140/leg (~$280/round trip) in extra diesel, projecting to $50,000+/year if TRK-01 ran the same load pattern all year.</div>
+    <div class="fact-highlight"><strong>Golden Gate Fresh Distributors averages 43.8 minutes of detention per stop</strong> — nearly 5x the ~9-minute average at every other customer, totaling 81.8 hours of detention across 112 delivery events, or roughly $5,300 in uncompensated truck-and-driver time at $65/hour.</div>
+    <div class="fact-highlight"><strong>Golden Gate is on time only 4.46% of the time</strong> — compared to 82–90% on-time performance at every other customer, indicating the delay is structural to how the facility operates rather than an occasional bad day.</div>
+    <div class="fact-highlight"><strong>Northbound backhauls net $1.02/mile vs. $2.37/mile southbound</strong> — less than half the profitability per mile, and 37.6% of all northbound trips fall below a reasonable $1.65/mile breakeven threshold.</div>
+    <div class="fact-highlight"><strong>TRK-01's maintenance cost is already 2-3x TRK-02's and rising</strong> — 13 service events totaling $18,253.58 (avg $1,404/event) and 210.8 downtime hours, vs. TRK-02's 9 events totaling $9,679.29 (avg $1,075/event) and 71.3 hours. TRK-01's trailing-period average cost and downtime are both climbing while TRK-02's are falling.</div>
+    <div class="fact-highlight"><strong>63% of revenue comes from just 3 customers</strong> — Bellingham Cold Storage (22.8%), Cascade Berry Growers (20.5%), and Golden Gate Fresh Distributors (19.8%) — and Golden Gate, the customer causing the most detention pain, is also a top-3 revenue source Blue Heron can't easily walk away from.</div>
+  </div>
+
+  <!-- DATA ANALYZED -->
+  <div class="section">
+    <div class="section-title">📂 Data Analyzed</div>
+    <p style="font-size:0.875rem;color:#8b949e;margin-bottom:1rem">
+      The following datasets were provided by Blue Heron Cold Chain and analyzed to produce
+      the insights report and operations platform below.
+    </p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Dataset</th>
+          <th>Records</th>
+          <th>Period</th>
+          <th>Key Fields</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Load History</td>
+          <td>789 records</td>
+          <td>Jul 2024 – Jul 2026</td>
+          <td><span class="col-tag">customer_id</span> <span class="col-tag">route_id</span> <span class="col-tag">freight_type</span> <span class="col-tag">revenue</span> <span class="col-tag">fuel_surcharge</span> <span class="col-tag">load_status</span></td>
+        </tr>
+        <tr>
+          <td>Trip Records</td>
+          <td>789 records</td>
+          <td>Jul 2024 – Jul 2026</td>
+          <td><span class="col-tag">truck_id</span> <span class="col-tag">driver_id</span> <span class="col-tag">actual_miles</span> <span class="col-tag">actual_mpg</span> <span class="col-tag">on_time_flag</span></td>
+        </tr>
+        <tr>
+          <td>Fuel Purchases</td>
+          <td>954 records</td>
+          <td>Jul 2024 – Jul 2026</td>
+          <td><span class="col-tag">truck_id</span> <span class="col-tag">gallons</span> <span class="col-tag">price_per_gallon</span> <span class="col-tag">total_cost</span> <span class="col-tag">location</span></td>
+        </tr>
+        <tr>
+          <td>Delivery Events</td>
+          <td>789 records</td>
+          <td>Jul 2024 – Jul 2026</td>
+          <td><span class="col-tag">facility_type</span> <span class="col-tag">scheduled_time</span> <span class="col-tag">actual_time</span> <span class="col-tag">detention_minutes</span> <span class="col-tag">on_time</span></td>
+        </tr>
+        <tr>
+          <td>Maintenance Records</td>
+          <td>22 records</td>
+          <td>Sep 2024 – Jun 2026</td>
+          <td><span class="col-tag">truck_id</span> <span class="col-tag">service_type</span> <span class="col-tag">cost</span> <span class="col-tag">downtime_hours</span> <span class="col-tag">odometer_at_service</span></td>
+        </tr>
+        <tr>
+          <td>Routes</td>
+          <td>7 records</td>
+          <td>—</td>
+          <td><span class="col-tag">origin_city</span> <span class="col-tag">destination_city</span> <span class="col-tag">distance_miles</span> <span class="col-tag">base_rate_per_mile</span></td>
+        </tr>
+        <tr>
+          <td>Customers</td>
+          <td>6 records</td>
+          <td>—</td>
+          <td><span class="col-tag">customer_name</span> <span class="col-tag">industry</span> <span class="col-tag">payment_terms_days</span> <span class="col-tag">account_status</span></td>
+        </tr>
+        <tr>
+          <td>Trucks</td>
+          <td>2 records</td>
+          <td>—</td>
+          <td><span class="col-tag">make</span> <span class="col-tag">model</span> <span class="col-tag">current_odometer</span> <span class="col-tag">fuel_type</span></td>
+        </tr>
+        <tr>
+          <td>Drivers</td>
+          <td>2 records</td>
+          <td>Mar 2017 – May 2019</td>
+          <td><span class="col-tag">cdl_class</span> <span class="col-tag">years_experience</span> <span class="col-tag">home_terminal</span> <span class="col-tag">employment_status</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAIN POINTS -->
+  <div class="section">
+    <div class="section-title">⚠️ Primary Pain Points Identified</div>
+    <p style="font-size:0.875rem;color:#8b949e;margin-bottom:1rem">
+      Analysis of the data revealed the following operational pain points, ranked by
+      estimated annual dollar impact.
+    </p>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">1</span> TRK-01 Fuel Inefficiency</div>
+      <div class="pain-card-body">TRK-01, Marcus's 2016 Freightliner Cascadia with 766,000+ miles, averages 5.18 MPG versus TRK-02's (Renata's 2021 Kenworth T680, 446,000 miles) 7.01 MPG — a 26% gap on the exact same lanes. On a typical ~680-mile southbound leg, that works out to roughly $529.88 in fuel for TRK-01 versus $389.78 for TRK-02, or about $140 more per leg and $280 more per round trip. Extrapolated across a full year of similar load patterns, that's an estimated $50,000+ in excess fuel spend attributable to one aging truck.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">2</span> Golden Gate Fresh Distributors Detention</div>
+      <div class="pain-card-body">Golden Gate Fresh Distributors in Oakland, CA — Blue Heron's single highest-volume delivery point — averages 43.84 minutes of detention per stop, roughly 5x the fleet-wide average of about 9 minutes everywhere else, with a recorded max of 75 minutes. Across 112 delivery events that's 81.8 total hours of detention, an estimated $5,300 in uncompensated truck-and-driver cost at a conservative $65/hour rate. On-time performance at this facility is just 4.46%, versus 82–90% at every other customer, suggesting the delay is baked into how the dock operates rather than being occasional.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">3</span> Structurally Thin Northbound Backhaul Margins</div>
+      <div class="pain-card-body">Northbound trips from Oakland/Portland back to Washington average $1.70/mile in revenue and just $1.02/mile in net margin, versus southbound's $3.05/mile revenue and $2.37/mile net margin — less than half the profitability per mile. 37.6% of all northbound trips fall below a reasonable $1.65/mile breakeven threshold, meaning over a third of the fleet's return trips are running at or near a loss, driven by low load-board rates and higher deadhead miles.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">4</span> TRK-01's Rising Maintenance Burden</div>
+      <div class="pain-card-body">TRK-01 logged 13 service events totaling $18,253.58 (averaging $1,404/event) and 210.8 hours of downtime, compared to TRK-02's 9 events totaling $9,679.29 (averaging $1,075/event) and just 71.3 hours of downtime — roughly 3x the downtime on top of the fuel penalty. Worse, the trend lines are diverging: TRK-01's trailing-period average cost ($1,463) and downtime (16.8 hrs) are both climbing as it crosses 600,000 miles, while TRK-02's are falling ($933, 6.3 hrs) — classic signs of a truck approaching the end of its economical service life.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">5</span> Customer Revenue Concentration Risk</div>
+      <div class="pain-card-body">Three customers — Bellingham Cold Storage (22.8% of revenue), Cascade Berry Growers (20.5%), and Golden Gate Fresh Distributors (19.8%) — account for 63% of Blue Heron's total revenue. Golden Gate is simultaneously a top-3 revenue customer and the worst detention offender in the fleet, which means Blue Heron can't simply walk away from the relationship that's costing them the most — any fix has to come through better terms, not fewer loads.</div>
+    </div>
+  </div>
+
+  <!-- WHAT WE BUILT -->
+  <div class="section">
+    <div class="section-title">🛠️ What We Built</div>
+    <div class="product-grid">
+      <a class="product-card" href="https://your-domain.com/blue-heron-cold-chain/report/" target="_blank" rel="noopener">
+        <div class="product-card-icon">📊</div>
+        <div class="product-card-type">Free · Insights Report</div>
+        <div class="product-card-title">Data Insights Report</div>
+        <div class="product-card-desc">
+          A self-contained, shareable HTML report covering every major pain point
+          with interactive charts. No login required — built to be sent to the
+          customer or shared with their bank or accountant.
+        </div>
+        <div class="product-card-link">View Report →</div>
+      </a>
+      <a class="product-card" href="https://your-domain.com/blue-heron-cold-chain/ops" target="_blank" rel="noopener">
+        <div class="product-card-icon">🚛</div>
+        <div class="product-card-type">Paid · SaaS Platform</div>
+        <div class="product-card-title">Operations Platform</div>
+        <div class="product-card-desc">
+          A multi-page daily-use operations dashboard built on their actual data.
+          Includes a Getting Started guide, load board, fleet KPIs, cash flow
+          tracking, and driver scorecards — designed for an owner-operator who
+          has never used software like this before.
+        </div>
+        <div class="product-card-link">Open Platform →</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    Built autonomously by Carrier Demo Factory · <a href="https://your-domain.com">your-domain.com</a>
+  </div>
+
+</div>
+</body>
+</html>

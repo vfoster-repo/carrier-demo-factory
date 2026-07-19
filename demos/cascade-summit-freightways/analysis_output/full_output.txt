@@ -1,0 +1,951 @@
+
+====================================================================================================
+SHAPE / DTYPES: customers  (8, 7)
+====================================================================================================
+customer_id             str
+customer_name           str
+city                    str
+state                   str
+industry                str
+payment_terms_days    int64
+account_status          str
+dtype: object
+  customer_id                     customer_name      city state             industry  payment_terms_days account_status
+0     CUST-01            Cascade Paper Products   Spokane    WA           Paper/Pulp                  30         active
+1     CUST-02             Evergreen Foods Co-op  Portland    OR         Food/Grocery                  30         active
+2     CUST-03       TitanBolt Industrial Supply    Dallas    TX  Industrial/Hardware                  45         active
+3     CUST-04  Northwind Appliance Distributors   Chicago    IL           Appliances                  30         active
+4     CUST-05   Rocky Summit Building Materials    Denver    CO   Building Materials                  30         active
+5     CUST-06          Peachtree Consumer Goods   Atlanta    GA       Consumer Goods                  45         active
+6     CUST-07     Lonestar Auto Parts Wholesale    Dallas    TX     Automotive Parts                  30         active
+7     CUST-08          Pioneer Home Furnishings   Seattle    WA            Furniture                  30         active
+                   count unique                     top freq   mean       std   min   25%   50%    75%   max
+customer_id            8      8                 CUST-01    1    NaN       NaN   NaN   NaN   NaN    NaN   NaN
+customer_name          8      8  Cascade Paper Products    1    NaN       NaN   NaN   NaN   NaN    NaN   NaN
+city                   8      7                  Dallas    2    NaN       NaN   NaN   NaN   NaN    NaN   NaN
+state                  8      6                      WA    2    NaN       NaN   NaN   NaN   NaN    NaN   NaN
+industry               8      8              Paper/Pulp    1    NaN       NaN   NaN   NaN   NaN    NaN   NaN
+payment_terms_days   8.0    NaN                     NaN  NaN  33.75  6.943651  30.0  30.0  30.0  33.75  45.0
+account_status         8      1                  active    8    NaN       NaN   NaN   NaN   NaN    NaN   NaN
+
+====================================================================================================
+SHAPE / DTYPES: drivers  (165, 8)
+====================================================================================================
+driver_id                       str
+first_name                      str
+last_name                       str
+hire_date            datetime64[us]
+employment_status               str
+cdl_class                       str
+years_experience              int64
+home_terminal                   str
+dtype: object
+  driver_id first_name last_name  hire_date employment_status cdl_class  years_experience home_terminal
+0   DRV-001     Andrew    Okafor 2021-08-31            active   Class A                 8   Spokane, WA
+1   DRV-002     Thomas    Thomas 2018-12-07            active   Class A                 9   Spokane, WA
+2   DRV-003      Jacob      Hall 2020-08-21        terminated   Class A                 7   Chicago, IL
+3   DRV-004     Robert    Thomas 2020-07-13            active   Class A                10   Spokane, WA
+4   DRV-005    Cynthia    Taylor 2021-09-01            active   Class A                 8   Spokane, WA
+5   DRV-006   Michelle    Thomas 2020-11-23            active   Class A                11   Chicago, IL
+6   DRV-007    Gregory     Young 2021-08-16            active   Class A                 8   Spokane, WA
+7   DRV-008    Cynthia    Wright 2021-08-18            active   Class A                 9   Spokane, WA
+8   DRV-009      Scott  Kowalski 2016-10-24            active   Class A                13   Chicago, IL
+9   DRV-010     Ronald  Campbell 2025-11-06            active   Class A                 1   Spokane, WA
+                   count unique          top freq                        mean                  min                  25%                  50%  \
+driver_id            165    165      DRV-001    1                         NaN                  NaN                  NaN                  NaN   
+first_name           165     61      Michael    7                         NaN                  NaN                  NaN                  NaN   
+last_name            165     54     Thompson    7                         NaN                  NaN                  NaN                  NaN   
+hire_date            165    NaN          NaN  NaN  2021-07-17 15:51:16.363636  2016-07-07 00:00:00  2019-04-11 00:00:00  2021-08-14 00:00:00   
+employment_status    165      2       active  132                         NaN                  NaN                  NaN                  NaN   
+cdl_class            165      2      Class A  156                         NaN                  NaN                  NaN                  NaN   
+years_experience   165.0    NaN          NaN  NaN                    8.090909                  1.0                  6.0                  8.0   
+home_terminal        165      2  Spokane, WA  114                         NaN                  NaN                  NaN                  NaN   
+
+                                   75%                  max       std  
+driver_id                          NaN                  NaN       NaN  
+first_name                         NaN                  NaN       NaN  
+last_name                          NaN                  NaN       NaN  
+hire_date          2023-09-29 00:00:00  2026-04-20 00:00:00       NaN  
+employment_status                  NaN                  NaN       NaN  
+cdl_class                          NaN                  NaN       NaN  
+years_experience                  11.0                 14.0  3.312611  
+home_terminal                      NaN                  NaN       NaN  
+
+====================================================================================================
+SHAPE / DTYPES: trucks  (110, 8)
+====================================================================================================
+truck_id                       str
+make                           str
+model                          str
+year                         int64
+status                         str
+acquisition_date    datetime64[us]
+current_odometer             int64
+fuel_type                      str
+dtype: object
+  truck_id       make    model  year  status acquisition_date  current_odometer fuel_type
+0  TRK-001      Volvo  VNL 760  2017  active       2017-12-09            384062    diesel
+1  TRK-002  Peterbilt      389  2024  active       2024-07-22            502265    diesel
+2  TRK-003   Kenworth     T680  2022  active       2022-10-01            502727    diesel
+3  TRK-004  Peterbilt      389  2016  active       2016-07-17            450717    diesel
+4  TRK-005  Peterbilt      579  2021  active       2021-01-19            410500    diesel
+5  TRK-006   Kenworth     T680  2016  active       2016-12-06            121331    diesel
+6  TRK-007  Peterbilt      579  2016  active       2016-07-25            325842    diesel
+7  TRK-008  Peterbilt      579  2021  active       2021-03-07            173675    diesel
+8  TRK-009      Volvo  VNL 760  2024  active       2024-09-23            300879    diesel
+9  TRK-010  Peterbilt      579  2024    shop       2024-05-10            330251    diesel
+                  count unique        top freq                        mean                  min                  25%                  50%  \
+truck_id            110    110    TRK-001    1                         NaN                  NaN                  NaN                  NaN   
+make                110      4  Peterbilt   51                         NaN                  NaN                  NaN                  NaN   
+model               110      5        389   29                         NaN                  NaN                  NaN                  NaN   
+year              110.0    NaN        NaN  NaN                 2019.081818               2010.0               2017.0               2019.0   
+status              110      3     active  106                         NaN                  NaN                  NaN                  NaN   
+acquisition_date    110    NaN        NaN  NaN  2019-07-15 12:39:16.363636  2010-01-02 00:00:00  2017-10-06 18:00:00  2019-08-27 00:00:00   
+current_odometer  110.0    NaN        NaN  NaN               351241.090909             100422.0             221850.5             337239.0   
+fuel_type           110      1     diesel  110                         NaN                  NaN                  NaN                  NaN   
+
+                                  75%                  max            std  
+truck_id                          NaN                  NaN            NaN  
+make                              NaN                  NaN            NaN  
+model                             NaN                  NaN            NaN  
+year                           2021.0               2024.0       3.251342  
+status                            NaN                  NaN            NaN  
+acquisition_date  2021-08-30 18:00:00  2024-09-23 00:00:00            NaN  
+current_odometer             446836.5             905655.0  177351.626584  
+fuel_type                         NaN                  NaN            NaN  
+
+====================================================================================================
+SHAPE / DTYPES: routes  (12, 7)
+====================================================================================================
+route_id                  str
+origin_city               str
+origin_state              str
+destination_city          str
+destination_state         str
+distance_miles          int64
+base_rate_per_mile    float64
+dtype: object
+  route_id origin_city origin_state destination_city destination_state  distance_miles  base_rate_per_mile
+0   RTE-01     Spokane           WA          Chicago                IL            1980                2.35
+1   RTE-02     Spokane           WA           Dallas                TX            1970                2.30
+2   RTE-03    Portland           OR           Denver                CO            1240                2.15
+3   RTE-04     Seattle           WA          Atlanta                GA            2630                2.05
+4   RTE-05     Chicago           IL          Spokane                WA            1980                2.20
+5   RTE-06      Dallas           TX          Spokane                WA            1970                2.15
+6   RTE-07      Denver           CO         Portland                OR            1240                2.10
+7   RTE-08     Atlanta           GA          Seattle                WA            2630                1.95
+8   RTE-09     Spokane           WA         Portland                OR             350                2.60
+9   RTE-10    Portland           OR          Spokane                WA             350                2.55
+                   count unique      top freq         mean        std    min     25%     50%     75%     max
+route_id              12     12   RTE-01    1          NaN        NaN    NaN     NaN     NaN     NaN     NaN
+origin_city           12      7  Spokane    3          NaN        NaN    NaN     NaN     NaN     NaN     NaN
+origin_state          12      6       WA    4          NaN        NaN    NaN     NaN     NaN     NaN     NaN
+destination_city      12      7  Spokane    3          NaN        NaN    NaN     NaN     NaN     NaN     NaN
+destination_state     12      6       WA    4          NaN        NaN    NaN     NaN     NaN     NaN     NaN
+distance_miles      12.0    NaN      NaN  NaN  1516.666667  791.03308  350.0   930.0  1605.0  1980.0  2630.0
+base_rate_per_mile  12.0    NaN      NaN  NaN     2.270833   0.203892   1.95  2.1375    2.25  2.4125     2.6
+
+====================================================================================================
+SHAPE / DTYPES: loads  (62000, 9)
+====================================================================================================
+load_id                      str
+customer_id                  str
+route_id                     str
+load_date         datetime64[us]
+freight_type                 str
+weight_lbs                 int64
+revenue                  float64
+fuel_surcharge           float64
+load_status                  str
+dtype: object
+     load_id customer_id route_id  load_date freight_type  weight_lbs  revenue  fuel_surcharge load_status
+0  LD-000001     CUST-01   RTE-01 2024-07-17      dry van       38711  4890.02          380.72   delivered
+1  LD-000002     CUST-04   RTE-01 2024-08-16      dry van       28266  4210.31          390.81   delivered
+2  LD-000003     CUST-02   RTE-03 2025-09-17      dry van       20944  2780.05          252.29   delivered
+3  LD-000004     CUST-06   RTE-08 2024-12-03      dry van       26461  4732.32          440.69   delivered
+4  LD-000005     CUST-03   RTE-02 2024-08-11      dry van       22936  4260.77          414.76   delivered
+5  LD-000006     CUST-01   RTE-05 2024-09-06      dry van       32459  4230.73          345.03   delivered
+6  LD-000007     CUST-08   RTE-08 2025-03-03      dry van       21823  4403.30          271.88   delivered
+7  LD-000008     CUST-04   RTE-05 2025-06-25      dry van       10994  3936.90          391.82   delivered
+8  LD-000009     CUST-06   RTE-04 2025-11-22      dry van       23302  5003.50          449.35   delivered
+9  LD-000010     CUST-08   RTE-08 2026-06-08      dry van       16760  4737.04          365.76   delivered
+                  count unique        top   freq                        mean                  min                  25%                  50%  \
+load_id           62000  62000  LD-000001      1                         NaN                  NaN                  NaN                  NaN   
+customer_id       62000      8    CUST-01  14900                         NaN                  NaN                  NaN                  NaN   
+route_id          62000     12     RTE-01  10007                         NaN                  NaN                  NaN                  NaN   
+load_date         62000    NaN        NaN    NaN  2025-07-02 18:44:04.954838  2024-07-03 00:00:00  2025-01-01 00:00:00  2025-07-02 00:00:00   
+freight_type      62000      1    dry van  62000                         NaN                  NaN                  NaN                  NaN   
+weight_lbs      62000.0    NaN        NaN    NaN                 26460.37521               8000.0              17196.0              26477.5   
+revenue         62000.0    NaN        NaN    NaN                 4006.580603                803.3              3871.82             4374.015   
+fuel_surcharge  62000.0    NaN        NaN    NaN                  283.892087                28.02               202.64               270.33   
+load_status       62000      2  delivered  61394                         NaN                  NaN                  NaN                  NaN   
+
+                                75%                  max          std  
+load_id                         NaN                  NaN          NaN  
+customer_id                     NaN                  NaN          NaN  
+route_id                        NaN                  NaN          NaN  
+load_date       2026-01-02 00:00:00  2026-07-03 00:00:00          NaN  
+freight_type                    NaN                  NaN          NaN  
+weight_lbs                  35725.0              45000.0  10682.84135  
+revenue                     4681.49              5283.66  1002.746686  
+fuel_surcharge               366.54               578.56   111.533857  
+load_status                     NaN                  NaN          NaN  
+
+====================================================================================================
+SHAPE / DTYPES: trips  (61394, 10)
+====================================================================================================
+trip_id                      str
+load_id                      str
+driver_id                    str
+truck_id                     str
+actual_miles             float64
+fuel_gallons             float64
+actual_mpg               float64
+departure_time    datetime64[us]
+arrival_time      datetime64[us]
+on_time_flag                bool
+dtype: object
+      trip_id    load_id driver_id truck_id  actual_miles  fuel_gallons  actual_mpg      departure_time               arrival_time  on_time_flag
+0  TRP-000001  LD-000001   DRV-100  TRK-007        1958.1        282.96        6.92 2024-07-17 10:00:00 2024-07-19 01:52:31.308247          True
+1  TRP-000002  LD-000002   DRV-008  TRK-084        2021.8        301.31        6.71 2024-08-16 05:45:00 2024-08-17 20:58:09.370743          True
+2  TRP-000003  LD-000003   DRV-131  TRK-083        1279.7        183.34        6.98 2025-09-17 11:15:00 2025-09-18 13:35:36.303905          True
+3  TRP-000004  LD-000004   DRV-162  TRK-089        2628.2        402.48        6.53 2024-12-03 04:30:00 2024-12-05 09:27:51.977399         False
+4  TRP-000005  LD-000005   DRV-067  TRK-028        2004.4        283.11        7.08 2024-08-11 12:45:00 2024-08-13 01:46:39.318096          True
+5  TRP-000006  LD-000006   DRV-057  TRK-027        2028.0        303.14        6.69 2024-09-06 12:30:00 2024-09-08 06:34:31.570236          True
+6  TRP-000007  LD-000007   DRV-044  TRK-059        2662.2        379.77        7.01 2025-03-03 17:30:00 2025-03-05 21:58:00.277632          True
+7  TRP-000008  LD-000008   DRV-063  TRK-071        2043.2        316.78        6.45 2025-06-25 14:00:00 2025-06-27 05:26:32.194198          True
+8  TRP-000009  LD-000009   DRV-074  TRK-043        2703.3        449.80        6.01 2025-11-22 04:30:00 2025-11-24 11:07:16.454007          True
+9  TRP-000010  LD-000010   DRV-016  TRK-033        2739.7        386.96        7.08 2026-06-08 08:00:00 2026-06-10 14:04:07.119648          True
+                  count unique         top   freq                        mean                         min                         25%  \
+trip_id           61394  61394  TRP-000001      1                         NaN                         NaN                         NaN   
+load_id           61394  61394   LD-000001      1                         NaN                         NaN                         NaN   
+driver_id         61394    165     DRV-140    463                         NaN                         NaN                         NaN   
+truck_id          61394    109     TRK-003    620                         NaN                         NaN                         NaN   
+actual_miles    61394.0    NaN         NaN    NaN                 1919.806657                       343.0                      1934.7   
+fuel_gallons    61394.0    NaN         NaN    NaN                  284.570656                       46.47                    266.4225   
+actual_mpg      61394.0    NaN         NaN    NaN                     6.77501                         4.6                        6.51   
+departure_time    61394    NaN         NaN    NaN  2025-07-03 09:16:31.430758         2024-07-03 04:00:00         2025-01-01 08:03:45   
+arrival_time      61394    NaN         NaN    NaN  2025-07-04 22:16:10.576463  2024-07-03 14:04:10.230208  2025-01-02 20:30:06.969450   
+on_time_flag      61394      2        True  54237                         NaN                         NaN                         NaN   
+
+                                       50%                         75%                         max         std  
+trip_id                                NaN                         NaN                         NaN         NaN  
+load_id                                NaN                         NaN                         NaN         NaN  
+driver_id                              NaN                         NaN                         NaN         NaN  
+truck_id                               NaN                         NaN                         NaN         NaN  
+actual_miles                        1998.5                      2059.5                      2761.5  533.854256  
+fuel_gallons                        292.01                      319.02                      594.79   81.667716  
+actual_mpg                            6.81                        7.11                         7.4     0.42329  
+departure_time         2025-07-03 04:07:30         2026-01-02 17:26:15         2026-07-03 18:45:00         NaN  
+arrival_time    2025-07-04 13:01:35.312936  2026-01-04 07:51:23.763732  2026-07-06 02:14:07.590673         NaN  
+on_time_flag                           NaN                         NaN                         NaN         NaN  
+
+====================================================================================================
+SHAPE / DTYPES: fuel  (180253, 9)
+====================================================================================================
+purchase_id                    str
+trip_id                        str
+truck_id                       str
+driver_id                      str
+purchase_date       datetime64[us]
+gallons                    float64
+price_per_gallon           float64
+total_cost                 float64
+location                       str
+dtype: object
+   purchase_id     trip_id truck_id driver_id purchase_date  gallons  price_per_gallon  total_cost                             location
+0  FUEL-000001  TRP-000001  TRK-007   DRV-100    2024-07-17    94.67             3.930      372.05         Flying J - Wichita Falls, TX
+1  FUEL-000002  TRP-000001  TRK-007   DRV-100    2024-07-17    85.26             3.913      333.62          Flying J - North Platte, NE
+2  FUEL-000003  TRP-000001  TRK-007   DRV-100    2024-07-18   103.03             3.938      405.73     Love's Travel Stop - Seattle, WA
+3  FUEL-000004  TRP-000002  TRK-084   DRV-008    2024-08-16   144.01             3.945      568.12  Pilot Travel Center - Nashville, TN
+4  FUEL-000005  TRP-000002  TRK-084   DRV-008    2024-08-17   157.30             3.948      621.02      TA Travel Center - Billings, MT
+5  FUEL-000006  TRP-000003  TRK-083   DRV-131    2025-09-17    87.92             4.071      357.92     TA Travel Center - Knoxville, TN
+6  FUEL-000007  TRP-000003  TRK-083   DRV-131    2025-09-18    95.42             4.022      383.78  Pilot Travel Center - Nashville, TN
+7  FUEL-000008  TRP-000004  TRK-089   DRV-162    2024-12-03   115.70             3.976      460.02  Pilot Travel Center - Nashville, TN
+8  FUEL-000009  TRP-000004  TRK-089   DRV-162    2024-12-03   108.08             3.874      418.70      Love's Travel Stop - Denver, CO
+9  FUEL-000010  TRP-000004  TRK-089   DRV-162    2024-12-04    97.85             4.072      398.45        TA Travel Center - Joliet, IL
+                     count  unique                                   top  freq                        mean                  min                  25%  \
+purchase_id         180253  180253                           FUEL-000001     1                         NaN                  NaN                  NaN   
+trip_id             180253   61394                            TRP-000004     4                         NaN                  NaN                  NaN   
+truck_id            180253     109                               TRK-003  1848                         NaN                  NaN                  NaN   
+driver_id           180253     165                               DRV-140  1372                         NaN                  NaN                  NaN   
+purchase_date       180253     NaN                                   NaN   NaN  2025-07-02 23:13:30.800375  2024-07-03 00:00:00  2025-01-01 00:00:00   
+gallons           180253.0     NaN                                   NaN   NaN                   96.924494                 25.1                69.55   
+price_per_gallon  180253.0     NaN                                   NaN   NaN                    4.080236                3.772                3.986   
+total_cost        180253.0     NaN                                   NaN   NaN                  395.503854               102.71               283.57   
+location            180253      20  Pilot Travel Center - Rapid City, SD  9162                         NaN                  NaN                  NaN   
+
+                                  50%                  75%                  max         std  
+purchase_id                       NaN                  NaN                  NaN         NaN  
+trip_id                           NaN                  NaN                  NaN         NaN  
+truck_id                          NaN                  NaN                  NaN         NaN  
+driver_id                         NaN                  NaN                  NaN         NaN  
+purchase_date     2025-07-03 00:00:00  2026-01-03 00:00:00  2026-07-05 00:00:00         NaN  
+gallons                         89.14               115.76               331.32    38.72148  
+price_per_gallon                4.079                4.175                 4.42    0.131775  
+total_cost                     363.62               473.37              1419.71  158.676515  
+location                          NaN                  NaN                  NaN         NaN  
+
+====================================================================================================
+SHAPE / DTYPES: maint  (840, 7)
+====================================================================================================
+record_id                         str
+truck_id                          str
+service_date           datetime64[us]
+service_type                      str
+cost                          float64
+downtime_hours                float64
+odometer_at_service             int64
+dtype: object
+    record_id truck_id service_date        service_type     cost  downtime_hours  odometer_at_service
+0  MNT-000001  TRK-001   2025-05-28  routine PM service   708.25            16.5               345524
+1  MNT-000002  TRK-001   2025-04-04  routine PM service  1502.56            16.0                59111
+2  MNT-000003  TRK-001   2025-08-07          electrical  1698.11            14.1               293392
+3  MNT-000004  TRK-001   2025-06-28    tire replacement  1647.39            12.5               118097
+4  MNT-000005  TRK-002   2026-05-13  routine PM service   954.40            16.1               453005
+5  MNT-000006  TRK-002   2026-05-23      cooling system  1771.66            23.8               278298
+6  MNT-000007  TRK-002   2025-12-04      cooling system  1719.47            23.4               130358
+7  MNT-000008  TRK-002   2026-05-17  routine PM service  1734.12            12.7               109611
+8  MNT-000009  TRK-002   2026-01-18    tire replacement  1383.93             9.5               409903
+9  MNT-000010  TRK-002   2025-05-05        brake system  1503.52             3.1               297451
+                     count unique                 top freq                        mean                  min                  25%                  50%  \
+record_id              840    840          MNT-000001    1                         NaN                  NaN                  NaN                  NaN   
+truck_id               840    110             TRK-045   21                         NaN                  NaN                  NaN                  NaN   
+service_date           840    NaN                 NaN  NaN  2025-07-05 11:10:17.142857  2024-07-03 00:00:00  2024-12-26 00:00:00  2025-07-15 00:00:00   
+service_type           840      8  routine PM service  289                         NaN                  NaN                  NaN                  NaN   
+cost                 840.0    NaN                 NaN  NaN                 2418.607393               261.22              1209.08              2016.64   
+downtime_hours       840.0    NaN                 NaN  NaN                   20.481905                  2.0                8.675                 15.1   
+odometer_at_service  840.0    NaN                 NaN  NaN               246951.146429                230.0              91650.0             193813.0   
+
+                                     75%                  max            std  
+record_id                            NaN                  NaN            NaN  
+truck_id                             NaN                  NaN            NaN  
+service_date         2026-01-01 06:00:00  2026-07-03 00:00:00            NaN  
+service_type                         NaN                  NaN            NaN  
+cost                              2846.5              9476.84    1917.004172  
+downtime_hours                      21.7                 95.9      19.967258  
+odometer_at_service             333412.0             899201.0  208277.882615  
+
+====================================================================================================
+SHAPE / DTYPES: events  (61394, 8)
+====================================================================================================
+event_id                        str
+load_id                         str
+trip_id                         str
+facility_type                   str
+scheduled_time       datetime64[us]
+actual_time          datetime64[us]
+detention_minutes             int64
+on_time                        bool
+dtype: object
+     event_id    load_id     trip_id facility_type             scheduled_time                actual_time  detention_minutes  on_time
+0  EVT-000001  LD-000001  TRP-000001     consignee 2024-07-19 01:00:00.308247 2024-07-19 01:29:00.308247                 11     True
+1  EVT-000002  LD-000002  TRP-000002       shipper 2024-08-17 21:00:00.370743 2024-08-17 21:05:00.370743                 10     True
+2  EVT-000003  LD-000003  TRP-000003     consignee 2025-09-18 13:00:00.303905 2025-09-18 13:23:00.303905                 13     True
+3  EVT-000004  LD-000004  TRP-000004    cross-dock 2024-12-05 10:00:00.977399 2024-12-05 10:13:00.977399                 17    False
+4  EVT-000005  LD-000005  TRP-000005    cross-dock 2024-08-13 02:00:00.318096 2024-08-13 02:32:00.318096                 37    False
+5  EVT-000006  LD-000006  TRP-000006     consignee 2024-09-08 06:00:00.570236 2024-09-08 06:05:00.570236                  7     True
+6  EVT-000007  LD-000007  TRP-000007    cross-dock 2025-03-05 22:00:00.277632 2025-03-05 22:24:00.277632                  7     True
+7  EVT-000008  LD-000008  TRP-000008     consignee 2025-06-27 06:00:00.194198 2025-06-27 06:22:00.194198                  2     True
+8  EVT-000009  LD-000009  TRP-000009     consignee 2025-11-24 11:00:00.454007 2025-11-24 11:23:00.454007                 10     True
+9  EVT-000010  LD-000010  TRP-000010       shipper 2026-06-10 14:00:00.119648 2026-06-10 14:33:00.119648                 13     True
+                     count unique         top   freq                        mean                         min                         25%  \
+event_id             61394  61394  EVT-000001      1                         NaN                         NaN                         NaN   
+load_id              61394  61394   LD-000001      1                         NaN                         NaN                         NaN   
+trip_id              61394  61394  TRP-000001      1                         NaN                         NaN                         NaN   
+facility_type        61394      3   consignee  30562                         NaN                         NaN                         NaN   
+scheduled_time       61394    NaN         NaN    NaN  2025-07-04 22:16:12.068384  2024-07-03 15:00:00.230208  2025-01-02 20:15:00.696242   
+actual_time          61394    NaN         NaN    NaN  2025-07-04 22:36:50.692028  2024-07-03 15:28:00.230208  2025-01-02 20:47:45.592630   
+detention_minutes  61394.0    NaN         NaN    NaN                   15.616428                         0.0                         7.0   
+on_time              61394      2        True  44638                         NaN                         NaN                         NaN   
+
+                                          50%                         75%                         max       std  
+event_id                                  NaN                         NaN                         NaN       NaN  
+load_id                                   NaN                         NaN                         NaN       NaN  
+trip_id                                   NaN                         NaN                         NaN       NaN  
+facility_type                             NaN                         NaN                         NaN       NaN  
+scheduled_time     2025-07-04 13:00:00.717613  2026-01-04 08:00:00.621720  2026-07-06 02:00:00.590673       NaN  
+actual_time        2025-07-04 13:18:00.470176  2026-01-04 08:35:30.736014  2026-07-06 02:28:00.590673       NaN  
+detention_minutes                        12.0                        17.0                        98.0  14.62319  
+on_time                                   NaN                         NaN                         NaN       NaN  
+
+====================================================================================================
+BUILDING MASTER TABLE
+====================================================================================================
+(61394, 47)
+['trip_id', 'load_id', 'driver_id', 'truck_id', 'actual_miles', 'fuel_gallons', 'actual_mpg', 'departure_time', 'arrival_time', 'on_time_flag', 'customer_id', 'route_id', 'load_date', 'freight_type', 'weight_lbs', 'revenue', 'fuel_surcharge', 'load_status', 'origin_city', 'origin_state', 'destination_city', 'destination_state', 'distance_miles', 'base_rate_per_mile', 'customer_name', 'city', 'state', 'industry', 'payment_terms_days', 'account_status', 'first_name', 'last_name', 'hire_date', 'employment_status', 'home_terminal', 'years_experience', 'make', 'model', 'year', 'status', 'acquisition_date', 'fuel_cost', 'gallons', 'total_revenue', 'rev_per_mile', 'net_after_fuel', 'net_per_mile']
+
+====================================================================================================
+REVENUE & MARGIN BY LANE (route)
+====================================================================================================
+   route_id origin_city origin_state destination_city destination_state  distance_miles  base_rate_per_mile  loads  avg_rev_per_mile  avg_net_per_mile  avg_fuel_cost  total_revenue  on_time_rate
+7    RTE-08     Atlanta           GA          Seattle                WA            2630                1.95   4312          1.905084          1.301162    1612.610814    21926885.91      0.832096
+3    RTE-04     Seattle           WA          Atlanta                GA            2630                2.05   7344          1.995915          1.390533    1615.923339    39110878.28      0.819444
+6    RTE-07      Denver           CO         Portland                OR            1240                2.10   4941          2.197281          1.592118     761.746861    13660502.83      0.903663
+2    RTE-03    Portland           OR           Denver                CO            1240                2.15   7418          2.245599          1.640842     761.231606    20959676.99      0.898355
+5    RTE-06      Dallas           TX          Spokane                WA            1970                2.15   7371          2.248683          1.644302    1208.311758    33123888.16      0.901099
+4    RTE-05     Chicago           IL          Spokane                WA            1980                2.20   8601          2.294138          1.689175    1215.831012    39641355.11      0.895710
+1    RTE-02     Spokane           WA           Dallas                TX            1970                2.30   9006          2.392923          1.788001    1209.750802    43080788.56      0.894515
+0    RTE-01     Spokane           WA          Chicago                IL            1980                2.35   9910          2.443835          1.838829    1215.878211    48652269.76      0.895358
+10   RTE-11      Dallas           TX          Chicago                IL             930                2.40    299          2.497510          1.891411     572.240970      704713.95      0.913043
+11   RTE-12     Chicago           IL           Dallas                TX             930                2.45    305          2.538993          1.933933     571.452295      731217.81      0.901639
+9    RTE-10    Portland           OR          Spokane                WA             350                2.55    627          2.629299          2.024353     215.011547      585655.12      0.874003
+8    RTE-09     Spokane           WA         Portland                OR             350                2.60   1260          2.680627          2.076021     214.942444     1200328.19      0.897619
+
+====================================================================================================
+LANES BELOW BREAKEVEN ($2.05/mi net-after-fuel)
+====================================================================================================
+   route_id origin_city origin_state destination_city destination_state  distance_miles  base_rate_per_mile  loads  avg_rev_per_mile  avg_net_per_mile  avg_fuel_cost  total_revenue  on_time_rate
+7    RTE-08     Atlanta           GA          Seattle                WA            2630                1.95   4312          1.905084          1.301162    1612.610814    21926885.91      0.832096
+3    RTE-04     Seattle           WA          Atlanta                GA            2630                2.05   7344          1.995915          1.390533    1615.923339    39110878.28      0.819444
+6    RTE-07      Denver           CO         Portland                OR            1240                2.10   4941          2.197281          1.592118     761.746861    13660502.83      0.903663
+2    RTE-03    Portland           OR           Denver                CO            1240                2.15   7418          2.245599          1.640842     761.231606    20959676.99      0.898355
+5    RTE-06      Dallas           TX          Spokane                WA            1970                2.15   7371          2.248683          1.644302    1208.311758    33123888.16      0.901099
+4    RTE-05     Chicago           IL          Spokane                WA            1980                2.20   8601          2.294138          1.689175    1215.831012    39641355.11      0.895710
+1    RTE-02     Spokane           WA           Dallas                TX            1970                2.30   9006          2.392923          1.788001    1209.750802    43080788.56      0.894515
+0    RTE-01     Spokane           WA          Chicago                IL            1980                2.35   9910          2.443835          1.838829    1215.878211    48652269.76      0.895358
+10   RTE-11      Dallas           TX          Chicago                IL             930                2.40    299          2.497510          1.891411     572.240970      704713.95      0.913043
+11   RTE-12     Chicago           IL           Dallas                TX             930                2.45    305          2.538993          1.933933     571.452295      731217.81      0.901639
+9    RTE-10    Portland           OR          Spokane                WA             350                2.55    627          2.629299          2.024353     215.011547      585655.12      0.874003
+
+====================================================================================================
+REVENUE / VOLUME BY CUSTOMER
+====================================================================================================
+  customer_id                     customer_name  loads  total_revenue  avg_rev_per_mile  avg_net_per_mile  on_time_rate  pct_of_total_revenue
+0     CUST-01            Cascade Paper Products  14751    66821838.85          2.400566          1.795505      0.896482             25.371063
+3     CUST-04  Northwind Appliance Distributors   9380    44347085.86          2.373976          1.769034      0.891151             16.837799
+2     CUST-03       TitanBolt Industrial Supply   8312    38333146.25          2.330931          1.726434      0.900987             14.554413
+7     CUST-08          Pioneer Home Furnishings   6873    32007175.83          2.058898          1.454976      0.832533             12.152555
+5     CUST-06          Peachtree Consumer Goods   5714    29913206.57          1.961240          1.355361      0.824466             11.357512
+4     CUST-05   Rocky Summit Building Materials   6194    17343982.88          2.225958          1.621490      0.898612              6.585202
+6     CUST-07     Lonestar Auto Parts Wholesale   4005    17335527.49          2.268504          1.663837      0.899625              6.581991
+1     CUST-02             Evergreen Foods Co-op   6165    17276196.94          2.226607          1.621235      0.902352              6.559464
+
+====================================================================================================
+DETENTION MINUTES BY CUSTOMER
+====================================================================================================
+  customer_id                     customer_name  events  avg_detention_min  median_detention_min  pct_on_time
+2     CUST-03       TitanBolt Industrial Supply    8312          47.358638                  48.0     0.023701
+3     CUST-04  Northwind Appliance Distributors    9380          10.792857                  11.0     0.845309
+1     CUST-02             Evergreen Foods Co-op    6165          10.743066                  11.0     0.857097
+7     CUST-08          Pioneer Home Furnishings    6873          10.687327                  11.0     0.790921
+5     CUST-06          Peachtree Consumer Goods    5714          10.620581                  11.0     0.782989
+0     CUST-01            Cascade Paper Products   14751          10.608772                  10.0     0.853773
+4     CUST-05   Rocky Summit Building Materials    6194          10.523410                  10.0     0.852599
+6     CUST-07     Lonestar Auto Parts Wholesale    4005          10.444444                  10.0     0.859675
+
+FLEET AVERAGE DETENTION: 15.6 min
+
+====================================================================================================
+MPG BY TRUCK
+====================================================================================================
+    truck_id  trips   avg_mpg  total_miles  total_fuel_cost          make     model  year
+45   TRK-047    606  4.917046    1149937.0        955377.08     Peterbilt       389  2011
+43   TRK-045    528  5.944356    1007986.7        692437.27     Peterbilt       389  2011
+42   TRK-044    573  5.947365    1101120.1        754907.00  Freightliner  Cascadia  2011
+46   TRK-048    611  5.947971    1168234.4        802419.36     Peterbilt       389  2011
+44   TRK-046    566  5.953392    1074068.2        737299.98  Freightliner  Cascadia  2012
+40   TRK-042    550  5.957455    1057052.8        724187.91  Freightliner  Cascadia  2010
+41   TRK-043    515  5.961417    1011195.5        691022.18  Freightliner  Cascadia  2012
+39   TRK-041    560  5.961786    1083107.0        742654.71     Peterbilt       389  2010
+94   TRK-096    551  6.830780    1048198.5        628692.96     Peterbilt       579  2019
+21   TRK-022    505  6.831050     972904.3        582362.03     Peterbilt       389  2022
+5    TRK-006    586  6.831382    1121907.4        670779.11      Kenworth      T680  2016
+67   TRK-069    549  6.831821    1053226.2        631177.36      Kenworth      T680  2018
+50   TRK-052    578  6.832042    1100628.7        658600.55  Freightliner  Cascadia  2020
+16   TRK-017    571  6.832119    1083763.0        648557.82     Peterbilt       389  2022
+36   TRK-038    586  6.832167    1137594.0        680206.23  Freightliner  Cascadia  2019
+34   TRK-036    548  6.835931    1066468.9        637579.86         Volvo   VNL 760  2023
+61   TRK-063    515  6.836155     984366.7        588236.54         Volvo   VNL 760  2020
+68   TRK-070    535  6.836879    1048903.0        627139.89      Kenworth      T680  2022
+78   TRK-080    542  6.837214    1036687.1        620267.85     Peterbilt       389  2018
+91   TRK-093    556  6.838525    1080705.7        647104.56     Peterbilt       579  2017
+106  TRK-108    565  6.838743    1076584.5        644610.86     Peterbilt       389  2017
+52   TRK-054    579  6.838929    1113783.5        666442.75  Freightliner  Cascadia  2017
+57   TRK-059    602  6.839286    1175601.0        702463.51  Freightliner  Cascadia  2016
+51   TRK-053    565  6.840018    1106536.6        661410.05     Peterbilt       389  2023
+0    TRK-001    571  6.840368    1100222.4        658293.69         Volvo   VNL 760  2017
+96   TRK-098    555  6.841568    1061949.3        635531.50         Volvo   VNL 760  2020
+28   TRK-030    556  6.841619    1086713.2        650276.86  Freightliner  Cascadia  2023
+89   TRK-091    569  6.841670    1087460.1        649891.14  Freightliner  Cascadia  2021
+64   TRK-066    543  6.842652    1037849.6        619213.75      Kenworth      T680  2020
+15   TRK-016    566  6.842915    1088701.3        651620.64         Volvo   VNL 760  2018
+8    TRK-009    572  6.842972    1094755.3        653953.14         Volvo   VNL 760  2024
+47   TRK-049    559  6.843667    1072319.7        640438.34         Volvo   VNL 760  2023
+97   TRK-099    589  6.844143    1149827.1        686787.71     Peterbilt       389  2016
+12   TRK-013    559  6.844347    1086215.7        648660.75      Kenworth      T680  2017
+26   TRK-028    550  6.844364    1051640.0        627357.28      Kenworth      T680  2021
+7    TRK-008    572  6.844615    1101801.3        657990.17     Peterbilt       579  2021
+20   TRK-021    607  6.845025    1138432.6        679212.55  Freightliner  Cascadia  2021
+74   TRK-076    572  6.845070    1095462.1        655078.48     Peterbilt       389  2021
+38   TRK-040    592  6.846149    1139378.7        680771.92      Kenworth      T680  2021
+10   TRK-011    526  6.846616     989684.8        590860.37         Volvo   VNL 760  2019
+19   TRK-020    582  6.846735    1120732.5        669472.07     Peterbilt       579  2017
+48   TRK-050    541  6.846802    1047169.2        625503.01         Volvo   VNL 760  2019
+84   TRK-086    555  6.847748    1071751.9        639558.24      Kenworth      T680  2019
+58   TRK-060    570  6.848421    1100087.4        656770.64     Peterbilt       389  2022
+54   TRK-056    571  6.848774    1129779.6        673318.71     Peterbilt       389  2019
+88   TRK-090    539  6.849054    1019053.6        609050.34  Freightliner  Cascadia  2020
+30   TRK-032    564  6.849131    1090297.1        649880.78  Freightliner  Cascadia  2023
+77   TRK-079    564  6.849202    1061196.7        634236.58     Peterbilt       389  2020
+22   TRK-023    600  6.849433    1150473.9        686269.56     Peterbilt       579  2017
+60   TRK-062    546  6.849451    1041609.9        622143.26     Peterbilt       579  2023
+87   TRK-089    604  6.850364    1149960.1        686577.34     Peterbilt       579  2017
+66   TRK-068    571  6.850578    1104279.8        659475.20         Volvo   VNL 760  2021
+23   TRK-024    558  6.850609    1075077.2        642035.00         Volvo   VNL 760  2018
+90   TRK-092    533  6.850619    1021458.6        610086.93  Freightliner  Cascadia  2018
+79   TRK-081    599  6.850651    1147367.1        685785.81  Freightliner  Cascadia  2018
+104  TRK-106    560  6.850875    1070988.4        639957.60     Peterbilt       579  2021
+11   TRK-012    544  6.851250    1058765.1        631722.39         Volvo   VNL 760  2016
+95   TRK-097    584  6.851541    1134262.6        678771.05  Freightliner  Cascadia  2019
+29   TRK-031    550  6.851618    1056141.6        629828.00     Peterbilt       579  2024
+102  TRK-104    531  6.851770    1030206.2        614667.75     Peterbilt       579  2019
+75   TRK-077    584  6.852158    1135335.9        678092.13     Peterbilt       389  2018
+27   TRK-029    563  6.852416    1072016.2        640191.45  Freightliner  Cascadia  2020
+99   TRK-101    497  6.852495     938455.9        559713.63  Freightliner  Cascadia  2020
+93   TRK-095    567  6.852504    1081743.9        647246.37     Peterbilt       579  2022
+107  TRK-109    610  6.852639    1147719.7        685614.66  Freightliner  Cascadia  2017
+49   TRK-051    526  6.852662    1010430.4        600602.95  Freightliner  Cascadia  2022
+108  TRK-110    559  6.852755    1092280.1        652081.10         Volvo   VNL 760  2019
+63   TRK-065    569  6.852917    1096263.2        653565.96     Peterbilt       389  2019
+70   TRK-072    575  6.853043    1070584.4        639812.77      Kenworth      T680  2023
+6    TRK-007    543  6.853425    1044040.9        623280.03     Peterbilt       579  2016
+73   TRK-075    583  6.853877    1122542.4        668622.76  Freightliner  Cascadia  2018
+101  TRK-103    552  6.854348    1057911.6        633471.79         Volvo   VNL 760  2024
+59   TRK-061    551  6.854446    1064543.3        633853.24     Peterbilt       389  2020
+55   TRK-057    520  6.854500     994350.8        593806.25     Peterbilt       389  2023
+76   TRK-078    576  6.854757    1074445.1        641243.19      Kenworth      T680  2018
+9    TRK-010    557  6.855117    1071569.8        638509.69     Peterbilt       579  2024
+82   TRK-084    541  6.855305    1054441.6        628170.87  Freightliner  Cascadia  2020
+92   TRK-094    555  6.855423    1073119.9        638701.60     Peterbilt       579  2017
+2    TRK-003    620  6.855500    1198821.4        716587.88      Kenworth      T680  2022
+33   TRK-035    533  6.856023    1027527.9        612511.99     Peterbilt       579  2020
+32   TRK-034    584  6.856781    1146020.5        683721.45  Freightliner  Cascadia  2020
+25   TRK-027    538  6.856803    1011387.3        604665.40      Kenworth      T680  2017
+62   TRK-064    582  6.857165    1116357.1        665743.65     Peterbilt       389  2019
+105  TRK-107    580  6.857397    1107881.2        660417.98  Freightliner  Cascadia  2017
+65   TRK-067    562  6.858434    1055240.5        628982.77     Peterbilt       389  2019
+37   TRK-039    566  6.858498    1088762.5        649137.60     Peterbilt       579  2019
+31   TRK-033    561  6.859180    1068856.5        636158.48  Freightliner  Cascadia  2023
+98   TRK-100    611  6.859313    1176360.9        701535.92     Peterbilt       579  2016
+18   TRK-019    592  6.859324    1122192.7        668014.12     Peterbilt       389  2019
+86   TRK-088    552  6.859674    1042211.0        620360.11     Peterbilt       389  2016
+1    TRK-002    558  6.859821    1068279.7        636903.24     Peterbilt       389  2024
+72   TRK-074    557  6.860718    1067785.0        635783.11     Peterbilt       389  2024
+69   TRK-071    603  6.861294    1161455.1        693443.64         Volvo   VNL 760  2020
+81   TRK-083    573  6.861745    1119265.9        666561.99     Peterbilt       579  2018
+13   TRK-014    546  6.862198    1048144.1        624312.15      Kenworth      T680  2018
+14   TRK-015    561  6.862692    1075589.9        641274.41  Freightliner  Cascadia  2021
+71   TRK-073    570  6.862895    1074454.3        641178.91     Peterbilt       389  2019
+53   TRK-055    591  6.862910    1126362.6        671252.70      Kenworth      T680  2019
+24   TRK-025    582  6.863797    1122396.1        668418.34     Peterbilt       389  2021
+17   TRK-018    585  6.863880    1122542.9        668481.89     Peterbilt       579  2023
+3    TRK-004    577  6.864298    1098131.2        655104.56     Peterbilt       389  2016
+100  TRK-102    587  6.864583    1147204.0        682546.98  Freightliner  Cascadia  2017
+4    TRK-005    513  6.865283     999117.5        595830.27     Peterbilt       579  2021
+85   TRK-087    560  6.867482    1067230.1        635521.11      Kenworth      T680  2024
+56   TRK-058    581  6.868640    1109118.2        661218.08  Freightliner  Cascadia  2016
+83   TRK-085    569  6.871125    1099066.0        654086.61     Peterbilt       579  2023
+103  TRK-105    540  6.873056    1039452.9        617964.34     Peterbilt       389  2018
+35   TRK-037    559  6.873757    1067473.0        636310.89     Peterbilt       389  2020
+80   TRK-082    507  6.884458     964494.3        573159.15      Kenworth      T680  2017
+
+FLEET AVERAGE MPG: 6.78
+
+WORST 10 TRUCKS BY MPG:
+   truck_id  trips   avg_mpg  total_miles  total_fuel_cost          make     model  year
+45  TRK-047    606  4.917046    1149937.0        955377.08     Peterbilt       389  2011
+43  TRK-045    528  5.944356    1007986.7        692437.27     Peterbilt       389  2011
+42  TRK-044    573  5.947365    1101120.1        754907.00  Freightliner  Cascadia  2011
+46  TRK-048    611  5.947971    1168234.4        802419.36     Peterbilt       389  2011
+44  TRK-046    566  5.953392    1074068.2        737299.98  Freightliner  Cascadia  2012
+40  TRK-042    550  5.957455    1057052.8        724187.91  Freightliner  Cascadia  2010
+41  TRK-043    515  5.961417    1011195.5        691022.18  Freightliner  Cascadia  2012
+39  TRK-041    560  5.961786    1083107.0        742654.71     Peterbilt       389  2010
+94  TRK-096    551  6.830780    1048198.5        628692.96     Peterbilt       579  2019
+21  TRK-022    505  6.831050     972904.3        582362.03     Peterbilt       389  2022
+
+====================================================================================================
+MPG BY DRIVER
+====================================================================================================
+    driver_id  trips   avg_mpg  on_time_rate  total_miles first_name last_name home_terminal  hire_date employment_status
+108   DRV-109    256  6.699063      0.886719     486354.6    Michael  Robinson   Spokane, WA 2025-04-12        terminated
+65    DRV-066     54  6.707222      0.888889     108368.2    Michael    Nguyen   Spokane, WA 2026-03-23            active
+69    DRV-070    409  6.717115      0.872861     799733.0      Maria   Roberts   Spokane, WA 2021-03-14            active
+80    DRV-081    128  6.720859      0.812500     242388.2      Donna  Anderson   Spokane, WA 2025-11-27            active
+37    DRV-038    400  6.724200      0.882500     768099.8    Michael    Martin   Spokane, WA 2018-04-20            active
+102   DRV-103    281  6.726121      0.879004     538498.5     Samuel  Thompson   Spokane, WA 2025-01-17            active
+119   DRV-120     45  6.727111      0.955556      81081.6      Betty  Martinez   Spokane, WA 2026-04-17            active
+124   DRV-125    392  6.739872      0.903061     763338.2     Ashley     Baker   Spokane, WA 2017-06-01            active
+45    DRV-046    422  6.741801      0.872038     808425.2      Donna      Hall   Chicago, IL 2021-05-04            active
+122   DRV-123    407  6.742359      0.896806     768511.8     Sharon     Baker   Chicago, IL 2018-11-18            active
+3     DRV-004    414  6.744034      0.876812     793326.2     Robert    Thomas   Spokane, WA 2020-07-13            active
+38    DRV-039    378  6.744206      0.894180     721600.3      Donna    Harris   Chicago, IL 2019-02-16            active
+125   DRV-126    418  6.744354      0.858852     806364.1     Amanda  Kowalski   Spokane, WA 2018-05-16            active
+28    DRV-029    418  6.745191      0.894737     804997.0      Maria  Mitchell   Spokane, WA 2024-06-08        terminated
+136   DRV-137    376  6.745266      0.896277     700795.3     Amanda     Allen   Spokane, WA 2019-08-28            active
+
+====================================================================================================
+ON-TIME RATE BY CUSTOMER / ROUTE / DRIVER
+====================================================================================================
+By customer:
+                      customer_name  on_time_rate  loads
+5          Peachtree Consumer Goods      0.824466   5714
+7          Pioneer Home Furnishings      0.832533   6873
+3  Northwind Appliance Distributors      0.891151   9380
+0            Cascade Paper Products      0.896482  14751
+4   Rocky Summit Building Materials      0.898612   6194
+6     Lonestar Auto Parts Wholesale      0.899625   4005
+2       TitanBolt Industrial Supply      0.900987   8312
+1             Evergreen Foods Co-op      0.902352   6165
+
+By route:
+   origin_city destination_city  on_time_rate  loads
+3      Seattle          Atlanta      0.819444   7344
+7      Atlanta          Seattle      0.832096   4312
+9     Portland          Spokane      0.874003    627
+1      Spokane           Dallas      0.894515   9006
+0      Spokane          Chicago      0.895358   9910
+4      Chicago          Spokane      0.895710   8601
+8      Spokane         Portland      0.897619   1260
+2     Portland           Denver      0.898355   7418
+5       Dallas          Spokane      0.901099   7371
+11     Chicago           Dallas      0.901639    305
+6       Denver         Portland      0.903663   4941
+10      Dallas          Chicago      0.913043    299
+
+By driver (worst 15):
+    driver_id first_name last_name  on_time_rate  trips
+121   DRV-122     Amanda  Thompson      0.802083     96
+80    DRV-081      Donna  Anderson      0.812500    128
+36    DRV-037       Paul     Davis      0.839286    392
+31    DRV-032      Jacob  Anderson      0.842105     57
+127   DRV-128       Paul     Baker      0.844156    154
+84    DRV-085     Sharon    Miller      0.848411    409
+152   DRV-153    Matthew  Campbell      0.849879    413
+35    DRV-036      Brian  Gonzalez      0.851955    358
+64    DRV-065   Nicholas    Thomas      0.852632    380
+60    DRV-061     Edward    Taylor      0.852761    163
+145   DRV-146       Mark    Miller      0.857500    400
+24    DRV-025     Ashley    Torres      0.858586    396
+125   DRV-126     Amanda  Kowalski      0.858852    418
+20    DRV-021    Melissa     Moore      0.860169    236
+129   DRV-130    Stephen  Campbell      0.860190    422
+
+====================================================================================================
+MAINTENANCE COST & DOWNTIME BY TRUCK
+====================================================================================================
+    truck_id  records  total_cost  total_downtime_hrs     avg_cost          make     model  year  current_odometer
+45   TRK-046       20   133884.50              1224.5  6694.225000  Freightliner  Cascadia  2012            905049
+44   TRK-045       21   119560.89              1373.8  5693.375714     Peterbilt       389  2011            905655
+41   TRK-042       17   106819.58               967.0  6283.504706  Freightliner  Cascadia  2010            763900
+42   TRK-043       18    98775.27               950.2  5487.515000  Freightliner  Cascadia  2012            857886
+47   TRK-048       18    98047.21               947.1  5447.067222     Peterbilt       389  2011            772350
+46   TRK-047       15    95659.82               759.5  6377.321333     Peterbilt       389  2011            745807
+40   TRK-041       17    87861.80               958.5  5168.341176     Peterbilt       389  2010            858189
+43   TRK-044       14    71291.34               938.3  5092.238571  Freightliner  Cascadia  2011            759781
+4    TRK-005       10    22258.89               132.4  2225.889000     Peterbilt       579  2021            410500
+13   TRK-014        8    21601.99                81.3  2700.248750      Kenworth      T680  2018            416547
+10   TRK-011        9    20856.26               111.0  2317.362222         Volvo   VNL 760  2019            230416
+61   TRK-062       10    20554.88               123.4  2055.488000     Peterbilt       579  2023            498834
+79   TRK-080        9    19478.71               125.8  2164.301111     Peterbilt       389  2018            190691
+95   TRK-096        9    19039.52                91.3  2115.502222     Peterbilt       579  2019            131583
+39   TRK-040       10    18048.17               126.7  1804.817000      Kenworth      T680  2021            343049
+63   TRK-064       10    17992.13               136.2  1799.213000     Peterbilt       389  2019            357555
+2    TRK-003        8    17747.97                95.2  2218.496250      Kenworth      T680  2022            502727
+96   TRK-097       10    17229.92               121.5  1722.992000  Freightliner  Cascadia  2019            358790
+94   TRK-095        9    16518.16                99.8  1835.351111     Peterbilt       579  2022            464737
+62   TRK-063        7    16485.39                87.9  2355.055714         Volvo   VNL 760  2020            506619
+86   TRK-087        9    16483.02               143.0  1831.446667      Kenworth      T680  2024            332780
+87   TRK-088       10    16420.40               151.4  1642.040000     Peterbilt       389  2016            297020
+5    TRK-006        8    16267.01                76.6  2033.376250      Kenworth      T680  2016            121331
+48   TRK-049        8    16126.23               116.3  2015.778750         Volvo   VNL 760  2023            392241
+92   TRK-093       10    15930.32               171.7  1593.032000     Peterbilt       579  2017            489975
+32   TRK-033        7    15508.06                67.0  2215.437143  Freightliner  Cascadia  2023            236447
+68   TRK-069        9    15503.13               122.8  1722.570000      Kenworth      T680  2018            139134
+53   TRK-054        9    15396.33                98.8  1710.703333  Freightliner  Cascadia  2017            353920
+21   TRK-022        8    14770.29                99.7  1846.286250     Peterbilt       389  2022            260665
+69   TRK-070        7    14759.30                89.1  2108.471429      Kenworth      T680  2022            334173
+37   TRK-038        9    14521.57                76.1  1613.507778  Freightliner  Cascadia  2019            481530
+54   TRK-055        8    14470.77               126.7  1808.846250      Kenworth      T680  2019            212755
+9    TRK-010        9    14376.10               110.2  1597.344444     Peterbilt       579  2024            330251
+67   TRK-068        8    14319.08               124.9  1789.885000         Volvo   VNL 760  2021            206141
+60   TRK-061        8    14108.81                99.6  1763.601250     Peterbilt       389  2020            493444
+93   TRK-094        9    14022.89               112.1  1558.098889     Peterbilt       579  2017            210148
+102  TRK-103        9    14003.31               121.4  1555.923333         Volvo   VNL 760  2024            347805
+34   TRK-035        8    13977.59                99.3  1747.198750     Peterbilt       579  2020            363611
+28   TRK-029        7    13803.29                94.7  1971.898571  Freightliner  Cascadia  2020            240325
+24   TRK-025        8    13604.58                74.1  1700.572500     Peterbilt       389  2021            242525
+30   TRK-031        8    13564.56               131.6  1695.570000     Peterbilt       579  2024            405924
+12   TRK-013        5    13428.62                67.6  2685.724000      Kenworth      T680  2017            142446
+57   TRK-058        9    13374.35               125.8  1486.038889  Freightliner  Cascadia  2016            324574
+91   TRK-092        5    13267.18                74.3  2653.436000  Freightliner  Cascadia  2018            264103
+84   TRK-085        7    13250.90                79.4  1892.985714     Peterbilt       579  2023            477248
+18   TRK-019        6    13125.80                65.1  2187.633333     Peterbilt       389  2019            391801
+19   TRK-020        9    13118.35               167.8  1457.594444     Peterbilt       579  2017            123239
+78   TRK-079        7    12685.59               109.1  1812.227143     Peterbilt       389  2020            312407
+1    TRK-002        9    12674.80               135.4  1408.311111     Peterbilt       389  2024            502265
+27   TRK-028        8    12623.95                66.3  1577.993750      Kenworth      T680  2021            358949
+106  TRK-107        8    12559.42               130.1  1569.927500  Freightliner  Cascadia  2017            368954
+20   TRK-021        8    12448.32                84.1  1556.040000  Freightliner  Cascadia  2021            340305
+52   TRK-053        7    12438.38               107.8  1776.911429     Peterbilt       389  2023            148064
+29   TRK-030        6    12190.60                75.0  2031.766667  Freightliner  Cascadia  2023            218784
+64   TRK-065        6    12173.00                81.8  2028.833333     Peterbilt       389  2019            106373
+17   TRK-018        7    12088.43                88.8  1726.918571     Peterbilt       579  2023            488660
+71   TRK-072        6    11996.49                88.4  1999.415000      Kenworth      T680  2023            456363
+108  TRK-109        9    11818.99               111.5  1313.221111  Freightliner  Cascadia  2017            387792
+98   TRK-099        7    11550.28               100.4  1650.040000     Peterbilt       389  2016            370926
+97   TRK-098        8    11422.64               100.7  1427.830000         Volvo   VNL 760  2020            380974
+50   TRK-051        7    11398.31                87.8  1628.330000  Freightliner  Cascadia  2022            506223
+65   TRK-066        8    11185.03               109.8  1398.128750      Kenworth      T680  2020            507814
+36   TRK-037        8    11182.97               104.0  1397.871250     Peterbilt       389  2020            328775
+25   TRK-026        7    10822.69                74.6  1546.098571     Peterbilt       579  2023            305335
+58   TRK-059        9    10788.34               107.4  1198.704444  Freightliner  Cascadia  2016            113372
+72   TRK-073        7    10705.64                66.3  1529.377143     Peterbilt       389  2019            377711
+90   TRK-091        7    10529.92               100.4  1504.274286  Freightliner  Cascadia  2021            435195
+6    TRK-007        6    10498.45                59.7  1749.741667     Peterbilt       579  2016            325842
+38   TRK-039        6    10494.56               106.4  1749.093333     Peterbilt       579  2019            247126
+14   TRK-015        6    10489.69                83.8  1748.281667  Freightliner  Cascadia  2021            145628
+104  TRK-105        8    10250.46                99.3  1281.307500     Peterbilt       389  2018            220529
+83   TRK-084        4    10238.90                53.9  2559.725000  Freightliner  Cascadia  2020            493205
+66   TRK-067        6    10222.27                81.3  1703.711667     Peterbilt       389  2019            281392
+8    TRK-009        5    10130.12                39.9  2026.024000         Volvo   VNL 760  2024            300879
+23   TRK-024        8    10060.46               134.1  1257.557500         Volvo   VNL 760  2018            248203
+7    TRK-008        4    10025.90                48.7  2506.475000     Peterbilt       579  2021            173675
+15   TRK-016        7     9964.26                91.3  1423.465714         Volvo   VNL 760  2018            233576
+107  TRK-108        7     9902.21                86.3  1414.601429     Peterbilt       389  2017            466318
+22   TRK-023        8     9758.57                88.0  1219.821250     Peterbilt       579  2017            378299
+82   TRK-083        4     9755.07                36.8  2438.767500     Peterbilt       579  2018            184247
+80   TRK-081        5     9750.57                58.5  1950.114000  Freightliner  Cascadia  2018            301464
+75   TRK-076        5     9657.14               102.3  1931.428000     Peterbilt       389  2021            395578
+31   TRK-032        6     9603.60               102.6  1600.600000  Freightliner  Cascadia  2023            460937
+103  TRK-104        4     9602.96                64.0  2400.740000     Peterbilt       579  2019            264847
+105  TRK-106        5     9425.76                31.2  1885.152000     Peterbilt       579  2021            392170
+76   TRK-077        6     9401.18                70.0  1566.863333     Peterbilt       389  2018            277691
+35   TRK-036        5     9101.52                66.9  1820.304000         Volvo   VNL 760  2023            464100
+73   TRK-074        6     8622.42                97.3  1437.070000     Peterbilt       389  2024            175188
+49   TRK-050        4     8614.11                64.9  2153.527500         Volvo   VNL 760  2019            204864
+88   TRK-089        4     8508.85                42.6  2127.212500     Peterbilt       579  2017            156697
+77   TRK-078        5     8504.21                44.9  1700.842000      Kenworth      T680  2018            109704
+16   TRK-017        4     8406.78                38.4  2101.695000     Peterbilt       389  2022            393030
+101  TRK-102        7     8172.64                94.4  1167.520000  Freightliner  Cascadia  2017            212699
+55   TRK-056        6     8151.96                64.4  1358.660000     Peterbilt       389  2019            425975
+26   TRK-027        6     8017.51                77.4  1336.251667      Kenworth      T680  2017            307764
+100  TRK-101        7     7960.09                84.2  1137.155714  Freightliner  Cascadia  2020            423108
+51   TRK-052        4     7808.55                71.7  1952.137500  Freightliner  Cascadia  2020            239953
+56   TRK-057        4     7772.31                49.4  1943.077500     Peterbilt       389  2023            209741
+85   TRK-086        4     7642.23                44.8  1910.557500      Kenworth      T680  2019            301049
+74   TRK-075        6     7498.51                78.5  1249.751667  Freightliner  Cascadia  2018            104495
+109  TRK-110        4     7231.12                42.5  1807.780000         Volvo   VNL 760  2019            100422
+33   TRK-034        4     6988.88                55.1  1747.220000  Freightliner  Cascadia  2020            499906
+81   TRK-082        5     6985.92                67.4  1397.184000      Kenworth      T680  2017            119671
+59   TRK-060        4     6917.17                61.4  1729.292500     Peterbilt       389  2022            345448
+11   TRK-012        4     6659.91                48.5  1664.977500         Volvo   VNL 760  2016            187201
+70   TRK-071        5     6429.62                62.7  1285.924000         Volvo   VNL 760  2020            225815
+0    TRK-001        4     5556.31                59.1  1389.077500         Volvo   VNL 760  2017            384062
+99   TRK-100        4     5201.52                62.6  1300.380000     Peterbilt       579  2016            460091
+89   TRK-090        4     4936.14                43.5  1234.035000  Freightliner  Cascadia  2020            131752
+3    TRK-004        5     4211.77                75.9   842.354000     Peterbilt       389  2016            450717
+
+FLEET AVG MAINT COST/TRUCK: $18,469.37
+FLEET AVG DOWNTIME HRS/TRUCK: 156.4
+
+====================================================================================================
+AGING COHORT TRK-041 to TRK-048 vs FLEET
+====================================================================================================
+Aging cohort:
+   truck_id  records  total_cost  total_downtime_hrs     avg_cost          make     model  year  current_odometer
+45  TRK-046       20   133884.50              1224.5  6694.225000  Freightliner  Cascadia  2012            905049
+44  TRK-045       21   119560.89              1373.8  5693.375714     Peterbilt       389  2011            905655
+41  TRK-042       17   106819.58               967.0  6283.504706  Freightliner  Cascadia  2010            763900
+42  TRK-043       18    98775.27               950.2  5487.515000  Freightliner  Cascadia  2012            857886
+47  TRK-048       18    98047.21               947.1  5447.067222     Peterbilt       389  2011            772350
+46  TRK-047       15    95659.82               759.5  6377.321333     Peterbilt       389  2011            745807
+40  TRK-041       17    87861.80               958.5  5168.341176     Peterbilt       389  2010            858189
+43  TRK-044       14    71291.34               938.3  5092.238571  Freightliner  Cascadia  2011            759781
+
+Aging cohort avg cost: $101,487.55 | avg downtime: 1014.9 hrs
+Rest of fleet avg cost: $11,958.14 | avg downtime: 89.1 hrs
+
+====================================================================================================
+MAINTENANCE COST PER MILE BY TRUCK AGE
+====================================================================================================
+    age  trucks  avg_cost_per_mile  avg_total_cost
+0     2       7           0.012019    12836.332857
+1     3      12           0.011903    12621.174167
+2     4       7           0.012093    12931.140000
+3     5      11           0.012027    13039.218182
+4     6      14           0.010158    10658.106429
+5     7      16           0.011673    12629.613750
+6     8      12           0.011297    12086.310833
+7     9      14           0.009983    10941.209286
+8    10       9           0.009571    10552.447778
+9    14       2           0.111167   116329.885000
+10   15       4           0.087618    96139.815000
+11   16       2           0.091087    97340.690000
+
+====================================================================================================
+DRIVER TENURE / TURNOVER
+====================================================================================================
+employment_status        active  terminated
+home_terminal hire_year                    
+Chicago, IL   2016            2           0
+              2017            5           1
+              2018            1           0
+              2019            3           0
+              2020            4           2
+              2021            4           1
+              2022            3           0
+              2023            8          13
+              2024            2           0
+              2025            1           0
+              2026            1           0
+Spokane, WA   2016            2           1
+              2017           11           1
+              2018           14           2
+              2019            8           2
+              2020            8           0
+              2021           19           2
+              2022            8           1
+              2023            6           2
+              2024            7           3
+              2025           10           2
+              2026            5           0
+
+Termination rate by terminal:
+  home_terminal  termination_rate
+0   Chicago, IL          0.333333
+1   Spokane, WA          0.140351
+
+Chicago 2023 hires: 21, termination rate: 61.9%
+Spokane overall termination rate: 14.0%
+Overall fleet termination rate: 20.0%
+
+All drivers by terminal and status:
+home_terminal  employment_status
+Chicago, IL    active               34
+               terminated           17
+Spokane, WA    active               98
+               terminated           16
+dtype: int64
+
+====================================================================================================
+MONTHLY LOAD VOLUME & REVENUE TREND
+====================================================================================================
+      month  loads      revenue
+0   2024-07   2506   9948943.79
+1   2024-08   2646  10652577.32
+2   2024-09   2502  10107031.24
+3   2024-10   2588  10396669.96
+4   2024-11   2576  10250395.65
+5   2024-12   2662  10629866.84
+6   2025-01   2659  10672431.42
+7   2025-02   2395   9586199.28
+8   2025-03   2589  10360407.86
+9   2025-04   2599  10477162.63
+10  2025-05   2508  10068298.61
+11  2025-06   2592  10425874.64
+12  2025-07   2715  10864413.73
+13  2025-08   2595  10493639.33
+14  2025-09   2451   9753896.42
+15  2025-10   2616  10503320.56
+16  2025-11   2533  10032554.96
+17  2025-12   2607  10426096.98
+18  2026-01   2648  10586364.17
+19  2026-02   2327   9313678.04
+20  2026-03   2651  10656875.82
+21  2026-04   2568  10302498.88
+22  2026-05   2641  10598722.45
+23  2026-06   2571  10282242.83
+24  2026-07    255   1017834.00
+
+====================================================================================================
+FUEL PRICE TREND OVER TIME
+====================================================================================================
+      month  avg_price_per_gal  total_spend
+0   2024-07           3.927249   2698743.74
+1   2024-08           3.953204   2973249.71
+2   2024-09           3.975418   2830622.51
+3   2024-10           3.998866   2911257.82
+4   2024-11           4.025681   2900659.76
+5   2024-12           3.930185   2932142.77
+6   2025-01           3.955078   2967758.42
+7   2025-02           3.980022   2679313.58
+8   2025-03           4.001509   2896482.92
+9   2025-04           4.028491   2969490.28
+10  2025-05           4.050269   2879267.30
+11  2025-06           4.078238   2978223.16
+12  2025-07           4.102120   3135439.10
+13  2025-08           4.125807   3052811.36
+14  2025-09           4.151953   2850643.22
+15  2025-10           4.177260   3071741.14
+16  2025-11           4.198637   2976723.50
+17  2025-12           4.103544   2998477.45
+18  2026-01           4.130371   3077445.82
+19  2026-02           4.153230   2737067.44
+20  2026-03           4.178817   3144113.39
+21  2026-04           4.202414   3029868.78
+22  2026-05           4.225645   3137477.40
+23  2026-06           4.252351   3100871.15
+24  2026-07           4.268490    360864.41
+
+====================================================================================================
+ON-TIME TREND OVER TIME
+====================================================================================================
+      month  on_time_flag
+0   2024-07      0.867150
+1   2024-08      0.881881
+2   2024-09      0.883448
+3   2024-10      0.892008
+4   2024-11      0.891458
+5   2024-12      0.888213
+6   2025-01      0.902124
+7   2025-02      0.875158
+8   2025-03      0.878585
+9   2025-04      0.881119
+10  2025-05      0.892958
+11  2025-06      0.883658
+12  2025-07      0.884101
+13  2025-08      0.876457
+14  2025-09      0.892562
+15  2025-10      0.886873
+16  2025-11      0.884600
+17  2025-12      0.878718
+18  2026-01      0.878961
+19  2026-02      0.881158
+20  2026-03      0.882643
+21  2026-04      0.869685
+22  2026-05      0.881044
+23  2026-06      0.886667
+24  2026-07      0.882353
+
+====================================================================================================
+CUSTOMER CONCENTRATION RISK
+====================================================================================================
+                      customer_name  loads  total_revenue  pct_of_total_revenue
+0            Cascade Paper Products  14751    66821838.85             25.371063
+3  Northwind Appliance Distributors   9380    44347085.86             16.837799
+2       TitanBolt Industrial Supply   8312    38333146.25             14.554413
+7          Pioneer Home Furnishings   6873    32007175.83             12.152555
+5          Peachtree Consumer Goods   5714    29913206.57             11.357512
+4   Rocky Summit Building Materials   6194    17343982.88              6.585202
+6     Lonestar Auto Parts Wholesale   4005    17335527.49              6.581991
+1             Evergreen Foods Co-op   6165    17276196.94              6.559464
+
+Largest customer share of revenue: 25.4%
+
+====================================================================================================
+PAYMENT TERMS BY CUSTOMER
+====================================================================================================
+                      customer_name  payment_terms_days
+2       TitanBolt Industrial Supply                  45
+5          Peachtree Consumer Goods                  45
+1             Evergreen Foods Co-op                  30
+0            Cascade Paper Products                  30
+3  Northwind Appliance Distributors                  30
+4   Rocky Summit Building Materials                  30
+6     Lonestar Auto Parts Wholesale                  30
+7          Pioneer Home Furnishings                  30
+
+
+ANALYSIS COMPLETE

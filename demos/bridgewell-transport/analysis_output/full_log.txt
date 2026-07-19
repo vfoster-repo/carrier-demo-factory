@@ -1,0 +1,734 @@
+
+====================================================================================================
+SHAPES & DTYPES
+====================================================================================================
+
+--- customers: (6, 7) ---
+customer_id             str
+customer_name           str
+city                    str
+state                   str
+industry                str
+payment_terms_days    int64
+account_status          str
+dtype: object
+  customer_id                     customer_name           city state            industry  payment_terms_days account_status
+0    CUST-001             Ozark Building Supply         Joplin    MO  Building Materials                  30         active
+1    CUST-002           Route 66 Ag Cooperative          Tulsa    OK         Agriculture                  30         active
+2    CUST-003               Sooner State Lumber  Oklahoma City    OK  Building Materials                  30         active
+3    CUST-004                 Delta Farm & Feed    Little Rock    AR         Agriculture                  30         active
+4    CUST-005  Crossroads Hardware Distribution    Springfield    MO  Building Materials                  30         active
+5    CUST-006          Heartland Grain Exchange    Kansas City    MO         Agriculture                  15         active
+                   count unique                    top freq  mean       std   min   25%   50%   75%   max
+customer_id            6      6               CUST-001    1   NaN       NaN   NaN   NaN   NaN   NaN   NaN
+customer_name          6      6  Ozark Building Supply    1   NaN       NaN   NaN   NaN   NaN   NaN   NaN
+city                   6      6                 Joplin    1   NaN       NaN   NaN   NaN   NaN   NaN   NaN
+state                  6      3                     MO    3   NaN       NaN   NaN   NaN   NaN   NaN   NaN
+industry               6      2     Building Materials    3   NaN       NaN   NaN   NaN   NaN   NaN   NaN
+payment_terms_days   6.0    NaN                    NaN  NaN  27.5  6.123724  15.0  30.0  30.0  30.0  30.0
+account_status         6      1                 active    6   NaN       NaN   NaN   NaN   NaN   NaN   NaN
+
+--- delivery_events: (3229, 8) ---
+event_id                        str
+load_id                         str
+trip_id                         str
+facility_type                   str
+scheduled_time       datetime64[us]
+actual_time          datetime64[us]
+detention_minutes             int64
+on_time                        bool
+dtype: object
+     event_id    load_id     trip_id facility_type             scheduled_time                actual_time  detention_minutes  on_time
+0  EVT-000001  LD-000001  TRP-000001      delivery 2024-07-03 05:00:00.178690 2024-07-03 05:52:00.178690                 44    False
+1  EVT-000002  LD-000002  TRP-000002      delivery 2024-07-03 09:00:00.411040 2024-07-03 08:59:00.411040                  3     True
+2  EVT-000003  LD-000003  TRP-000003      delivery 2024-07-03 05:00:00.694101 2024-07-03 05:23:00.694101                 14     True
+3  EVT-000004  LD-000004  TRP-000004      delivery 2024-07-03 13:00:00.821042 2024-07-03 13:12:00.821042                  7     True
+4  EVT-000005  LD-000005  TRP-000005      delivery 2024-07-03 15:00:00.460393 2024-07-03 16:10:00.460393                 58    False
+5  EVT-000006  LD-000006  TRP-000006      delivery 2024-07-04 07:00:00.289461 2024-07-04 07:24:00.289461                 17     True
+6  EVT-000007  LD-000007  TRP-000007      delivery 2024-07-04 11:00:00.329984 2024-07-04 11:23:00.329984                  8     True
+7  EVT-000008  LD-000008  TRP-000008      delivery 2024-07-04 10:00:00.503855 2024-07-04 10:12:00.503855                 10     True
+8  EVT-000009  LD-000009  TRP-000009      delivery 2024-07-04 09:00:00.118515 2024-07-04 09:19:00.118515                 18     True
+9  EVT-000010  LD-000010  TRP-000010      delivery 2024-07-05 08:00:00.202196 2024-07-05 08:12:00.202196                  7     True
+                    count unique         top  freq                        mean                         min                         25%  \
+event_id             3229   3229  EVT-000001     1                         NaN                         NaN                         NaN   
+load_id              3229   3229   LD-000001     1                         NaN                         NaN                         NaN   
+trip_id              3229   3229  TRP-000001     1                         NaN                         NaN                         NaN   
+facility_type        3229      1    delivery  3229                         NaN                         NaN                         NaN   
+scheduled_time       3229    NaN         NaN   NaN  2025-07-05 08:36:43.534446  2024-07-03 05:00:00.178690  2025-01-02 06:00:00.325304   
+actual_time          3229    NaN         NaN   NaN  2025-07-05 08:57:37.699822  2024-07-03 05:23:00.694101  2025-01-02 06:07:00.325304   
+detention_minutes  3229.0    NaN         NaN   NaN                   16.021988                         0.0                         8.0   
+on_time              3229      2        True  2478                         NaN                         NaN                         NaN   
+
+                                          50%                         75%                         max        std  
+event_id                                  NaN                         NaN                         NaN        NaN  
+load_id                                   NaN                         NaN                         NaN        NaN  
+trip_id                                   NaN                         NaN                         NaN        NaN  
+facility_type                             NaN                         NaN                         NaN        NaN  
+scheduled_time     2025-07-05 11:00:00.744100  2026-01-09 10:00:00.113090  2026-07-02 12:00:00.855787        NaN  
+actual_time        2025-07-05 11:31:00.349982  2026-01-09 10:19:00.705239  2026-07-02 12:26:00.855787        NaN  
+detention_minutes                        12.0                        16.0                        76.0  14.461754  
+on_time                                   NaN                         NaN                         NaN        NaN  
+
+--- drivers: (14, 8) ---
+driver_id                       str
+first_name                      str
+last_name                       str
+hire_date            datetime64[us]
+employment_status               str
+cdl_class                       str
+years_experience              int64
+home_terminal                   str
+dtype: object
+  driver_id first_name last_name  hire_date employment_status cdl_class  years_experience home_terminal
+0   DRV-001      James  Holbrook 2024-08-22            active         A                22    Joplin, MO
+1   DRV-002     Robert      Tice 2024-09-21            active         A                18    Joplin, MO
+2   DRV-003    Michael    Munsey 2024-10-31            active         A                15    Joplin, MO
+3   DRV-004    William    Gantry 2024-11-20            active         A                12    Joplin, MO
+4   DRV-005      David    Osgood 2025-01-09        terminated         A                 9    Joplin, MO
+5   DRV-006    Richard    Pellum 2025-02-18            active         A                 8    Joplin, MO
+6   DRV-007     Joseph    Rourke 2025-03-20        terminated         A                 6    Joplin, MO
+7   DRV-008     Thomas   Dunmore 2025-04-29            active         A                11    Joplin, MO
+8   DRV-009    Charles    Fetzer 2025-05-29            active         A                 7    Joplin, MO
+9   DRV-010     Daniel    Yancey 2025-07-08        terminated         A                 4    Joplin, MO
+                  count unique         top freq                        mean                  min                  25%                  50%  \
+driver_id            14     14     DRV-001    1                         NaN                  NaN                  NaN                  NaN   
+first_name           14     14       James    1                         NaN                  NaN                  NaN                  NaN   
+last_name            14     14    Holbrook    1                         NaN                  NaN                  NaN                  NaN   
+hire_date            14    NaN         NaN  NaN  2025-05-01 20:34:17.142857  2024-08-22 00:00:00  2024-12-02 12:00:00  2025-04-09 00:00:00   
+employment_status    14      2      active   11                         NaN                  NaN                  NaN                  NaN   
+cdl_class            14      1           A   14                         NaN                  NaN                  NaN                  NaN   
+years_experience   14.0    NaN         NaN  NaN                    8.785714                  1.0                 4.25                  7.5   
+home_terminal        14      1  Joplin, MO   14                         NaN                  NaN                  NaN                  NaN   
+
+                                   75%                  max       std  
+driver_id                          NaN                  NaN       NaN  
+first_name                         NaN                  NaN       NaN  
+last_name                          NaN                  NaN       NaN  
+hire_date          2025-08-22 00:00:00  2026-05-04 00:00:00       NaN  
+employment_status                  NaN                  NaN       NaN  
+cdl_class                          NaN                  NaN       NaN  
+years_experience                 11.75                 22.0  6.216338  
+home_terminal                      NaN                  NaN       NaN  
+
+--- fuel: (3229, 9) ---
+purchase_id                    str
+trip_id                        str
+truck_id                       str
+driver_id                      str
+purchase_date       datetime64[us]
+gallons                    float64
+price_per_gallon           float64
+total_cost                 float64
+location                       str
+dtype: object
+   purchase_id     trip_id truck_id driver_id purchase_date  gallons  price_per_gallon  total_cost           location
+0  FUEL-000001  TRP-000001  TRK-008   DRV-009    2024-07-03    10.99             3.708       40.75  Oklahoma City, OK
+1  FUEL-000002  TRP-000002  TRK-004   DRV-005    2024-07-03    22.35             3.954       88.37    Little Rock, AR
+2  FUEL-000003  TRP-000003  TRK-007   DRV-014    2024-07-03    11.59             3.996       46.31  Oklahoma City, OK
+3  FUEL-000004  TRP-000004  TRK-010   DRV-011    2024-07-03    36.77             3.781      139.03  Oklahoma City, OK
+4  FUEL-000005  TRP-000005  TRK-008   DRV-010    2024-07-03    42.10             3.838      161.58    Little Rock, AR
+5  FUEL-000006  TRP-000006  TRK-005   DRV-002    2024-07-04    10.67             3.880       41.40         Dallas, TX
+6  FUEL-000007  TRP-000007  TRK-006   DRV-011    2024-07-04    54.23             3.917      212.42          Tulsa, OK
+7  FUEL-000008  TRP-000008  TRK-008   DRV-009    2024-07-04    24.66             3.996       98.54    Little Rock, AR
+8  FUEL-000009  TRP-000009  TRK-005   DRV-003    2024-07-04    10.92             3.828       41.80  Oklahoma City, OK
+9  FUEL-000010  TRP-000010  TRK-001   DRV-001    2024-07-05    25.68             3.770       96.81         Joplin, MO
+                   count unique          top freq                        mean                  min                  25%                  50%  \
+purchase_id         3229   3229  FUEL-000001    1                         NaN                  NaN                  NaN                  NaN   
+trip_id             3229   3229   TRP-000001    1                         NaN                  NaN                  NaN                  NaN   
+truck_id            3229     10      TRK-006  573                         NaN                  NaN                  NaN                  NaN   
+driver_id           3229     14      DRV-001  441                         NaN                  NaN                  NaN                  NaN   
+purchase_date       3229    NaN          NaN  NaN  2025-07-04 22:28:07.952926  2024-07-03 00:00:00  2025-01-02 00:00:00  2025-07-05 00:00:00   
+gallons           3229.0    NaN          NaN  NaN                   29.600994                10.01                22.11                25.49   
+price_per_gallon  3229.0    NaN          NaN  NaN                    4.100349                3.708                3.973                4.106   
+total_cost        3229.0    NaN          NaN  NaN                  121.350889                38.57                86.25               104.77   
+location            3229      8   Dallas, TX  427                         NaN                  NaN                  NaN                  NaN   
+
+                                  75%                  max        std  
+purchase_id                       NaN                  NaN        NaN  
+trip_id                           NaN                  NaN        NaN  
+truck_id                          NaN                  NaN        NaN  
+driver_id                         NaN                  NaN        NaN  
+purchase_date     2026-01-09 00:00:00  2026-07-02 00:00:00        NaN  
+gallons                         40.07                58.24    14.5967  
+price_per_gallon                4.223                4.497    0.16714  
+total_cost                     164.94               253.21  59.966779  
+location                          NaN                  NaN        NaN  
+
+--- loads: (3229, 9) ---
+load_id                      str
+customer_id                  str
+route_id                     str
+load_date         datetime64[us]
+freight_type                 str
+weight_lbs                 int64
+revenue                  float64
+fuel_surcharge           float64
+load_status                  str
+dtype: object
+     load_id customer_id  route_id  load_date      freight_type  weight_lbs  revenue  fuel_surcharge load_status
+0  LD-000001    CUST-001  ROUTE-09 2024-07-03  roofing supplies       35314   210.57           12.79   delivered
+1  LD-000002    CUST-002  ROUTE-04 2024-07-03        fertilizer       28212   423.91           30.02   delivered
+2  LD-000003    CUST-005  ROUTE-09 2024-07-03          hardware       30582   222.23           23.69   delivered
+3  LD-000004    CUST-003  ROUTE-05 2024-07-03           drywall       39641   597.09           52.88   delivered
+4  LD-000005    CUST-001  ROUTE-02 2024-07-03            lumber       38336   514.10           44.07   delivered
+5  LD-000006    CUST-005  ROUTE-10 2024-07-04          hardware       39861   209.16           26.21   delivered
+6  LD-000007    CUST-004  ROUTE-02 2024-07-04       bagged seed       31753   532.81           69.50   delivered
+7  LD-000008    CUST-006  ROUTE-07 2024-07-04       bagged feed       40252   450.08           42.55   delivered
+8  LD-000009    CUST-005  ROUTE-09 2024-07-04            lumber       43924   229.70           25.92   delivered
+9  LD-000010    CUST-006  ROUTE-08 2024-07-05             grain       44959   416.09           32.93   delivered
+                 count unique         top  freq                        mean                  min                  25%                  50%  \
+load_id           3229   3229   LD-000001     1                         NaN                  NaN                  NaN                  NaN   
+customer_id       3229      6    CUST-006   565                         NaN                  NaN                  NaN                  NaN   
+route_id          3229     10    ROUTE-10   404                         NaN                  NaN                  NaN                  NaN   
+load_date         3229    NaN         NaN   NaN  2025-07-04 22:28:07.952926  2024-07-03 00:00:00  2025-01-02 00:00:00  2025-07-05 00:00:00   
+freight_type      3229      8  fertilizer   435                         NaN                  NaN                  NaN                  NaN   
+weight_lbs      3229.0    NaN         NaN   NaN                 36552.08083              28025.0              32214.0              36553.0   
+revenue         3229.0    NaN         NaN   NaN                  428.703475               203.19               384.32               435.24   
+fuel_surcharge  3229.0    NaN         NaN   NaN                   45.978145                11.26                25.78                44.87   
+load_status       3229      2   delivered  3225                         NaN                  NaN                  NaN                  NaN   
+
+                                75%                  max          std  
+load_id                         NaN                  NaN          NaN  
+customer_id                     NaN                  NaN          NaN  
+route_id                        NaN                  NaN          NaN  
+load_date       2026-01-09 00:00:00  2026-07-02 00:00:00          NaN  
+freight_type                    NaN                  NaN          NaN  
+weight_lbs                  40840.0              45000.0  4919.466479  
+revenue                      536.32               659.87   138.814573  
+fuel_surcharge                60.57                94.47     22.27745  
+load_status                     NaN                  NaN          NaN  
+
+--- maint: (92, 7) ---
+record_id                         str
+truck_id                          str
+service_date           datetime64[us]
+service_type                      str
+cost                          float64
+downtime_hours                float64
+odometer_at_service             int64
+dtype: object
+     record_id truck_id service_date          service_type     cost  downtime_hours  odometer_at_service
+0  MAINT-00001  TRK-001   2025-01-01             alignment   838.85             2.4               198462
+1  MAINT-00002  TRK-001   2025-01-09  transmission service  1828.92            14.3               166949
+2  MAINT-00003  TRK-001   2026-01-16            oil change   816.52             5.8               256669
+3  MAINT-00004  TRK-001   2026-04-24        DOT inspection   473.10             5.0               273106
+4  MAINT-00005  TRK-001   2025-12-14         engine repair  1904.17            23.8               253856
+5  MAINT-00006  TRK-001   2025-02-18         brake service   601.02             5.9               186664
+6  MAINT-00007  TRK-002   2024-11-11      tire replacement   822.53             7.2               122810
+7  MAINT-00008  TRK-002   2025-04-01         brake service   835.63             5.5               137530
+8  MAINT-00009  TRK-002   2026-05-02         brake service   676.72             6.1               199421
+9  MAINT-00010  TRK-002   2026-03-21        coolant system   833.43             4.3               188640
+                    count unique          top freq                        mean                  min                  25%                  50%  \
+record_id              92     92  MAINT-00001    1                         NaN                  NaN                  NaN                  NaN   
+truck_id               92     10      TRK-006   20                         NaN                  NaN                  NaN                  NaN   
+service_date           92    NaN          NaN  NaN  2025-07-03 01:18:15.652174  2024-08-09 00:00:00  2024-12-20 00:00:00  2025-06-30 12:00:00   
+service_type           92      8    alignment   16                         NaN                  NaN                  NaN                  NaN   
+cost                 92.0    NaN          NaN  NaN                 1174.942283               154.08               398.09              673.895   
+downtime_hours       92.0    NaN          NaN  NaN                   12.691304                  1.0                  3.0                  5.6   
+odometer_at_service  92.0    NaN          NaN  NaN                366587.26087              69003.0             200524.0             307303.0   
+
+                                     75%                  max            std  
+record_id                            NaN                  NaN            NaN  
+truck_id                             NaN                  NaN            NaN  
+service_date         2026-01-06 00:00:00  2026-06-04 00:00:00            NaN  
+service_type                         NaN                  NaN            NaN  
+cost                           1264.5325              6137.56     1366.40928  
+downtime_hours                     14.45                 94.2      17.102983  
+odometer_at_service             569064.0             733295.0  202137.428964  
+
+--- routes: (12, 7) ---
+route_id                  str
+origin_city               str
+origin_state              str
+destination_city          str
+destination_state         str
+distance_miles          int64
+base_rate_per_mile    float64
+dtype: object
+   route_id    origin_city origin_state destination_city destination_state  distance_miles  base_rate_per_mile
+0  ROUTE-01         Joplin           MO      Little Rock                AR             270                1.95
+1  ROUTE-02    Little Rock           AR           Joplin                MO             270                1.90
+2  ROUTE-03         Joplin           MO            Tulsa                OK             165                2.55
+3  ROUTE-04          Tulsa           OK           Joplin                MO             165                2.45
+4  ROUTE-05         Joplin           MO    Oklahoma City                OK             260                2.35
+5  ROUTE-06  Oklahoma City           OK           Joplin                MO             260                2.30
+6  ROUTE-07         Joplin           MO      Kansas City                MO             165                2.60
+7  ROUTE-08    Kansas City           MO           Joplin                MO             165                2.50
+8  ROUTE-09         Joplin           MO      Springfield                MO              75                2.90
+9  ROUTE-10    Springfield           MO           Joplin                MO              75                2.85
+                   count unique       top freq      mean         std   min     25%    50%     75%    max
+route_id              12     12  ROUTE-01    1       NaN         NaN   NaN     NaN    NaN     NaN    NaN
+origin_city           12      7    Joplin    6       NaN         NaN   NaN     NaN    NaN     NaN    NaN
+origin_state          12      4        MO    8       NaN         NaN   NaN     NaN    NaN     NaN    NaN
+destination_city      12      7    Joplin    6       NaN         NaN   NaN     NaN    NaN     NaN    NaN
+destination_state     12      4        MO    8       NaN         NaN   NaN     NaN    NaN     NaN    NaN
+distance_miles      12.0    NaN       NaN  NaN     227.5  116.726175  75.0   165.0  212.5   270.0  430.0
+base_rate_per_mile  12.0    NaN       NaN  NaN  2.391667    0.315388   1.9  2.1875    2.4  2.5625    2.9
+
+--- trips: (3229, 10) ---
+trip_id                      str
+load_id                      str
+driver_id                    str
+truck_id                     str
+actual_miles             float64
+fuel_gallons             float64
+actual_mpg               float64
+departure_time    datetime64[us]
+arrival_time      datetime64[us]
+on_time_flag                bool
+dtype: object
+      trip_id    load_id driver_id truck_id  actual_miles  fuel_gallons  actual_mpg      departure_time               arrival_time  on_time_flag
+0  TRP-000001  LD-000001   DRV-009  TRK-008          75.4         10.99        6.86 2024-07-03 04:05:00 2024-07-03 05:35:56.178690          True
+1  TRP-000002  LD-000002   DRV-005  TRK-004         166.5         22.35        7.45 2024-07-03 06:06:00 2024-07-03 09:30:57.411040          True
+2  TRP-000003  LD-000003   DRV-014  TRK-007          76.6         11.59        6.61 2024-07-03 04:02:00 2024-07-03 05:28:14.694101          True
+3  TRP-000004  LD-000004   DRV-011  TRK-010         261.1         36.77        7.10 2024-07-03 08:46:00 2024-07-03 13:59:34.821042          True
+4  TRP-000005  LD-000005   DRV-010  TRK-008         284.2         42.10        6.75 2024-07-03 09:31:00 2024-07-03 15:04:16.460393         False
+5  TRP-000006  LD-000006   DRV-002  TRK-005          78.4         10.67        7.35 2024-07-04 05:40:00 2024-07-04 07:15:27.289461          True
+6  TRP-000007  LD-000007   DRV-011  TRK-006         275.5         54.23        5.08 2024-07-04 05:29:00 2024-07-04 11:13:11.329984         False
+7  TRP-000008  LD-000008   DRV-009  TRK-008         174.1         24.66        7.06 2024-07-04 07:01:00 2024-07-04 10:34:38.503855          True
+8  TRP-000009  LD-000009   DRV-003  TRK-005          75.6         10.92        6.92 2024-07-04 08:10:00 2024-07-04 09:40:30.118515          True
+9  TRP-000010  LD-000010   DRV-001  TRK-001         170.8         25.68        6.65 2024-07-05 05:00:00 2024-07-05 08:31:00.202196          True
+                 count unique         top  freq                        mean                         min                         25%  \
+trip_id           3229   3229  TRP-000001     1                         NaN                         NaN                         NaN   
+load_id           3229   3229   LD-000001     1                         NaN                         NaN                         NaN   
+driver_id         3229     14     DRV-001   441                         NaN                         NaN                         NaN   
+truck_id          3229     10     TRK-006   573                         NaN                         NaN                         NaN   
+actual_miles    3229.0    NaN         NaN   NaN                   189.18851                        75.0                       165.0   
+fuel_gallons    3229.0    NaN         NaN   NaN                   29.600994                       10.01                       22.11   
+actual_mpg      3229.0    NaN         NaN   NaN                    6.639179                         4.9                        6.49   
+departure_time    3229    NaN         NaN   NaN  2025-07-05 05:28:17.020749         2024-07-03 04:02:00         2025-01-02 05:17:00   
+arrival_time      3229    NaN         NaN   NaN  2025-07-05 09:07:15.060305  2024-07-03 05:28:14.694101  2025-01-02 06:56:43.325304   
+on_time_flag      3229      2        True  2816                         NaN                         NaN                         NaN   
+
+                                       50%                         75%                         max        std  
+trip_id                                NaN                         NaN                         NaN        NaN  
+load_id                                NaN                         NaN                         NaN        NaN  
+driver_id                              NaN                         NaN                         NaN        NaN  
+truck_id                               NaN                         NaN                         NaN        NaN  
+actual_miles                         172.3                       272.0                       286.2  78.702688  
+fuel_gallons                         25.49                       40.07                       58.24    14.5967  
+actual_mpg                            6.84                        7.17                         7.5   0.733483  
+departure_time         2025-07-05 08:47:00         2026-01-09 05:07:00         2026-07-02 06:52:00        NaN  
+arrival_time    2025-07-05 11:51:42.349982  2026-01-09 10:14:37.705239  2026-07-02 12:16:58.855787        NaN  
+on_time_flag                           NaN                         NaN                         NaN        NaN  
+
+--- trucks: (10, 8) ---
+truck_id                       str
+make                           str
+model                          str
+year                         int64
+status                         str
+acquisition_date    datetime64[us]
+current_odometer             int64
+fuel_type                      str
+dtype: object
+  truck_id          make     model  year  status acquisition_date  current_odometer fuel_type
+0  TRK-001  Freightliner  Cascadia  2021  active       2024-01-15            285000    diesel
+1  TRK-002     Peterbilt       579  2022  active       2024-08-02            210000    diesel
+2  TRK-003      Kenworth      T680  2020  active       2023-06-29            340000    diesel
+3  TRK-004  Freightliner  Cascadia  2019  active       2022-09-02            425000    diesel
+4  TRK-005     Peterbilt       579  2018  active       2022-02-14            480000    diesel
+5  TRK-006  Freightliner  Cascadia  2013  active       2017-09-28            738000    diesel
+6  TRK-007      Kenworth      T680  2020  active       2023-08-18            355000    diesel
+7  TRK-008     Peterbilt       579  2022  active       2024-09-21            195000    diesel
+8  TRK-009  Freightliner  Cascadia  2021  active       2024-02-04            275000    diesel
+9  TRK-010      Kenworth      T680  2015  active       2019-12-07            610000    diesel
+                 count unique           top freq                 mean                  min                  25%                  50%                  75%  \
+truck_id            10     10       TRK-001    1                  NaN                  NaN                  NaN                  NaN                  NaN   
+make                10      3  Freightliner    4                  NaN                  NaN                  NaN                  NaN                  NaN   
+model               10      3      Cascadia    4                  NaN                  NaN                  NaN                  NaN                  NaN   
+year              10.0    NaN           NaN  NaN               2019.1               2013.0              2018.25               2020.0               2021.0   
+status              10      1        active   10                  NaN                  NaN                  NaN                  NaN                  NaN   
+acquisition_date    10    NaN           NaN  NaN  2022-09-14 00:00:00  2017-09-28 00:00:00  2022-04-05 00:00:00  2023-07-24 00:00:00  2024-01-30 00:00:00   
+current_odometer  10.0    NaN           NaN  NaN             391300.0             195000.0             277500.0             347500.0             466250.0   
+fuel_type           10      1        diesel   10                  NaN                  NaN                  NaN                  NaN                  NaN   
+
+                                  max            std  
+truck_id                          NaN            NaN  
+make                              NaN            NaN  
+model                             NaN            NaN  
+year                           2022.0       2.998148  
+status                            NaN            NaN  
+acquisition_date  2024-09-21 00:00:00            NaN  
+current_odometer             738000.0  175503.118048  
+fuel_type                         NaN            NaN  
+
+====================================================================================================
+REVENUE PER MILE BY ROUTE
+====================================================================================================
+   route_id    origin_city destination_city  distance_miles  base_rate_per_mile  loads  avg_revenue  avg_rev_per_mile  total_revenue
+1  ROUTE-02    Little Rock           Joplin             270                1.90    403   587.068288          2.174327      236588.52
+0  ROUTE-01         Joplin      Little Rock             270                1.95    388   601.540180          2.227927      233397.59
+5  ROUTE-06  Oklahoma City           Joplin             260                2.30    250   675.205080          2.596943      168801.27
+4  ROUTE-05         Joplin    Oklahoma City             260                2.35    273   685.535385          2.636675      187151.16
+3  ROUTE-04          Tulsa           Joplin             165                2.45    278   451.575144          2.736819      125537.89
+7  ROUTE-08    Kansas City           Joplin             165                2.50    285   460.041930          2.788133      131111.95
+2  ROUTE-03         Joplin            Tulsa             165                2.55    268   468.906978          2.841860      125667.07
+6  ROUTE-07         Joplin      Kansas City             165                2.60    280   475.868536          2.884052      133243.19
+9  ROUTE-10    Springfield           Joplin              75                2.85    404   235.798317          3.143978       95262.52
+8  ROUTE-09         Joplin      Springfield              75                2.90    400   239.964475          3.199526       95985.79
+
+====================================================================================================
+FUEL COST PER MILE BY ROUTE (via trips/fuel)
+====================================================================================================
+   route_id    origin_city destination_city  trips  avg_actual_miles  avg_fuel_cost   avg_mpg
+0  ROUTE-01         Joplin      Little Rock    388        277.938402     202.647577  5.728119
+1  ROUTE-02    Little Rock           Joplin    403        278.304467     199.391315  5.835682
+2  ROUTE-03         Joplin            Tulsa    268        169.635075     100.859478  6.946343
+3  ROUTE-04          Tulsa           Joplin    278        169.885971     101.090432  6.899568
+4  ROUTE-05         Joplin    Oklahoma City    273        267.370696     160.623297  6.864799
+5  ROUTE-06  Oklahoma City           Joplin    250        267.840800     158.698120  6.921440
+6  ROUTE-07         Joplin      Kansas City    280        170.263571     101.827357  6.906964
+7  ROUTE-08    Kansas City           Joplin    285        170.058596     101.200175  6.934912
+8  ROUTE-09         Joplin      Springfield    400         77.290000      45.796100  6.930675
+9  ROUTE-10    Springfield           Joplin    404         77.211634      45.865693  6.922772
+
+--- NET MARGIN PER MILE BY ROUTE (revenue - fuel) ---
+   route_id    origin_city destination_city  distance_miles  loads  avg_rev_per_mile  fuel_cost_per_mile  net_per_mile
+0  ROUTE-02    Little Rock           Joplin             270    403          2.174327            0.716450      1.457877
+1  ROUTE-01         Joplin      Little Rock             270    388          2.227927            0.729110      1.498817
+2  ROUTE-06  Oklahoma City           Joplin             260    250          2.596943            0.592509      2.004433
+3  ROUTE-05         Joplin    Oklahoma City             260    273          2.636675            0.600751      2.035923
+4  ROUTE-04          Tulsa           Joplin             165    278          2.736819            0.595049      2.141770
+5  ROUTE-08    Kansas City           Joplin             165    285          2.788133            0.595090      2.193043
+6  ROUTE-03         Joplin            Tulsa             165    268          2.841860            0.594567      2.247293
+7  ROUTE-07         Joplin      Kansas City             165    280          2.884052            0.598057      2.285995
+8  ROUTE-10    Springfield           Joplin              75    404          3.143978            0.594026      2.549952
+9  ROUTE-09         Joplin      Springfield              75    400          3.199526            0.592523      2.607003
+
+====================================================================================================
+REVENUE PER LOAD BY CUSTOMER
+====================================================================================================
+  customer_id                     customer_name  payment_terms_days  loads  total_revenue  avg_revenue_per_load  pct_of_total_revenue
+2    CUST-003               Sooner State Lumber                  30    523      355952.43            680.597380             23.223170
+3    CUST-004                 Delta Farm & Feed                  30    555      329775.58            594.190234             21.515331
+5    CUST-006          Heartland Grain Exchange                  15    565      264355.14            467.885204             17.247148
+1    CUST-002           Route 66 Ag Cooperative                  30    546      251204.96            460.082344             16.389200
+0    CUST-001             Ozark Building Supply                  30    476      197411.93            414.730945             12.879617
+4    CUST-005  Crossroads Hardware Distribution                  30    564      134046.91            237.671826              8.745534
+
+====================================================================================================
+LOAD VOLUME TREND OVER TIME (MONTHLY)
+====================================================================================================
+      month  loads   revenue
+0   2024-07    101  43366.68
+1   2024-08    161  69146.65
+2   2024-09    133  55952.08
+3   2024-10    144  63915.55
+4   2024-11    119  51074.34
+5   2024-12    145  62821.50
+6   2025-01    128  55500.61
+7   2025-02    134  53102.68
+8   2025-03    131  57201.19
+9   2025-04    138  61176.58
+10  2025-05    140  62518.02
+11  2025-06    121  51025.63
+12  2025-07    144  59249.69
+13  2025-08    130  54636.51
+14  2025-09    129  54926.30
+15  2025-10    136  54445.93
+16  2025-11    111  46982.02
+17  2025-12    142  62141.71
+18  2026-01    155  65145.48
+19  2026-02    121  49810.17
+20  2026-03    135  61384.02
+21  2026-04    141  62520.44
+22  2026-05    142  60100.18
+23  2026-06    139  62371.82
+24  2026-07      9   3767.74
+
+====================================================================================================
+FUEL EFFICIENCY (MPG) BY TRUCK
+====================================================================================================
+  truck_id  trips   avg_mpg  total_miles  total_gallons          make     model  year
+5  TRK-006    573  5.196632     153844.5       29639.48  Freightliner  Cascadia  2013
+9  TRK-010    305  6.938000      52216.4        7543.83      Kenworth      T680  2015
+6  TRK-007    297  6.938384      52990.6        7652.79      Kenworth      T680  2020
+2  TRK-003    291  6.939794      47889.9        6926.92      Kenworth      T680  2020
+0  TRK-001    284  6.945880      48862.8        7055.18  Freightliner  Cascadia  2021
+3  TRK-004    314  6.947420      53764.2        7765.83  Freightliner  Cascadia  2019
+1  TRK-002    304  6.951382      53942.0        7770.89     Peterbilt       579  2022
+4  TRK-005    292  6.961370      49937.4        7192.26     Peterbilt       579  2018
+8  TRK-009    300  6.965133      51005.0        7350.33  Freightliner  Cascadia  2021
+7  TRK-008    269  6.967918      46436.9        6684.10     Peterbilt       579  2022
+
+Fleet average MPG: 6.64
+
+====================================================================================================
+FUEL EFFICIENCY (MPG) BY DRIVER
+====================================================================================================
+   driver_id  trips   avg_mpg  total_miles first_name last_name  years_experience
+4    DRV-005    435  6.342000      94495.8      David    Osgood                 9
+9    DRV-010    236  6.383390      50988.8     Daniel    Yancey                 4
+6    DRV-007    312  6.396410      67572.8     Joseph    Rourke                 6
+5    DRV-006    322  6.410776      69244.1    Richard    Pellum                 8
+13   DRV-014     50  6.473600      10699.4    Gregory  Hardwick                 1
+10   DRV-011    110  6.620455      20540.8    Anthony   Castell                 5
+12   DRV-013     72  6.667639      14807.0      Brian     Suggs                 2
+11   DRV-012     70  6.724000      13974.3      Kevin  Brannock                 3
+7    DRV-008    166  6.813313      28999.2     Thomas   Dunmore                11
+8    DRV-009    142  6.815634      23791.1    Charles    Fetzer                 7
+2    DRV-003    292  6.828425      49554.2    Michael    Munsey                15
+1    DRV-002    335  6.857731      54360.0     Robert      Tice                18
+3    DRV-004    246  6.869268      41409.2    William    Gantry                12
+0    DRV-001    441  6.871020      70453.0      James  Holbrook                22
+
+====================================================================================================
+ON-TIME DELIVERY RATE BY CUSTOMER
+====================================================================================================
+  customer_id                     customer_name  trips  on_time_rate
+3    CUST-004                 Delta Farm & Feed    555      0.787387
+0    CUST-001             Ozark Building Supply    476      0.855042
+5    CUST-006          Heartland Grain Exchange    565      0.886726
+2    CUST-003               Sooner State Lumber    523      0.891013
+1    CUST-002           Route 66 Ag Cooperative    546      0.897436
+4    CUST-005  Crossroads Hardware Distribution    564      0.913121
+
+====================================================================================================
+ON-TIME DELIVERY RATE BY ROUTE
+====================================================================================================
+   route_id    origin_city destination_city  trips  on_time_rate
+0  ROUTE-01         Joplin      Little Rock    388      0.775773
+1  ROUTE-02    Little Rock           Joplin    403      0.784119
+7  ROUTE-08    Kansas City           Joplin    285      0.863158
+5  ROUTE-06  Oklahoma City           Joplin    250      0.884000
+3  ROUTE-04          Tulsa           Joplin    278      0.884892
+4  ROUTE-05         Joplin    Oklahoma City    273      0.897436
+2  ROUTE-03         Joplin            Tulsa    268      0.910448
+6  ROUTE-07         Joplin      Kansas City    280      0.910714
+8  ROUTE-09         Joplin      Springfield    400      0.922500
+9  ROUTE-10    Springfield           Joplin    404      0.923267
+
+====================================================================================================
+ON-TIME DELIVERY RATE BY DRIVER
+====================================================================================================
+   driver_id first_name last_name  trips  on_time_rate
+11   DRV-012      Kevin  Brannock     70      0.814286
+4    DRV-005      David    Osgood    435      0.836782
+5    DRV-006    Richard    Pellum    322      0.854037
+10   DRV-011    Anthony   Castell    110      0.854545
+9    DRV-010     Daniel    Yancey    236      0.864407
+6    DRV-007     Joseph    Rourke    312      0.868590
+2    DRV-003    Michael    Munsey    292      0.876712
+1    DRV-002     Robert      Tice    335      0.883582
+0    DRV-001      James  Holbrook    441      0.886621
+3    DRV-004    William    Gantry    246      0.890244
+8    DRV-009    Charles    Fetzer    142      0.894366
+12   DRV-013      Brian     Suggs     72      0.902778
+7    DRV-008     Thomas   Dunmore    166      0.909639
+13   DRV-014    Gregory  Hardwick     50      0.920000
+
+====================================================================================================
+DETENTION TIME BY CUSTOMER (delivery_events)
+====================================================================================================
+  customer_id                     customer_name  events  avg_detention_min  max_detention_min  on_time_rate
+0    CUST-001             Ozark Building Supply     476          47.737395                 76      0.033613
+5    CUST-006          Heartland Grain Exchange     565          10.764602                 29      0.881416
+3    CUST-004                 Delta Farm & Feed     555          10.636036                 27      0.888288
+2    CUST-003               Sooner State Lumber     523          10.541109                 24      0.892925
+1    CUST-002           Route 66 Ag Cooperative     546          10.481685                 25      0.890110
+4    CUST-005  Crossroads Hardware Distribution     564          10.267730                 24      0.918440
+
+====================================================================================================
+DETENTION BY FACILITY TYPE
+====================================================================================================
+               events  avg_detention  on_time_rate
+facility_type                                     
+delivery         3229      16.021988       0.76742
+
+====================================================================================================
+MAINTENANCE COST BY TRUCK
+====================================================================================================
+  truck_id  records  total_cost     avg_cost  total_downtime_hours          make     model  year  current_odometer
+5  TRK-006       20    42912.16  2145.608000                 461.3  Freightliner  Cascadia  2013            738000
+9  TRK-010       10    10435.25  1043.525000                 113.3      Kenworth      T680  2015            610000
+3  TRK-004        6    10171.25  1695.208333                 158.8  Freightliner  Cascadia  2019            425000
+7  TRK-008        9     8415.14   935.015556                  98.8     Peterbilt       579  2022            195000
+1  TRK-002       11     8308.95   755.359091                  58.0     Peterbilt       579  2022            210000
+6  TRK-007        7     6760.98   965.854286                  48.3      Kenworth      T680  2020            355000
+0  TRK-001        6     6462.58  1077.096667                  57.2  Freightliner  Cascadia  2021            285000
+8  TRK-009       10     5772.36   577.236000                  71.9  Freightliner  Cascadia  2021            275000
+2  TRK-003        7     5639.54   805.648571                  68.9      Kenworth      T680  2020            340000
+4  TRK-005        6     3216.48   536.080000                  31.1     Peterbilt       579  2018            480000
+
+====================================================================================================
+MAINTENANCE COST TREND OVER TIME
+====================================================================================================
+      month      cost  downtime  records
+0   2024-08  15131.28     194.2        4
+1   2024-09   3912.87      56.9        5
+2   2024-10   6724.00      49.7        3
+3   2024-11   4086.67      37.7        7
+4   2024-12   3344.86      19.8        6
+5   2025-01   6253.24      42.0        7
+6   2025-02   6771.47      53.4        3
+7   2025-03   3491.81      39.8        4
+8   2025-04   4020.98      40.9        3
+9   2025-05    706.19       1.0        1
+10  2025-06   3427.19      23.9        3
+11  2025-07    441.25       5.3        1
+12  2025-08   2023.53       8.0        3
+13  2025-09   7573.98      83.8        4
+14  2025-10    455.72       6.9        1
+15  2025-11   3694.74      28.9        6
+16  2025-12   8604.72      97.1        6
+17  2026-01   5397.87      94.7        7
+18  2026-02   5447.53     109.9        3
+19  2026-03   4897.10      53.5        5
+20  2026-04   4442.85      41.1        6
+21  2026-05   7059.47      76.2        3
+22  2026-06    185.37       2.9        1
+
+====================================================================================================
+MAINTENANCE BY SERVICE TYPE
+====================================================================================================
+                      count  total_cost     avg_cost  total_downtime
+service_type                                                        
+engine repair            11    30272.92  2752.083636           422.3
+transmission service     11    28636.04  2603.276364           295.3
+coolant system           11    17294.21  1572.200909           202.0
+alignment                16     8894.92   555.932500            56.9
+oil change               14     8497.83   606.987857            60.0
+brake service            10     5472.58   547.258000            36.9
+tire replacement          8     4839.63   604.953750            38.0
+DOT inspection           11     4186.56   380.596364            56.2
+
+====================================================================================================
+TRUCK AGE VS MAINTENANCE COST
+====================================================================================================
+  truck_id  age  total_cost  total_downtime_hours  current_odometer
+0  TRK-006   13    42912.16                 461.3            738000
+1  TRK-010   11    10435.25                 113.3            610000
+9  TRK-005    8     3216.48                  31.1            480000
+2  TRK-004    7    10171.25                 158.8            425000
+8  TRK-003    6     5639.54                  68.9            340000
+5  TRK-007    6     6760.98                  48.3            355000
+7  TRK-009    5     5772.36                  71.9            275000
+6  TRK-001    5     6462.58                  57.2            285000
+4  TRK-002    4     8308.95                  58.0            210000
+3  TRK-008    4     8415.14                  98.8            195000
+
+====================================================================================================
+LOAD COUNT BY DRIVER (utilization)
+====================================================================================================
+   driver_id  loads  total_miles first_name last_name  years_experience  hire_date employment_status
+13   DRV-014     50      10699.4    Gregory  Hardwick                 1 2026-05-04            active
+11   DRV-012     70      13974.3      Kevin  Brannock                 3 2025-11-05            active
+12   DRV-013     72      14807.0      Brian     Suggs                 2 2026-02-03            active
+10   DRV-011    110      20540.8    Anthony   Castell                 5 2025-09-06            active
+8    DRV-009    142      23791.1    Charles    Fetzer                 7 2025-05-29            active
+7    DRV-008    166      28999.2     Thomas   Dunmore                11 2025-04-29            active
+9    DRV-010    236      50988.8     Daniel    Yancey                 4 2025-07-08        terminated
+3    DRV-004    246      41409.2    William    Gantry                12 2024-11-20            active
+2    DRV-003    292      49554.2    Michael    Munsey                15 2024-10-31            active
+6    DRV-007    312      67572.8     Joseph    Rourke                 6 2025-03-20        terminated
+5    DRV-006    322      69244.1    Richard    Pellum                 8 2025-02-18            active
+1    DRV-002    335      54360.0     Robert      Tice                18 2024-09-21            active
+4    DRV-005    435      94495.8      David    Osgood                 9 2025-01-09        terminated
+0    DRV-001    441      70453.0      James  Holbrook                22 2024-08-22            active
+
+====================================================================================================
+DRIVER TENURE DISTRIBUTION
+====================================================================================================
+   driver_id  hire_date  years_experience employment_status
+0    DRV-001 2024-08-22                22            active
+1    DRV-002 2024-09-21                18            active
+2    DRV-003 2024-10-31                15            active
+3    DRV-004 2024-11-20                12            active
+4    DRV-005 2025-01-09                 9        terminated
+5    DRV-006 2025-02-18                 8            active
+6    DRV-007 2025-03-20                 6        terminated
+7    DRV-008 2025-04-29                11            active
+8    DRV-009 2025-05-29                 7            active
+9    DRV-010 2025-07-08                 4        terminated
+10   DRV-011 2025-09-06                 5            active
+11   DRV-012 2025-11-05                 3            active
+12   DRV-013 2026-02-03                 2            active
+13   DRV-014 2026-05-04                 1            active
+
+Hire date range: 2024-08-22 00:00:00 to 2026-05-04 00:00:00
+
+====================================================================================================
+PAYMENT TERMS
+====================================================================================================
+  customer_id                     customer_name           city state            industry  payment_terms_days account_status
+0    CUST-001             Ozark Building Supply         Joplin    MO  Building Materials                  30         active
+1    CUST-002           Route 66 Ag Cooperative          Tulsa    OK         Agriculture                  30         active
+2    CUST-003               Sooner State Lumber  Oklahoma City    OK  Building Materials                  30         active
+3    CUST-004                 Delta Farm & Feed    Little Rock    AR         Agriculture                  30         active
+4    CUST-005  Crossroads Hardware Distribution    Springfield    MO  Building Materials                  30         active
+5    CUST-006          Heartland Grain Exchange    Kansas City    MO         Agriculture                  15         active
+
+====================================================================================================
+CUSTOMER CONCENTRATION
+====================================================================================================
+Top 4 customers = 78.4% of revenue
+
+====================================================================================================
+FUEL COST TRENDS OVER TIME
+====================================================================================================
+      month  purchases  total_cost  avg_price_per_gallon  total_gallons
+0   2024-07        101    11425.36              3.868228        2947.52
+1   2024-08        161    19611.31              3.882820        5057.77
+2   2024-09        133    15759.30              3.900008        4043.17
+3   2024-10        144    17222.78              3.916021        4400.46
+4   2024-11        119    13643.83              3.937706        3463.71
+5   2024-12        145    17395.45              3.958303        4392.03
+6   2025-01        128    15478.72              3.983211        3888.71
+7   2025-02        134    14491.81              4.010619        3608.85
+8   2025-03        131    15704.26              4.031542        3890.91
+9   2025-04        138    17267.69              4.045007        4264.75
+10  2025-05        140    17590.28              4.078614        4312.77
+11  2025-06        121    14248.76              4.087132        3487.75
+12  2025-07        144    16054.25              4.123604        3894.35
+13  2025-08        130    15130.35              4.117762        3681.96
+14  2025-09        129    15856.48              4.151147        3819.07
+15  2025-10        136    15614.17              4.177985        3735.54
+16  2025-11        111    13240.44              4.182225        3167.45
+17  2025-12        142    18068.86              4.209831        4289.89
+18  2026-01        155    18414.06              4.229277        4359.73
+19  2026-02        121    13924.21              4.239562        3281.91
+20  2026-03        135    19005.97              4.264496        4458.86
+21  2026-04        141    19288.37              4.294858        4489.03
+22  2026-05        142    17539.72              4.321225        4059.33
+23  2026-06        139    18767.44              4.336540        4331.57
+24  2026-07          9     1098.15              4.316778         254.52
+
+====================================================================================================
+ON-TIME PERFORMANCE TREND OVER TIME
+====================================================================================================
+      month  trips  on_time_rate
+0   2024-07    101      0.871287
+1   2024-08    161      0.869565
+2   2024-09    133      0.827068
+3   2024-10    144      0.895833
+4   2024-11    119      0.899160
+5   2024-12    145      0.862069
+6   2025-01    128      0.882812
+7   2025-02    134      0.888060
+8   2025-03    131      0.908397
+9   2025-04    138      0.826087
+10  2025-05    140      0.814286
+11  2025-06    121      0.867769
+12  2025-07    144      0.902778
+13  2025-08    130      0.869231
+14  2025-09    129      0.875969
+15  2025-10    136      0.830882
+16  2025-11    111      0.837838
+17  2025-12    142      0.894366
+18  2026-01    155      0.909677
+19  2026-02    121      0.892562
+20  2026-03    135      0.874074
+21  2026-04    141      0.829787
+22  2026-05    142      0.901408
+23  2026-06    139      0.884892
+24  2026-07      9      1.000000
+
+====================================================================================================
+DATE RANGE OF DATA
+====================================================================================================
+Loads: 2024-07-03 00:00:00 to 2026-07-02 00:00:00
+Trips: 2024-07-03 04:02:00 to 2026-07-02 06:52:00
+
+
+DONE.

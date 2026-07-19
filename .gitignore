@@ -1,0 +1,29 @@
+# Local configuration — never commit this
+config.env
+
+# Pipeline state and logs
+current_state.txt
+logs/
+
+# Context file (internal session notes)
+CONTEXT.md
+
+# Personal portfolio page — lives on VPS, backed up locally
+web/
+
+# Python virtualenv
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+
+# Personal Claude Code permissions (VPS access) — do not commit
+.claude/settings.local.json
+
+# VPS internals — local-only, never commit to this public repo
+VPS-CONFORMANCE.md
+DEPLOY.md

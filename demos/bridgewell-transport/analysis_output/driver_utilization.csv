@@ -1,0 +1,15 @@
+driver_id,loads,total_miles,first_name,last_name,years_experience,hire_date,employment_status
+DRV-014,50,10699.4,Gregory,Hardwick,1,2026-05-04,active
+DRV-012,70,13974.3,Kevin,Brannock,3,2025-11-05,active
+DRV-013,72,14807.0,Brian,Suggs,2,2026-02-03,active
+DRV-011,110,20540.8,Anthony,Castell,5,2025-09-06,active
+DRV-009,142,23791.1,Charles,Fetzer,7,2025-05-29,active
+DRV-008,166,28999.2,Thomas,Dunmore,11,2025-04-29,active
+DRV-010,236,50988.8,Daniel,Yancey,4,2025-07-08,terminated
+DRV-004,246,41409.2,William,Gantry,12,2024-11-20,active
+DRV-003,292,49554.2,Michael,Munsey,15,2024-10-31,active
+DRV-007,312,67572.8,Joseph,Rourke,6,2025-03-20,terminated
+DRV-006,322,69244.1,Richard,Pellum,8,2025-02-18,active
+DRV-002,335,54360.0,Robert,Tice,18,2024-09-21,active
+DRV-005,435,94495.8,David,Osgood,9,2025-01-09,terminated
+DRV-001,441,70453.0,James,Holbrook,22,2024-08-22,active

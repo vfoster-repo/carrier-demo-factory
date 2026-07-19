@@ -1,0 +1,7 @@
+customer_id,customer_name,trips,on_time_rate
+CUST-004,Delta Farm & Feed,555,0.7873873873873873
+CUST-001,Ozark Building Supply,476,0.8550420168067226
+CUST-006,Heartland Grain Exchange,565,0.8867256637168142
+CUST-003,Sooner State Lumber,523,0.8910133843212237
+CUST-002,Route 66 Ag Cooperative,546,0.8974358974358975
+CUST-005,Crossroads Hardware Distribution,564,0.9131205673758865

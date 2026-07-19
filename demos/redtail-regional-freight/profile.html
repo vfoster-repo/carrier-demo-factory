@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Redtail Regional Freight — Company Profile | Carrier Demo Factory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#0f1117;color:#c9d1d9;line-height:1.65;min-height:100vh}
+a{color:#58a6ff;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Layout */
+.page{max-width:860px;margin:0 auto;padding:2.5rem 1.25rem 5rem}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#1a2744 0%,#1e2a3a 100%);border:1px solid #21262d;border-radius:16px;padding:2.5rem;margin-bottom:2rem}
+.hero-tag{font-size:0.72rem;font-weight:700;color:#58a6ff;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.75rem}
+.hero-company{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;color:#e6edf3;line-height:1.2;margin-bottom:0.5rem}
+.hero-meta{font-size:0.85rem;color:#8b949e;margin-bottom:1.25rem}
+.hero-tagline{font-size:1rem;color:#adbac7;line-height:1.7;max-width:680px;border-left:3px solid #1f6feb;padding-left:1rem}
+
+/* Stat strip */
+.stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1rem;margin-bottom:2rem}
+.stat-box{background:#161b22;border:1px solid #21262d;border-radius:12px;padding:1.1rem 1.25rem;text-align:center}
+.stat-value{font-size:1.6rem;font-weight:700;color:#e6edf3;line-height:1}
+.stat-label{font-size:0.72rem;color:#8b949e;margin-top:0.35rem;text-transform:uppercase;letter-spacing:0.06em}
+
+/* Sections */
+.section{margin-bottom:2.5rem}
+.section-title{font-size:1.05rem;font-weight:700;color:#e6edf3;margin-bottom:1.1rem;padding-bottom:0.5rem;border-bottom:1px solid #21262d;display:flex;align-items:center;gap:0.5rem}
+
+/* Pain point cards */
+.pain-card{background:#161b22;border:1px solid #21262d;border-radius:12px;padding:1.3rem 1.5rem;margin-bottom:0.85rem}
+.pain-card-title{font-size:0.95rem;font-weight:600;color:#e6edf3;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem}
+.pain-card-body{font-size:0.875rem;color:#8b949e;line-height:1.65}
+.pain-number{background:#1f6feb;color:white;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:700;flex-shrink:0}
+
+/* Data table */
+.data-table{width:100%;border-collapse:collapse;font-size:0.85rem}
+.data-table th{text-align:left;font-size:0.72rem;font-weight:600;color:#8b949e;text-transform:uppercase;letter-spacing:0.06em;padding:0.5rem 0.75rem;border-bottom:1px solid #21262d}
+.data-table td{padding:0.65rem 0.75rem;border-bottom:1px solid #161b22;color:#c9d1d9;vertical-align:top}
+.data-table tr:last-child td{border-bottom:none}
+.data-table .col-tag{background:#21262d;border-radius:4px;padding:1px 6px;font-size:0.7rem;display:inline-block;margin:1px}
+
+/* Product cards */
+.product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+.product-card{background:#161b22;border:1px solid #21262d;border-radius:12px;padding:1.5rem;display:flex;flex-direction:column;gap:0.75rem;transition:border-color 0.15s}
+.product-card:hover{border-color:#58a6ff}
+.product-card-icon{font-size:1.75rem}
+.product-card-type{font-size:0.7rem;font-weight:700;color:#58a6ff;text-transform:uppercase;letter-spacing:0.08em}
+.product-card-title{font-size:1rem;font-weight:700;color:#e6edf3}
+.product-card-desc{font-size:0.85rem;color:#8b949e;line-height:1.6;flex:1}
+.product-card-link{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.85rem;font-weight:600;color:#58a6ff;margin-top:0.25rem}
+
+/* Fact highlight */
+.fact-highlight{background:#1a2744;border:1px solid #1f6feb33;border-radius:10px;padding:0.85rem 1.1rem;margin-bottom:0.6rem;font-size:0.9rem;color:#adbac7;line-height:1.6}
+.fact-highlight strong{color:#e6edf3}
+
+/* Back link */
+.back{margin-bottom:1.75rem;font-size:0.85rem}
+
+/* Footer */
+.footer{text-align:center;font-size:0.75rem;color:#484f58;margin-top:4rem;padding-top:1.5rem;border-top:1px solid #21262d}
+
+/* Mobile */
+@media(max-width:600px){
+  .hero{padding:1.5rem}
+  .hero-company{font-size:1.5rem}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Company Profile · Carrier Demo Factory</div>
+    <div class="hero-company">Redtail Regional Freight</div>
+    <div class="hero-meta">Regional Carrier — Dry Van &amp; Reefer · Amarillo, Texas</div>
+    <div class="hero-tagline">A Texas Panhandle carrier that grew up hauling ag and food freight through the Permian Basin boom, now straining under an aging reefer segment and one brutal detention customer.</div>
+  </div>
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat-box"><div class="stat-value">38</div><div class="stat-label">Trucks</div></div>
+    <div class="stat-box"><div class="stat-value">52</div><div class="stat-label">Drivers</div></div>
+    <div class="stat-box"><div class="stat-value">6</div><div class="stat-label">Customers</div></div>
+    <div class="stat-box"><div class="stat-value">$5.25M</div><div class="stat-label">Annual Revenue</div></div>
+    <div class="stat-box"><div class="stat-value">17</div><div class="stat-label">Years in Business</div></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section">
+    <div class="section-title">🏢 About This Company</div>
+    <p>Dale Whitfield spent eleven years driving oilfield support trucks out of Midland before he bought his first truck in 2009, right as the shale boom was reshaping freight demand across the Panhandle. He started Redtail Regional Freight with a single 2006 Peterbilt and a handshake contract hauling frac sand and ag inputs between Amarillo and Lubbock. By the early 2010s he'd added reefer capacity to chase food-processing freight, and the company settled into its current identity: a dry van/reefer hybrid regional carrier running a tight corridor across the Texas Panhandle, eastern New Mexico, western Oklahoma, and southern Colorado.</p>
+    <p style="margin-top:1rem">Today Redtail runs 38 trucks and employs 52 drivers out of a single terminal in Amarillo. The fleet is a mix of newer Freightliner Cascadias and Peterbilts bought in the last five years and a stubborn tail of older trucks Dale has been reluctant to retire because they're paid off. The company's bread and butter is agricultural and food freight — beef, dairy, produce, and packaged foods moving out of Panhandle processing plants to distribution centers in Denver, Oklahoma City, and Albuquerque, plus backhauls of packaging materials and dry goods. Four anchor customers — Panhandle Beef Processors, Llano Estacado Foods, High Plains Ag Cooperative, and Sangre de Cristo Distribution — together with two smaller accounts account for the large majority of Redtail's freight volume.</p>
+    <p style="margin-top:1rem">Dale still works the dispatch desk most mornings and prides himself on knowing every driver by name. But the operation has outgrown his spreadsheet-and-gut-feel management style. He knows something is dragging down margins on the Denver reefer lane and suspects one of his older trucks is a money pit, but he's never had the data laid out in front of him to prove it or size the problem. That combination — a real, profitable business run entirely on instinct, sitting on two years of transaction-level data nobody has ever queried — is exactly the kind of situation this analysis was built to surface.</p>
+  </div>
+
+  <!-- WHAT WE FOUND -->
+  <div class="section">
+    <div class="section-title">🔍 What We Found in the Data</div>
+    <div class="fact-highlight"><strong>TRK-014 runs 27% below fleet fuel efficiency</strong> — this 2013 Freightliner Cascadia with 781,400 miles averages 5.04 MPG across 528 trips vs. a 6.90 MPG fleet average, and the low standard deviation (0.21) shows it's consistently bad on every single trip, not just an occasional dip.</div>
+    <div class="fact-highlight"><strong>$123,170 in lifetime maintenance cost on one truck</strong> — TRK-014 has racked up over 11x the fleet's average per-truck maintenance spend ($10,765), with $89,439 of that (73%) incurred in just the last 18 months across 17 service events.</div>
+    <div class="fact-highlight"><strong>634.5 downtime hours from TRK-014 in 18 months</strong> — roughly 26 lost operating days from a single truck, out of a fleet-wide lifetime total of 1,097.9 downtime hours for that truck alone.</div>
+    <div class="fact-highlight"><strong>Llano Estacado Foods detains drivers 4.4x longer than any other customer</strong> — 46.6 minutes average detention per delivery across 8,950 events at their Lubbock dock, vs. a 10.6-minute average across every other customer, totaling 6,946 cumulative hours of unpaid idle time.</div>
+    <div class="fact-highlight"><strong>Three key lanes net below the $2.05/mile breakeven after fuel</strong> — AMA-DEN-REEFER nets $1.94/mile, DEN-AMA-BACKHAUL nets $1.74/mile, and AMA-OKC-BACKHAUL nets just $1.69/mile, despite posted base rates of $1.90–$2.15/mile that look fine on paper.</div>
+    <div class="fact-highlight"><strong>79.6% of AMA-DEN-REEFER loads lose money</strong> — and on both backhaul lanes, essentially every load (99.5%+) falls below the breakeven threshold once fuel and deadhead are netted out.</div>
+    <div class="fact-highlight"><strong>58.3% of drivers hired in the last 18 months have already quit or been fired</strong> — 7 of 12 recent hires, compared to a 5.0% termination rate among tenured drivers, pointing to an onboarding or early-assignment problem rather than random churn.</div>
+  </div>
+
+  <!-- DATA ANALYZED -->
+  <div class="section">
+    <div class="section-title">📂 Data Analyzed</div>
+    <p style="font-size:0.875rem;color:#8b949e;margin-bottom:1rem">
+      The following datasets were provided by Redtail Regional Freight and analyzed to produce
+      the insights report and operations platform below.
+    </p>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Dataset</th>
+          <th>Records</th>
+          <th>Period</th>
+          <th>Key Fields</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Loads</td>
+          <td>22,000 records</td>
+          <td>Jul 2024 – Jul 2026</td>
+          <td><span class="col-tag">customer_id</span> <span class="col-tag">route_id</span> <span class="col-tag">revenue</span> <span class="col-tag">fuel_surcharge</span> <span class="col-tag">weight_lbs</span></td>
+        </tr>
+        <tr>
+          <td>Trips</td>
+          <td>21,774 records</td>
+          <td>—</td>
+          <td><span class="col-tag">driver_id</span> <span class="col-tag">truck_id</span> <span class="col-tag">actual_mpg</span> <span class="col-tag">actual_miles</span> <span class="col-tag">on_time_flag</span></td>
+        </tr>
+        <tr>
+          <td>Delivery Events</td>
+          <td>43,548 records</td>
+          <td>—</td>
+          <td><span class="col-tag">facility_type</span> <span class="col-tag">detention_minutes</span> <span class="col-tag">scheduled_time</span> <span class="col-tag">actual_time</span> <span class="col-tag">on_time</span></td>
+        </tr>
+        <tr>
+          <td>Fuel Purchases</td>
+          <td>33,582 records</td>
+          <td>Jul 2024 – Jul 2026</td>
+          <td><span class="col-tag">truck_id</span> <span class="col-tag">gallons</span> <span class="col-tag">price_per_gallon</span> <span class="col-tag">total_cost</span> <span class="col-tag">location</span></td>
+        </tr>
+        <tr>
+          <td>Maintenance Records</td>
+          <td>361 records</td>
+          <td>Jul 2024 – Jul 2026</td>
+          <td><span class="col-tag">truck_id</span> <span class="col-tag">service_type</span> <span class="col-tag">cost</span> <span class="col-tag">downtime_hours</span> <span class="col-tag">odometer_at_service</span></td>
+        </tr>
+        <tr>
+          <td>Trucks</td>
+          <td>38 records</td>
+          <td>—</td>
+          <td><span class="col-tag">make</span> <span class="col-tag">model</span> <span class="col-tag">year</span> <span class="col-tag">status</span> <span class="col-tag">current_odometer</span></td>
+        </tr>
+        <tr>
+          <td>Drivers</td>
+          <td>52 records</td>
+          <td>Oct 2010 – May 2026</td>
+          <td><span class="col-tag">hire_date</span> <span class="col-tag">employment_status</span> <span class="col-tag">cdl_class</span> <span class="col-tag">years_experience</span></td>
+        </tr>
+        <tr>
+          <td>Customers</td>
+          <td>6 records</td>
+          <td>—</td>
+          <td><span class="col-tag">customer_name</span> <span class="col-tag">industry</span> <span class="col-tag">payment_terms_days</span> <span class="col-tag">account_status</span></td>
+        </tr>
+        <tr>
+          <td>Routes</td>
+          <td>8 records</td>
+          <td>—</td>
+          <td><span class="col-tag">origin_city</span> <span class="col-tag">destination_city</span> <span class="col-tag">distance_miles</span> <span class="col-tag">base_rate_per_mile</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PAIN POINTS -->
+  <div class="section">
+    <div class="section-title">⚠️ Primary Pain Points Identified</div>
+    <p style="font-size:0.875rem;color:#8b949e;margin-bottom:1rem">
+      Analysis of the data revealed the following operational pain points, ranked by
+      estimated annual dollar impact.
+    </p>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">1</span> TRK-014 Fuel Inefficiency</div>
+      <div class="pain-card-body">TRK-014, a 2013 Freightliner Cascadia with 781,400 miles, averages 5.04 MPG across 528 trips versus a 6.90 MPG fleet average — a 27% efficiency gap that shows up on nearly every single trip (std dev of just 0.21), not as an occasional bad tank. At current diesel prices (~$4.20/gal fleet average), this one truck burns roughly 35% more fuel per mile than the fleet norm, and it's been that way long enough that it's fully baked into the truck's cost profile rather than a fixable mechanical fluke.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">2</span> TRK-014 Maintenance &amp; Downtime Concentration</div>
+      <div class="pain-card-body">The same truck has racked up $123,170 in total lifetime maintenance cost — over 11x the fleet average of $10,765 per truck — with $89,439 of that (73%) incurred in just the last 18 months across 17 separate service events. Downtime tells the same story: 1,097.9 lifetime hours, 634.5 of them (58%) in the trailing 18 months alone, which works out to roughly 26 lost operating days from a single truck in a year and a half.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">3</span> Llano Estacado Foods Detention Outlier</div>
+      <div class="pain-card-body">Llano Estacado Foods (CUST-002), Redtail's dairy and packaged-foods customer in Lubbock, generates average detention of 46.6 minutes per delivery across 8,950 events — a 4.4x gap over the 10.6-minute average every other customer produces, and it holds consistently rather than showing up as an occasional spike. That's 6,946 cumulative hours of driver and truck time tied up at one dock, effectively unpaid idle time that displaces revenue-generating miles and is currently invisible, buried inside "normal" trip variance.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">4</span> Reefer &amp; Backhaul Lanes Losing Money After Fuel</div>
+      <div class="pain-card-body">Once fuel is netted against revenue and fuel surcharge, the Amarillo→Denver reefer lane (AMA-DEN-REEFER) nets just $1.94/mile, the Denver→Amarillo backhaul nets $1.74/mile, and the Amarillo→Oklahoma City backhaul nets only $1.69/mile — all below the $2.05/mile reference breakeven despite posted base rates of $1.90–$2.15/mile that look reasonable at a glance. On the reefer lane specifically, 79.6% of individual loads fall below breakeven; on both backhaul lanes, essentially every load (99.5%+) does, meaning Dale has been running a substantial share of his network at a structural loss without a spreadsheet ever catching it.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-card-title"><span class="pain-number">5</span> New-Hire Driver Attrition</div>
+      <div class="pain-card-body">Of the 12 drivers hired at the Amarillo terminal in the last 18 months, 7 (58.3%) have already been terminated or quit, compared to a 5.0% termination rate among drivers hired earlier — a churn rate over 11x higher for new hires. This looks like a structural onboarding or early-route-assignment problem concentrated at the front end of the employment lifecycle, driving recruiting and training costs up while never giving new drivers the chance to become productive.</div>
+    </div>
+  </div>
+
+  <!-- WHAT WE BUILT -->
+  <div class="section">
+    <div class="section-title">🛠️ What We Built</div>
+    <div class="product-grid">
+      <a class="product-card" href="https://your-domain.com/redtail-regional-freight/report/" target="_blank" rel="noopener">
+        <div class="product-card-icon">📊</div>
+        <div class="product-card-type">Free · Insights Report</div>
+        <div class="product-card-title">Data Insights Report</div>
+        <div class="product-card-desc">
+          A self-contained, shareable HTML report covering every major pain point
+          with interactive charts. No login required — built to be sent to the
+          customer or shared with their bank or accountant.
+        </div>
+        <div class="product-card-link">View Report →</div>
+      </a>
+      <a class="product-card" href="https://your-domain.com/redtail-regional-freight/ops" target="_blank" rel="noopener">
+        <div class="product-card-icon">🚛</div>
+        <div class="product-card-type">Paid · SaaS Platform</div>
+        <div class="product-card-title">Operations Platform</div>
+        <div class="product-card-desc">
+          A multi-page daily-use operations dashboard built on their actual data.
+          Includes a Getting Started guide, load board, fleet KPIs, cash flow
+          tracking, and driver scorecards — designed for an owner-operator who
+          has never used software like this before.
+        </div>
+        <div class="product-card-link">Open Platform →</div>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer">
+    Built autonomously by Carrier Demo Factory · <a href="https://your-domain.com">your-domain.com</a>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+route_id,origin_city,origin_state,destination_city,destination_state,distance_miles,base_rate_per_mile
+ROUTE-01,Joplin,MO,Little Rock,AR,270,1.95
+ROUTE-02,Little Rock,AR,Joplin,MO,270,1.9
+ROUTE-03,Joplin,MO,Tulsa,OK,165,2.55
+ROUTE-04,Tulsa,OK,Joplin,MO,165,2.45
+ROUTE-05,Joplin,MO,Oklahoma City,OK,260,2.35
+ROUTE-06,Oklahoma City,OK,Joplin,MO,260,2.3
+ROUTE-07,Joplin,MO,Kansas City,MO,165,2.6
+ROUTE-08,Kansas City,MO,Joplin,MO,165,2.5
+ROUTE-09,Joplin,MO,Springfield,MO,75,2.9
+ROUTE-10,Springfield,MO,Joplin,MO,75,2.85
+ROUTE-11,Joplin,MO,Dallas,TX,430,2.2
+ROUTE-12,Dallas,TX,Joplin,MO,430,2.15

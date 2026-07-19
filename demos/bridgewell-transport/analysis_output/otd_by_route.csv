@@ -1,0 +1,11 @@
+route_id,origin_city,destination_city,trips,on_time_rate
+ROUTE-01,Joplin,Little Rock,388,0.7757731958762887
+ROUTE-02,Little Rock,Joplin,403,0.7841191066997518
+ROUTE-08,Kansas City,Joplin,285,0.8631578947368421
+ROUTE-06,Oklahoma City,Joplin,250,0.884
+ROUTE-04,Tulsa,Joplin,278,0.8848920863309353
+ROUTE-05,Joplin,Oklahoma City,273,0.8974358974358975
+ROUTE-03,Joplin,Tulsa,268,0.9104477611940298
+ROUTE-07,Joplin,Kansas City,280,0.9107142857142857
+ROUTE-09,Joplin,Springfield,400,0.9225
+ROUTE-10,Springfield,Joplin,404,0.9232673267326733

@@ -1,0 +1,11 @@
+truck_id,make,model,year,status,acquisition_date,current_odometer,fuel_type
+TRK-001,Freightliner,Cascadia,2021,active,2024-01-15,285000,diesel
+TRK-002,Peterbilt,579,2022,active,2024-08-02,210000,diesel
+TRK-003,Kenworth,T680,2020,active,2023-06-29,340000,diesel
+TRK-004,Freightliner,Cascadia,2019,active,2022-09-02,425000,diesel
+TRK-005,Peterbilt,579,2018,active,2022-02-14,480000,diesel
+TRK-006,Freightliner,Cascadia,2013,active,2017-09-28,738000,diesel
+TRK-007,Kenworth,T680,2020,active,2023-08-18,355000,diesel
+TRK-008,Peterbilt,579,2022,active,2024-09-21,195000,diesel
+TRK-009,Freightliner,Cascadia,2021,active,2024-02-04,275000,diesel
+TRK-010,Kenworth,T680,2015,active,2019-12-07,610000,diesel

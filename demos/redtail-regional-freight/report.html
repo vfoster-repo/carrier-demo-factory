@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redtail Regional Freight — Data Analysis Report</title>
+<script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+<style>
+:root {
+  --navy:   #1B4F72;
+  --red:    #E74C3C;
+  --green:  #2ECC71;
+  --gray:   #95A5A6;
+  --light:  #F4F6F8;
+  --white:  #FFFFFF;
+  --text:   #2C3E50;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+       color: var(--text); background: var(--light); }
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
+
+.metric-card { background: var(--white); border-radius: 12px; padding: 1.5rem;
+               box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.metric-value { font-size: 2.5rem; font-weight: 700; color: var(--navy); }
+.metric-label { color: var(--gray); font-size: 0.875rem; margin-top: 0.25rem; }
+.metric-delta.bad  { color: var(--red);   font-weight: 600; display: block; margin-top: 0.5rem; }
+.metric-delta.good { color: var(--green); font-weight: 600; display: block; margin-top: 0.5rem; }
+
+.section { padding: 3rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+.section-title { font-size: 1.75rem; font-weight: 700; color: var(--navy);
+                 margin-bottom: 0.5rem; }
+.section-subtitle { color: var(--gray); margin-bottom: 2rem; font-size: 1rem; }
+
+.finding-box { background: var(--navy); color: var(--white); border-radius: 12px;
+               padding: 1.5rem 2rem; margin: 2rem 0; font-size: 1.1rem; line-height: 1.6; }
+.finding-box strong { color: #F8C471; }
+
+.nav { position: sticky; top: 0; z-index: 100; background: var(--navy);
+       display: flex; gap: 0; overflow-x: auto; }
+.nav a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 1.25rem;
+         white-space: nowrap; font-size: 0.875rem; font-weight: 500; }
+.nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+
+.hero { background: var(--navy); color: white; padding: 4rem 1.5rem 3rem;
+        text-align: center; }
+.hero h1 { font-size: clamp(1.75rem, 5vw, 3rem); font-weight: 800; }
+.hero p  { opacity: 0.8; margin-top: 1rem; font-size: 1.1rem; max-width: 640px; margin-inline: auto; }
+.hero .badge { display: inline-block; background: rgba(255,255,255,0.15);
+               border-radius: 999px; padding: 0.35rem 1rem; font-size: 0.8rem;
+               margin-bottom: 1rem; }
+
+.chart-wrap { background: white; border-radius: 12px; padding: 1rem;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin: 1.5rem 0; }
+
+.pitch { background: var(--navy); color: white; padding: 3rem 1.5rem; text-align: center; }
+.pitch h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; }
+.pitch p  { opacity: 0.85; max-width: 640px; margin-inline: auto; line-height: 1.7; }
+.cta-btn  { display: inline-block; margin-top: 2rem; background: var(--green);
+            color: white; padding: 1rem 2.5rem; border-radius: 8px; font-weight: 700;
+            text-decoration: none; font-size: 1.1rem; }
+
+table.data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+table.data-table th, table.data-table td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #E5E8EB; }
+table.data-table th { color: var(--gray); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; }
+table.data-table tr.flag-row td { color: var(--red); font-weight: 600; }
+.status-pill { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+.status-pill.terminated, .status-pill.voluntary_quit { background: rgba(231,76,60,0.12); color: var(--red); }
+.status-pill.active { background: rgba(46,204,113,0.12); color: #1e8449; }
+
+@media (max-width: 600px) {
+  .section { padding: 2rem 1rem; }
+  .metric-value { font-size: 2rem; }
+  .hero { padding: 2.5rem 1rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">Data Analysis Report &middot; July 2, 2026</div>
+  <h1>Redtail Regional Freight</h1>
+  <p>We analyzed two years of trip, fuel, maintenance, and delivery data from your fleet. We found one truck quietly costing over $110K a year, one customer sitting on nearly 7,000 hours of unpaid dock time, three lanes that lose money on almost every load, and a new-hire turnover problem hiding in plain sight.</p>
+</div>
+
+<div class="nav">
+  <a href="#section-1">Truck TRK-014</a>
+  <a href="#section-2">Detention Cost</a>
+  <a href="#section-3">Lane Profitability</a>
+  <a href="#section-4">Driver Retention</a>
+  <a href="#whats-next">What's Next</a>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: TRK-014 fuel + maintenance -->
+<!-- ============================================================ -->
+<section class="section" id="section-1">
+  <h2 class="section-title">One Truck Is Quietly Bleeding Redtail's Margin</h2>
+  <p class="section-subtitle">TRK-014, a 2013 Freightliner Cascadia with 781,400 miles, burns fuel far worse than the rest of the fleet and has become a maintenance magnet — and the gap isn't an occasional bad week, it's chronic across every trip.</p>
+
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="metric-value">5.04 MPG</div>
+      <div class="metric-label">TRK-014 average, vs. 6.90 MPG fleet average</div>
+      <span class="metric-delta bad">↓ 26.9% below fleet average</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$123,170</div>
+      <div class="metric-label">TRK-014 lifetime maintenance cost</div>
+      <span class="metric-delta bad">vs. $10,765 fleet average per truck</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">1,098 hrs</div>
+      <div class="metric-label">TRK-014 lifetime downtime</div>
+      <span class="metric-delta bad">~46 lost operating days</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-1a" style="height:400px;"></div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-1b" style="height:350px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>TRK-014 averages 5.04 MPG against a 6.90 MPG fleet average — a 26.9% efficiency gap — while also carrying more than 11x the fleet's average lifetime maintenance cost.</strong> No other truck in the 38-unit fleet comes close on either measure. This single unit is the clearest, most defensible case in the data for a replacement decision.
+  </div>
+</section>
+
+<script>
+const s1 = {"fleet_avg_mpg": 6.9, "trk014_mpg": 5.04, "mpg_gap_pct": 26.9, "trk014_total_maint": 123170.0, "fleet_avg_maint": 10765.0, "trk014_downtime_hrs": 1097.9, "scatter": [{"truck_id": "TRK-014", "mpg": 5.04, "maintenance_cost": 123170.0, "downtime_hrs": 1097.9, "flagged": true}, {"truck_id": "TRK-012", "mpg": 6.91, "maintenance_cost": 4007.0, "downtime_hrs": 27.1, "flagged": false}, {"truck_id": "TRK-033", "mpg": 6.92, "maintenance_cost": 5289.0, "downtime_hrs": 50.5, "flagged": false}, {"truck_id": "TRK-016", "mpg": 6.92, "maintenance_cost": 13606.0, "downtime_hrs": 61.2, "flagged": false}, {"truck_id": "TRK-001", "mpg": 6.92, "maintenance_cost": 7015.0, "downtime_hrs": 40.1, "flagged": false}, {"truck_id": "TRK-023", "mpg": 6.93, "maintenance_cost": 7220.0, "downtime_hrs": 65.6, "flagged": false}, {"truck_id": "TRK-024", "mpg": 6.93, "maintenance_cost": 6925.0, "downtime_hrs": 42.6, "flagged": false}, {"truck_id": "TRK-030", "mpg": 6.93, "maintenance_cost": 4898.0, "downtime_hrs": 31.6, "flagged": false}, {"truck_id": "TRK-036", "mpg": 6.94, "maintenance_cost": 10036.0, "downtime_hrs": 59.8, "flagged": false}, {"truck_id": "TRK-029", "mpg": 6.94, "maintenance_cost": 4371.0, "downtime_hrs": 41.5, "flagged": false}, {"truck_id": "TRK-007", "mpg": 6.94, "maintenance_cost": 13721.0, "downtime_hrs": 110.3, "flagged": false}, {"truck_id": "TRK-032", "mpg": 6.94, "maintenance_cost": 10249.0, "downtime_hrs": 62.0, "flagged": false}, {"truck_id": "TRK-021", "mpg": 6.94, "maintenance_cost": 6428.0, "downtime_hrs": 38.8, "flagged": false}, {"truck_id": "TRK-015", "mpg": 6.94, "maintenance_cost": 8076.0, "downtime_hrs": 32.0, "flagged": false}, {"truck_id": "TRK-031", "mpg": 6.94, "maintenance_cost": 5179.0, "downtime_hrs": 51.9, "flagged": false}, {"truck_id": "TRK-035", "mpg": 6.94, "maintenance_cost": 3498.0, "downtime_hrs": 38.7, "flagged": false}, {"truck_id": "TRK-020", "mpg": 6.94, "maintenance_cost": 12238.0, "downtime_hrs": 79.8, "flagged": false}, {"truck_id": "TRK-017", "mpg": 6.95, "maintenance_cost": 5510.0, "downtime_hrs": 38.8, "flagged": false}, {"truck_id": "TRK-026", "mpg": 6.95, "maintenance_cost": 16664.0, "downtime_hrs": 96.7, "flagged": false}, {"truck_id": "TRK-004", "mpg": 6.95, "maintenance_cost": 4170.0, "downtime_hrs": 30.6, "flagged": false}, {"truck_id": "TRK-037", "mpg": 6.95, "maintenance_cost": 8461.0, "downtime_hrs": 77.0, "flagged": false}, {"truck_id": "TRK-019", "mpg": 6.95, "maintenance_cost": 2872.0, "downtime_hrs": 15.4, "flagged": false}, {"truck_id": "TRK-010", "mpg": 6.95, "maintenance_cost": 10724.0, "downtime_hrs": 47.9, "flagged": false}, {"truck_id": "TRK-034", "mpg": 6.95, "maintenance_cost": 11327.0, "downtime_hrs": 59.3, "flagged": false}, {"truck_id": "TRK-009", "mpg": 6.95, "maintenance_cost": 4527.0, "downtime_hrs": 21.5, "flagged": false}, {"truck_id": "TRK-022", "mpg": 6.96, "maintenance_cost": 2192.0, "downtime_hrs": 13.3, "flagged": false}, {"truck_id": "TRK-006", "mpg": 6.96, "maintenance_cost": 7676.0, "downtime_hrs": 52.5, "flagged": false}, {"truck_id": "TRK-011", "mpg": 6.96, "maintenance_cost": 4105.0, "downtime_hrs": 22.5, "flagged": false}, {"truck_id": "TRK-025", "mpg": 6.96, "maintenance_cost": 8198.0, "downtime_hrs": 59.3, "flagged": false}, {"truck_id": "TRK-018", "mpg": 6.96, "maintenance_cost": 9564.0, "downtime_hrs": 54.4, "flagged": false}, {"truck_id": "TRK-003", "mpg": 6.96, "maintenance_cost": 6306.0, "downtime_hrs": 47.4, "flagged": false}, {"truck_id": "TRK-013", "mpg": 6.96, "maintenance_cost": 11321.0, "downtime_hrs": 78.2, "flagged": false}, {"truck_id": "TRK-027", "mpg": 6.96, "maintenance_cost": 12480.0, "downtime_hrs": 58.1, "flagged": false}, {"truck_id": "TRK-038", "mpg": 6.96, "maintenance_cost": 12845.0, "downtime_hrs": 40.4, "flagged": false}, {"truck_id": "TRK-008", "mpg": 6.97, "maintenance_cost": 7143.0, "downtime_hrs": 35.0, "flagged": false}, {"truck_id": "TRK-028", "mpg": 6.97, "maintenance_cost": 4458.0, "downtime_hrs": 33.0, "flagged": false}, {"truck_id": "TRK-005", "mpg": 6.99, "maintenance_cost": 9327.0, "downtime_hrs": 65.7, "flagged": false}], "mpg_bar": [{"truck_id": "TRK-014", "mpg": 5.04, "flagged": true}, {"truck_id": "TRK-012", "mpg": 6.91, "flagged": false}, {"truck_id": "TRK-033", "mpg": 6.92, "flagged": false}, {"truck_id": "TRK-016", "mpg": 6.92, "flagged": false}, {"truck_id": "TRK-001", "mpg": 6.92, "flagged": false}, {"truck_id": "TRK-023", "mpg": 6.93, "flagged": false}, {"truck_id": "TRK-024", "mpg": 6.93, "flagged": false}, {"truck_id": "TRK-030", "mpg": 6.93, "flagged": false}, {"truck_id": "TRK-036", "mpg": 6.94, "flagged": false}, {"truck_id": "TRK-029", "mpg": 6.94, "flagged": false}], "maint_bar": [{"truck_id": "TRK-014", "cost": 123170.0, "flagged": true}, {"truck_id": "TRK-026", "cost": 16664.0, "flagged": false}, {"truck_id": "TRK-007", "cost": 13721.0, "flagged": false}, {"truck_id": "TRK-016", "cost": 13606.0, "flagged": false}, {"truck_id": "TRK-038", "cost": 12845.0, "flagged": false}, {"truck_id": "TRK-027", "cost": 12480.0, "flagged": false}, {"truck_id": "TRK-020", "cost": 12238.0, "flagged": false}, {"truck_id": "TRK-034", "cost": 11327.0, "flagged": false}, {"truck_id": "TRK-013", "cost": 11321.0, "flagged": false}, {"truck_id": "TRK-010", "cost": 10724.0, "flagged": false}]};
+
+Plotly.newPlot('chart-1a', [{
+    type: 'scatter',
+    mode: 'markers',
+    x: s1.scatter.map(d => d.mpg),
+    y: s1.scatter.map(d => d.maintenance_cost),
+    text: s1.scatter.map(d => d.truck_id),
+    marker: {
+        size: s1.scatter.map(d => Math.max(10, Math.sqrt(d.downtime_hrs) * 3)),
+        color: s1.scatter.map(d => d.flagged ? '#E74C3C' : '#1B4F72'),
+        opacity: 0.85,
+        line: { color: 'white', width: 1 }
+    },
+    hovertemplate: '%{text}<br>MPG: %{x}<br>Maintenance: $%{y:,.0f}<extra></extra>'
+}], {
+    title: 'TRK-014 stands alone: worst fuel efficiency AND highest maintenance cost',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 70, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Average MPG' },
+    yaxis: { title: 'Lifetime maintenance cost ($)' },
+    annotations: [{
+        x: 5.04, y: 123170, text: 'TRK-014', showarrow: true, arrowhead: 2,
+        ax: 40, ay: -40, font: { color: '#E74C3C', size: 13, family: '-apple-system, sans-serif' }
+    }]
+}, { responsive: true, displayModeBar: false });
+
+Plotly.newPlot('chart-1b', [{
+    type: 'bar',
+    orientation: 'h',
+    y: s1.mpg_bar.map(d => d.truck_id).reverse(),
+    x: s1.mpg_bar.map(d => d.mpg).reverse(),
+    marker: { color: s1.mpg_bar.map(d => d.flagged ? '#E74C3C' : '#1B4F72').reverse() },
+    text: s1.mpg_bar.map(d => d.mpg.toFixed(2) + ' MPG').reverse(),
+    textposition: 'outside'
+}], {
+    title: '10 lowest-MPG trucks in the fleet — TRK-014 is not a close second',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 50, l: 80, r: 60 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Average MPG' },
+    yaxis: { title: '' }
+}, { responsive: true, displayModeBar: false });
+</script>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: Customer detention -->
+<!-- ============================================================ -->
+<section class="section" id="section-2">
+  <h2 class="section-title">One Customer Is Quietly Eating Thousands of Driver-Hours</h2>
+  <p class="section-subtitle">Llano Estacado Foods' Lubbock dock generates detention times more than 4x every other customer — consistently, month after month, not as an occasional spike.</p>
+
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="metric-value">46.6 min</div>
+      <div class="metric-label">Llano Estacado avg. detention per delivery</div>
+      <span class="metric-delta bad">vs. 10.6 min for every other customer</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">6,946 hrs</div>
+      <div class="metric-label">Cumulative detention hours, this customer alone</div>
+      <span class="metric-delta bad">unpaid, unbilled idle time</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">~$243,000</div>
+      <div class="metric-label">Estimated cost at $35/driver-hour</div>
+      <span class="metric-delta bad">currently invisible to the business</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-2a" style="height:350px;"></div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-2b" style="height:320px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Llano Estacado Foods generates 46.6 minutes of average dock detention per delivery versus 10.6 minutes for every other customer combined — a gap that has held steady for two straight years.</strong> That's 6,946 hours of driver and truck time tied up at one dock, worth an estimated $243,000 at a conservative $35/hour all-in cost — money currently invisible inside "normal trip variance."
+  </div>
+</section>
+
+<script>
+const s2 = {"llano_avg_detention": 46.6, "fleet_avg_detention_excl_llano": 10.6, "llano_total_hours": 6946.0, "llano_dollar_cost_35hr": 243122.0, "bar": [{"customer": "Llano Estacado Foods", "avg_detention_min": 46.6, "flagged": true}, {"customer": "Caprock Grain Exchange", "avg_detention_min": 10.6, "flagged": false}, {"customer": "Sangre de Cristo Distribution", "avg_detention_min": 10.6, "flagged": false}, {"customer": "Sooner State Foods", "avg_detention_min": 10.6, "flagged": false}, {"customer": "High Plains Ag Cooperative", "avg_detention_min": 10.6, "flagged": false}, {"customer": "Panhandle Beef Processors", "avg_detention_min": 10.5, "flagged": false}], "trend": [{"month": "2024-07", "avg_detention_min": 47.3}, {"month": "2024-08", "avg_detention_min": 46.4}, {"month": "2024-09", "avg_detention_min": 46.7}, {"month": "2024-10", "avg_detention_min": 46.4}, {"month": "2024-11", "avg_detention_min": 46.9}, {"month": "2024-12", "avg_detention_min": 45.8}, {"month": "2025-01", "avg_detention_min": 47.6}, {"month": "2025-02", "avg_detention_min": 47.2}, {"month": "2025-03", "avg_detention_min": 46.4}, {"month": "2025-04", "avg_detention_min": 46.8}, {"month": "2025-05", "avg_detention_min": 46.5}, {"month": "2025-06", "avg_detention_min": 45.9}, {"month": "2025-07", "avg_detention_min": 46.5}, {"month": "2025-08", "avg_detention_min": 47.1}, {"month": "2025-09", "avg_detention_min": 46.0}, {"month": "2025-10", "avg_detention_min": 46.5}, {"month": "2025-11", "avg_detention_min": 46.0}, {"month": "2025-12", "avg_detention_min": 46.7}, {"month": "2026-01", "avg_detention_min": 46.2}, {"month": "2026-02", "avg_detention_min": 46.4}, {"month": "2026-03", "avg_detention_min": 46.7}, {"month": "2026-04", "avg_detention_min": 46.5}, {"month": "2026-05", "avg_detention_min": 47.1}, {"month": "2026-06", "avg_detention_min": 46.4}, {"month": "2026-07", "avg_detention_min": 40.4}]};
+
+Plotly.newPlot('chart-2a', [{
+    type: 'bar',
+    orientation: 'h',
+    y: s2.bar.map(d => d.customer).reverse(),
+    x: s2.bar.map(d => d.avg_detention_min).reverse(),
+    marker: { color: s2.bar.map(d => d.flagged ? '#E74C3C' : '#1B4F72').reverse() },
+    text: s2.bar.map(d => d.avg_detention_min.toFixed(1) + ' min').reverse(),
+    textposition: 'outside'
+}], {
+    title: 'Llano Estacado Foods: 4.4x the fleet-wide average detention time',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 50, l: 200, r: 60 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Average detention minutes per delivery' },
+    yaxis: { title: '' },
+    shapes: [{
+        type: 'line', x0: 10.6, x1: 10.6, y0: -0.5, y1: 5.5,
+        line: { color: '#95A5A6', width: 2, dash: 'dash' }
+    }]
+}, { responsive: true, displayModeBar: false });
+
+Plotly.newPlot('chart-2b', [{
+    type: 'scatter',
+    mode: 'lines+markers',
+    x: s2.trend.map(d => d.month),
+    y: s2.trend.map(d => d.avg_detention_min),
+    line: { color: '#E74C3C', width: 2 },
+    marker: { size: 6, color: '#E74C3C' }
+}], {
+    title: 'Llano Estacado detention has stayed high every month for two years — this is not improving on its own',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 60, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Month' },
+    yaxis: { title: 'Avg. detention minutes', rangemode: 'tozero' }
+}, { responsive: true, displayModeBar: false });
+</script>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: Lane profitability -->
+<!-- ============================================================ -->
+<section class="section" id="section-3">
+  <h2 class="section-title">Three Lanes Lose Money on Almost Every Load</h2>
+  <p class="section-subtitle">Base rates look reasonable on paper, but once fuel cost is netted out, the Amarillo↔Denver reefer lane and both backhaul lanes fall below Redtail's $2.05/mile breakeven — on nearly every single load.</p>
+
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="metric-value">$1.69/mi</div>
+      <div class="metric-label">AMA-OKC-BACKHAUL net rate after fuel</div>
+      <span class="metric-delta bad">17.6% below $2.05 breakeven</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$1.94/mi</div>
+      <div class="metric-label">AMA-DEN-REEFER net rate after fuel</div>
+      <span class="metric-delta bad">79.6% of loads lose money</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">3 of 8</div>
+      <div class="metric-label">Routes net below breakeven fleet-wide</div>
+      <span class="metric-delta bad">on nearly every load run</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-3a" style="height:400px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>AMA-OKC-BACKHAUL nets $1.69/mile, DEN-AMA-BACKHAUL nets $1.74/mile, and AMA-DEN-REEFER nets $1.94/mile — all below the $2.05/mile breakeven — despite posted base rates of $1.90 to $2.15/mile.</strong> On the reefer lane, 8 of every 10 loads lose money after fuel; on the two backhaul lanes, essentially every load does. These three lanes look fine on a rate confirmation and lose money in reality.
+  </div>
+</section>
+
+<script>
+const s3 = {"breakeven": 2.05, "bar": [{"route": "AMA-OKC-BACKHAUL", "net_per_mile": 1.69, "gross_per_mile": 1.9, "pct_below_breakeven": 100.0, "below_breakeven": true}, {"route": "DEN-AMA-BACKHAUL", "net_per_mile": 1.74, "gross_per_mile": 1.95, "pct_below_breakeven": 99.5, "below_breakeven": true}, {"route": "AMA-DEN-REEFER", "net_per_mile": 1.94, "gross_per_mile": 2.15, "pct_below_breakeven": 79.6, "below_breakeven": true}, {"route": "AMA-OKC-VAN", "net_per_mile": 2.14, "gross_per_mile": 2.35, "pct_below_breakeven": 27.1, "below_breakeven": false}, {"route": "LUB-ABQ-VAN", "net_per_mile": 2.19, "gross_per_mile": 2.4, "pct_below_breakeven": 15.7, "below_breakeven": false}, {"route": "AMA-LUB-VAN", "net_per_mile": 2.33, "gross_per_mile": 2.55, "pct_below_breakeven": 2.8, "below_breakeven": false}, {"route": "PLV-AMA-AG", "net_per_mile": 2.73, "gross_per_mile": 2.95, "pct_below_breakeven": 0.0, "below_breakeven": false}, {"route": "AMA-HFD-AG", "net_per_mile": 2.87, "gross_per_mile": 3.1, "pct_below_breakeven": 0.0, "below_breakeven": false}], "worst_route": "AMA-OKC-BACKHAUL", "worst_route_net": 1.69, "n_losing_routes": 3, "ama_den_reefer_net": 1.94, "ama_den_reefer_pct_below": 79.6};
+
+Plotly.newPlot('chart-3a', [{
+    type: 'bar',
+    orientation: 'h',
+    y: s3.bar.map(d => d.route).reverse(),
+    x: s3.bar.map(d => d.net_per_mile).reverse(),
+    marker: { color: s3.bar.map(d => d.below_breakeven ? '#E74C3C' : '#1B4F72').reverse() },
+    text: s3.bar.map(d => '$' + d.net_per_mile.toFixed(2)).reverse(),
+    textposition: 'outside'
+}], {
+    title: 'Net $/mile after fuel, by route — three lanes fall below the $2.05 breakeven line',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 50, l: 160, r: 60 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Net revenue per mile ($)' },
+    yaxis: { title: '' },
+    shapes: [{
+        type: 'line', x0: 2.05, x1: 2.05, y0: -0.5, y1: 7.5,
+        line: { color: '#95A5A6', width: 2, dash: 'dash' }
+    }],
+    annotations: [{
+        x: 2.05, y: 7.5, yshift: 18, text: 'Breakeven: $2.05/mi', showarrow: false,
+        font: { color: '#95A5A6', size: 11, family: '-apple-system, sans-serif' }
+    }]
+}, { responsive: true, displayModeBar: false });
+</script>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: Driver retention -->
+<!-- ============================================================ -->
+<section class="section" id="section-4">
+  <h2 class="section-title">New Hires Are Leaving Before They Become Productive</h2>
+  <p class="section-subtitle">Drivers hired in the last 18 months at the Amarillo terminal are leaving at dramatically higher rates than tenured drivers — a structural onboarding problem, not random attrition.</p>
+
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="metric-value">66.7%</div>
+      <div class="metric-label">Termination/quit rate, drivers hired in last 18 months (n=12)</div>
+      <span class="metric-delta bad">vs. 10.0% for earlier hires (n=40)</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">8 of 12</div>
+      <div class="metric-label">Recent hires already terminated or quit</div>
+      <span class="metric-delta bad">most within the first year</span>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">~6.7x</div>
+      <div class="metric-label">Higher attrition rate vs. tenured drivers</div>
+      <span class="metric-delta bad">concentrated at the front end of tenure</span>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-4a" style="height:350px;"></div>
+  </div>
+
+  <div class="chart-wrap">
+    <table class="data-table">
+      <thead>
+        <tr><th>Driver</th><th>Hire Date</th><th>Status</th><th>Tenure (days)</th><th>Yrs. Experience</th></tr>
+      </thead>
+      <tbody id="recent-hires-table"></tbody>
+    </table>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Of the 12 drivers hired at the Amarillo terminal in the last 18 months, 8 (66.7%) have already been terminated or quit — versus just 10.0% among the 40 drivers hired earlier.</strong> This is not evenly distributed turnover; it's a front-end-of-tenure problem that suggests an onboarding, dispatcher-assignment, or route-fit gap specific to new hires.
+  </div>
+</section>
+
+<script>
+const s4 = {"last18_pct_left": 66.7, "last18_n": 12, "last18_n_left": 8, "earlier_pct_left": 10.0, "earlier_n": 40, "cohort_bar": [{"cohort": "Earlier Hires", "pct_left": 10.0, "n": 40, "n_left": 4}, {"cohort": "Last 18 Months", "pct_left": 66.7, "n": 12, "n_left": 8}], "tenure_hist": [{"bucket": "0-6mo", "count": 2}, {"bucket": "6-12mo", "count": 3}, {"bucket": "1-2yr", "count": 3}, {"bucket": "2-3yr", "count": 0}, {"bucket": "3-4yr", "count": 0}, {"bucket": "4yr+", "count": 4}], "recent_hires": [{"driver_id": "DRV-009", "name": "Eric Carter", "hire_date": "2025-06-15", "status": "terminated", "tenure_days": 382, "years_experience": 13.3}, {"driver_id": "DRV-041", "name": "Steven Clark", "hire_date": "2025-08-17", "status": "voluntary_quit", "tenure_days": 319, "years_experience": 1.6}, {"driver_id": "DRV-042", "name": "George Walker", "hire_date": "2025-07-15", "status": "terminated", "tenure_days": 352, "years_experience": 2.6}, {"driver_id": "DRV-044", "name": "Lisa Rivera", "hire_date": "2025-06-25", "status": "terminated", "tenure_days": 372, "years_experience": 0.6}, {"driver_id": "DRV-045", "name": "Gary Green", "hire_date": "2026-01-28", "status": "terminated", "tenure_days": 155, "years_experience": 2.5}, {"driver_id": "DRV-046", "name": "Robert Allen", "hire_date": "2025-11-03", "status": "terminated", "tenure_days": 241, "years_experience": 1.4}, {"driver_id": "DRV-047", "name": "Mark King", "hire_date": "2025-06-10", "status": "terminated", "tenure_days": 387, "years_experience": 0.9}, {"driver_id": "DRV-048", "name": "Kenneth Lewis", "hire_date": "2026-01-08", "status": "terminated", "tenure_days": 175, "years_experience": 2.3}, {"driver_id": "DRV-002", "name": "Wyatt Perez", "hire_date": "2025-06-01", "status": "active", "tenure_days": 396, "years_experience": 18.7}, {"driver_id": "DRV-034", "name": "Richard Baker", "hire_date": "2025-02-10", "status": "active", "tenure_days": 507, "years_experience": 26.6}, {"driver_id": "DRV-038", "name": "Kenneth Carter", "hire_date": "2024-11-27", "status": "active", "tenure_days": 582, "years_experience": 18.2}, {"driver_id": "DRV-043", "name": "Melissa Brown", "hire_date": "2026-05-03", "status": "active", "tenure_days": 60, "years_experience": 0.8}]};
+
+Plotly.newPlot('chart-4a', [{
+    type: 'bar',
+    x: s4.cohort_bar.map(d => d.cohort),
+    y: s4.cohort_bar.map(d => d.pct_left),
+    marker: { color: s4.cohort_bar.map(d => d.cohort === 'Last 18 Months' ? '#E74C3C' : '#1B4F72') },
+    text: s4.cohort_bar.map(d => d.pct_left.toFixed(1) + '% (n=' + d.n + ')'),
+    textposition: 'outside'
+}], {
+    title: 'Termination/quit rate by hiring cohort — new hires leave 6.7x more often',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 60, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: '' },
+    yaxis: { title: '% terminated or quit', range: [0, 80] }
+}, { responsive: true, displayModeBar: false });
+
+const tbody = document.getElementById('recent-hires-table');
+s4.recent_hires.forEach(function(d) {
+    const tr = document.createElement('tr');
+    if (d.status === 'terminated' || d.status === 'voluntary_quit') tr.className = 'flag-row';
+    tr.innerHTML = '<td>' + d.name + ' (' + d.driver_id + ')</td>' +
+                   '<td>' + d.hire_date + '</td>' +
+                   '<td><span class="status-pill ' + d.status + '">' + d.status.replace('_', ' ') + '</span></td>' +
+                   '<td>' + d.tenure_days + '</td>' +
+                   '<td>' + d.years_experience + '</td>';
+    tbody.appendChild(tr);
+});
+</script>
+
+<!-- ============================================================ -->
+<!-- PITCH -->
+<!-- ============================================================ -->
+<div class="pitch" id="whats-next">
+  <h2>What We'd Build For You</h2>
+  <p>
+    This report shows what we found in about an hour of analysis.
+    Imagine having a live operations platform built specifically for Redtail Regional Freight —
+    real-time load tracking, driver performance dashboards, automated alerts when
+    metrics go off-track, and a financial view that updates itself daily.
+  </p>
+  <p style="margin-top:1rem; opacity:0.75;">
+    For Dale specifically: a truck retirement scorecard that makes the TRK-014 replacement case for the bank, a detention tracker that gives him leverage in the next Llano Estacado Foods conversation, a lane profitability tool that flags underwater loads before they're accepted, and a driver retention dashboard that catches the next round of new-hire churn before it costs another six drivers.
+  </p>
+  <a class="cta-btn" href="mailto:victorfoster@hotmail.com">Request Your Custom Platform</a>
+</div>
+
+<footer style="text-align:center; padding:2rem; color:#95A5A6; font-size:0.85rem;">
+  Generated by Carrier Demo Factory &middot;
+  <a href="https://your-domain.com" style="color:#95A5A6;">your-domain.com</a> &middot;
+  July 2, 2026
+</footer>
+
+</body>
+</html>

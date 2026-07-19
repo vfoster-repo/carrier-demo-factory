@@ -1,0 +1,7 @@
+customer_id,customer_name,city,state,industry,payment_terms_days,account_status
+CUST-001,Panhandle Beef Processors,Amarillo,TX,Food Processing (Protein),30,active
+CUST-002,Llano Estacado Foods,Lubbock,TX,Food Processing (Dairy/Packaged),30,active
+CUST-003,High Plains Ag Cooperative,Hereford,TX,Agriculture,15,active
+CUST-004,Sangre de Cristo Distribution,Denver,CO,Retail Distribution,45,active
+CUST-005,Caprock Grain Exchange,Plainview,TX,Agriculture,15,active
+CUST-006,Sooner State Foods,Oklahoma City,OK,Food Distribution,30,active

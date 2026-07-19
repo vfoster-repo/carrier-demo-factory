@@ -1,0 +1,13 @@
+route_id,origin_city,origin_state,destination_city,destination_state,distance_miles,base_rate_per_mile
+RTE-01,Spokane,WA,Chicago,IL,1980,2.35
+RTE-02,Spokane,WA,Dallas,TX,1970,2.3
+RTE-03,Portland,OR,Denver,CO,1240,2.15
+RTE-04,Seattle,WA,Atlanta,GA,2630,2.05
+RTE-05,Chicago,IL,Spokane,WA,1980,2.2
+RTE-06,Dallas,TX,Spokane,WA,1970,2.15
+RTE-07,Denver,CO,Portland,OR,1240,2.1
+RTE-08,Atlanta,GA,Seattle,WA,2630,1.95
+RTE-09,Spokane,WA,Portland,OR,350,2.6
+RTE-10,Portland,OR,Spokane,WA,350,2.55
+RTE-11,Dallas,TX,Chicago,IL,930,2.4
+RTE-12,Chicago,IL,Dallas,TX,930,2.45

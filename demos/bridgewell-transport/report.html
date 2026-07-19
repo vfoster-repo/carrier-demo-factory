@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bridgewell Transport — Data Analysis Report</title>
+<script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+<style>
+:root {
+  --navy:   #1B4F72;
+  --red:    #E74C3C;
+  --green:  #2ECC71;
+  --gray:   #95A5A6;
+  --light:  #F4F6F8;
+  --white:  #FFFFFF;
+  --text:   #2C3E50;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+       color: var(--text); background: var(--light); }
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+.metric-card { background: var(--white); border-radius: 12px; padding: 1.5rem;
+               box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.metric-value { font-size: 2.5rem; font-weight: 700; color: var(--navy); }
+.metric-label { color: var(--gray); font-size: 0.875rem; margin-top: 0.25rem; }
+.metric-delta.bad  { color: var(--red);   font-weight: 600; }
+.metric-delta.good { color: var(--green); font-weight: 600; }
+.metric-delta { display: block; margin-top: 0.5rem; font-size: 0.85rem; }
+
+.section { padding: 3rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+.section-title { font-size: 1.75rem; font-weight: 700; color: var(--navy);
+                 margin-bottom: 0.5rem; }
+.section-subtitle { color: var(--gray); margin-bottom: 2rem; font-size: 1rem; }
+
+.finding-box { background: var(--navy); color: var(--white); border-radius: 12px;
+               padding: 1.5rem 2rem; margin: 2rem 0; font-size: 1.1rem; line-height: 1.6; }
+.finding-box strong { color: #F8C471; }
+
+.nav { position: sticky; top: 0; z-index: 100; background: var(--navy);
+       display: flex; gap: 0; overflow-x: auto; }
+.nav a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 1.25rem;
+         white-space: nowrap; font-size: 0.875rem; font-weight: 500; }
+.nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+
+.hero { background: var(--navy); color: white; padding: 4rem 1.5rem 3rem;
+        text-align: center; }
+.hero h1 { font-size: clamp(1.75rem, 5vw, 3rem); font-weight: 800; }
+.hero p  { opacity: 0.8; margin-top: 1rem; font-size: 1.1rem; max-width: 600px; margin-inline: auto; }
+.hero .badge { display: inline-block; background: rgba(255,255,255,0.15);
+               border-radius: 999px; padding: 0.35rem 1rem; font-size: 0.8rem;
+               margin-bottom: 1rem; }
+
+.chart-wrap { background: white; border-radius: 12px; padding: 1rem;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin: 1.5rem 0; }
+
+.pitch { background: var(--navy); color: white; padding: 3rem 1.5rem; text-align: center; }
+.pitch h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; }
+.pitch p  { opacity: 0.85; max-width: 640px; margin-inline: auto; line-height: 1.7; }
+.cta-btn  { display: inline-block; margin-top: 2rem; background: var(--green);
+            color: white; padding: 1rem 2.5rem; border-radius: 8px; font-weight: 700;
+            text-decoration: none; font-size: 1.1rem; }
+
+table.data-table { width: 100%; border-collapse: collapse; font-size: 0.875rem; margin-top: 1rem; }
+table.data-table th, table.data-table td { text-align: left; padding: 0.6rem 0.75rem; border-bottom: 1px solid #E5E8EA; }
+table.data-table th { color: var(--gray); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.03em; }
+table.data-table tr.highlight td { background: rgba(231,76,60,0.08); font-weight: 600; }
+table.data-table td.num { font-variant-numeric: tabular-nums; }
+
+@media (max-width: 600px) {
+  .section { padding: 2rem 1rem; }
+  .metric-value { font-size: 2rem; }
+  .hero { padding: 2.5rem 1rem 2rem; }
+  table.data-table { font-size: 0.78rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">Data Analysis Report &middot; July 3, 2026</div>
+  <h1>Bridgewell Transport</h1>
+  <p>Two years of load, fuel, maintenance, and delivery data confirm what Curtis already felt in his gut: one lane is losing money on every trip, one truck is quietly burning thousands a month, and one customer's dock is wrecking on-time performance. Here's what the numbers show — and what to do about it.</p>
+</div>
+
+<nav class="nav">
+  <a href="#section-1">Lane Profitability</a>
+  <a href="#section-2">Truck Health</a>
+  <a href="#section-3">Detention</a>
+  <a href="#section-4">Customer Risk</a>
+  <a href="#section-5">Driver Retention</a>
+  <a href="#whats-next">What's Next</a>
+</nav>
+
+<!-- SECTION 1: Lane Profitability -->
+<section class="section" id="section-1">
+  <h2 class="section-title">The Joplin ↔ Little Rock Lane Is Losing Money on Every Load</h2>
+  <p class="section-subtitle">Bridgewell's own $2.05/mile breakeven target isn't being met on its two busiest lanes — and they happen to be the ones running the fleet's worst truck.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">$1.46&ndash;$1.50</div>
+      <div class="metric-label">Net revenue per mile, Little Rock lane (both directions)</div>
+      <div class="metric-delta bad">↓ $0.55&ndash;$0.59/mile below $2.05 breakeven</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">791</div>
+      <div class="metric-label">Loads run on the Little Rock lane, generating ~$470K revenue</div>
+      <div class="metric-delta bad">Highest volume, lowest margin lane in the network</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$2.55&ndash;$2.61</div>
+      <div class="metric-label">Net revenue per mile, best lane (Joplin ↔ Springfield)</div>
+      <div class="metric-delta good">Nearly 75% better margin than Little Rock</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-1" style="height:420px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Every lane out of Joplin clears the $2.05/mile breakeven except Little Rock — the two Little Rock lanes net just $1.46&ndash;$1.50/mile, roughly 27% below target.</strong>
+    At current volume, that shortfall costs Bridgewell an estimated $150+ per round trip — and this is the lane the fleet's oldest, least efficient truck runs most often, compounding the loss.
+  </div>
+</section>
+
+<script>
+const data_1 = {"lanes": [{"label": "Little Rock\u2192Joplin", "value": 1.46, "loads": 403, "revenue": 236589.0}, {"label": "Joplin\u2192Little Rock", "value": 1.5, "loads": 388, "revenue": 233398.0}, {"label": "Oklahoma City\u2192Joplin", "value": 2.0, "loads": 250, "revenue": 168801.0}, {"label": "Joplin\u2192Oklahoma City", "value": 2.04, "loads": 273, "revenue": 187151.0}, {"label": "Tulsa\u2192Joplin", "value": 2.14, "loads": 278, "revenue": 125538.0}, {"label": "Kansas City\u2192Joplin", "value": 2.19, "loads": 285, "revenue": 131112.0}, {"label": "Joplin\u2192Tulsa", "value": 2.25, "loads": 268, "revenue": 125667.0}, {"label": "Joplin\u2192Kansas City", "value": 2.29, "loads": 280, "revenue": 133243.0}, {"label": "Springfield\u2192Joplin", "value": 2.55, "loads": 404, "revenue": 95263.0}, {"label": "Joplin\u2192Springfield", "value": 2.61, "loads": 400, "revenue": 95986.0}], "breakeven": 2.05};
+
+(function() {
+  const lanes = data_1.lanes;
+  const breakeven = data_1.breakeven;
+  const colors = lanes.map(d => d.value < breakeven ? '#E74C3C' : '#1B4F72');
+
+  Plotly.newPlot('chart-1', [{
+      type: 'bar',
+      orientation: 'h',
+      y: lanes.map(d => d.label).reverse(),
+      x: lanes.map(d => d.value).reverse(),
+      marker: { color: colors.slice().reverse() },
+      text: lanes.map(d => '$' + d.value.toFixed(2)).reverse(),
+      textposition: 'outside',
+      hovertemplate: '%{y}<br>Net: $%{x:.2f}/mile<extra></extra>'
+  }], {
+      title: 'Net revenue per mile by lane — red bars miss the $2.05 breakeven',
+      paper_bgcolor: 'white',
+      plot_bgcolor: 'white',
+      margin: { t: 60, b: 60, l: 140, r: 40 },
+      font: { family: '-apple-system, sans-serif' },
+      xaxis: { title: 'Net $ / mile (after fuel)', range: [0, 3.0] },
+      yaxis: { title: '' },
+      shapes: [{
+          type: 'line', x0: breakeven, x1: breakeven, y0: -0.5, y1: lanes.length - 0.5,
+          line: { color: '#95A5A6', width: 2, dash: 'solid' }
+      }],
+      annotations: [{
+          x: breakeven, y: lanes.length - 0.5, yanchor: 'bottom',
+          text: 'Breakeven $2.05', showarrow: false, font: { color: '#52514e', size: 11 }
+      }]
+  }, { responsive: true, displayModeBar: false });
+})();
+</script>
+
+<!-- SECTION 2: Truck Health -->
+<section class="section" id="section-2">
+  <h2 class="section-title">TRK-006 Is a Rolling Cost Center</h2>
+  <p class="section-subtitle">This 2013 Freightliner Cascadia with 738,000 miles is the worst performer in the fleet on every cost measure — fuel, maintenance, and downtime alike.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">5.20 MPG</div>
+      <div class="metric-label">TRK-006 fuel economy vs. 6.95 fleet average</div>
+      <div class="metric-delta bad">↓ 25% below fleet — ~$1,287/month in excess fuel</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$42,912</div>
+      <div class="metric-label">Total maintenance cost, TRK-006 (2-year window)</div>
+      <div class="metric-delta bad">4x higher than the next most expensive truck</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">461 hrs</div>
+      <div class="metric-label">Downtime hours, TRK-006</div>
+      <div class="metric-delta bad">More than 4x the fleet's next-highest truck</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-2" style="height:400px;"></div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-2b" style="height:340px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>TRK-006 costs roughly $0.34/mile more than the fleet average once fuel and maintenance are combined — about $52,000/year in excess cost for one truck.</strong>
+    It's also disproportionately assigned to the Joplin&ndash;Little Rock lane, meaning the worst truck is running the worst lane, doubling down on the loss.
+  </div>
+</section>
+
+<script>
+const data_2 = [{"truck_id": "TRK-006", "mpg": 5.2, "maintenance_cost": 42912.0, "downtime_hours": 461.3, "cost_per_mile": 1.05, "year": 2013}, {"truck_id": "TRK-010", "mpg": 6.94, "maintenance_cost": 10435.0, "downtime_hours": 113.3, "cost_per_mile": 0.778, "year": 2015}, {"truck_id": "TRK-004", "mpg": 6.95, "maintenance_cost": 10171.0, "downtime_hours": 158.8, "cost_per_mile": 0.767, "year": 2019}, {"truck_id": "TRK-008", "mpg": 6.97, "maintenance_cost": 8415.0, "downtime_hours": 98.8, "cost_per_mile": 0.757, "year": 2022}, {"truck_id": "TRK-002", "mpg": 6.95, "maintenance_cost": 8309.0, "downtime_hours": 58.0, "cost_per_mile": 0.73, "year": 2022}, {"truck_id": "TRK-001", "mpg": 6.95, "maintenance_cost": 6463.0, "downtime_hours": 57.2, "cost_per_mile": 0.71, "year": 2021}, {"truck_id": "TRK-007", "mpg": 6.94, "maintenance_cost": 6761.0, "downtime_hours": 48.3, "cost_per_mile": 0.705, "year": 2020}, {"truck_id": "TRK-003", "mpg": 6.94, "maintenance_cost": 5640.0, "downtime_hours": 68.9, "cost_per_mile": 0.696, "year": 2020}, {"truck_id": "TRK-009", "mpg": 6.97, "maintenance_cost": 5772.0, "downtime_hours": 71.9, "cost_per_mile": 0.69, "year": 2021}, {"truck_id": "TRK-005", "mpg": 6.96, "maintenance_cost": 3216.0, "downtime_hours": 31.1, "cost_per_mile": 0.641, "year": 2018}];
+const data_2b = [{"month": "2024-08", "cost": 15131.0}, {"month": "2024-09", "cost": 3913.0}, {"month": "2024-10", "cost": 6724.0}, {"month": "2024-11", "cost": 4087.0}, {"month": "2024-12", "cost": 3345.0}, {"month": "2025-01", "cost": 6253.0}, {"month": "2025-02", "cost": 6771.0}, {"month": "2025-03", "cost": 3492.0}, {"month": "2025-04", "cost": 4021.0}, {"month": "2025-05", "cost": 706.0}, {"month": "2025-06", "cost": 3427.0}, {"month": "2025-07", "cost": 441.0}, {"month": "2025-08", "cost": 2024.0}, {"month": "2025-09", "cost": 7574.0}, {"month": "2025-10", "cost": 456.0}, {"month": "2025-11", "cost": 3695.0}, {"month": "2025-12", "cost": 8605.0}, {"month": "2026-01", "cost": 5398.0}, {"month": "2026-02", "cost": 5448.0}, {"month": "2026-03", "cost": 4897.0}, {"month": "2026-04", "cost": 4443.0}, {"month": "2026-05", "cost": 7059.0}, {"month": "2026-06", "cost": 185.0}];
+
+(function() {
+  const trucks = data_2.slice().reverse();
+  const colors = trucks.map(d => d.truck_id === 'TRK-006' ? '#E74C3C' : '#1B4F72');
+
+  Plotly.newPlot('chart-2', [{
+      type: 'bar',
+      orientation: 'h',
+      y: trucks.map(d => d.truck_id),
+      x: trucks.map(d => d.cost_per_mile),
+      marker: { color: colors },
+      text: trucks.map(d => '$' + d.cost_per_mile.toFixed(2)),
+      textposition: 'outside',
+      hovertemplate: '%{y}<br>Cost/mile: $%{x:.3f}<extra></extra>'
+  }], {
+      title: 'Combined fuel + maintenance cost per mile by truck — TRK-006 is the outlier',
+      paper_bgcolor: 'white',
+      plot_bgcolor: 'white',
+      margin: { t: 60, b: 60, l: 80, r: 40 },
+      font: { family: '-apple-system, sans-serif' },
+      xaxis: { title: 'Cost per mile ($)' },
+      yaxis: { title: '' }
+  }, { responsive: true, displayModeBar: false });
+
+  Plotly.newPlot('chart-2b', [{
+      type: 'scatter',
+      mode: 'lines',
+      x: data_2b.map(d => d.month),
+      y: data_2b.map(d => d.cost),
+      line: { color: '#1B4F72', width: 2, shape: 'spline' },
+      fill: 'tozeroy',
+      fillcolor: 'rgba(27,79,114,0.08)',
+      hovertemplate: '%{x}<br>Fleet maintenance: $%{y:,.0f}<extra></extra>'
+  }], {
+      title: 'Fleet-wide monthly maintenance spend — lumpy, driven largely by TRK-006 repairs',
+      paper_bgcolor: 'white',
+      plot_bgcolor: 'white',
+      margin: { t: 60, b: 60, l: 70, r: 40 },
+      font: { family: '-apple-system, sans-serif' },
+      xaxis: { title: 'Month' },
+      yaxis: { title: 'Total cost ($)' }
+  }, { responsive: true, displayModeBar: false });
+})();
+</script>
+
+<!-- SECTION 3: Detention -->
+<section class="section" id="section-3">
+  <h2 class="section-title">Ozark Building Supply's Dock Is Destroying On-Time Performance</h2>
+  <p class="section-subtitle">Trucks generally arrive at Ozark on schedule — they just sit there. The wait, not the drive, is the failure point.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">47.7 min</div>
+      <div class="metric-label">Average detention per delivery at Ozark</div>
+      <div class="metric-delta bad">↑ 4.5x the 10.5-min fleet average</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">3.4%</div>
+      <div class="metric-label">Ozark on-time delivery rate</div>
+      <div class="metric-delta bad">vs. 85&ndash;92% at every other customer</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">~295 hrs</div>
+      <div class="metric-label">Excess driver-hours lost to Ozark detention (2-yr window)</div>
+      <div class="metric-delta bad">~12 driver-hours per month, every month</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-3" style="height:400px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Ozark Building Supply averages 47.7 minutes of detention per delivery against a 10.5-minute average everywhere else, and its on-time rate has collapsed to 3.4%.</strong>
+    That's a specific, quantifiable negotiating position: roughly 12 driver-hours a month — nearly two full driving days — lost to waiting at one customer's dock, not to driving.
+  </div>
+</section>
+
+<script>
+const data_3 = [{"label": "Ozark Building Supply", "value": 47.7, "on_time_rate": 3.4}, {"label": "Heartland Grain Exchange", "value": 10.8, "on_time_rate": 88.1}, {"label": "Delta Farm & Feed", "value": 10.6, "on_time_rate": 88.8}, {"label": "Sooner State Lumber", "value": 10.5, "on_time_rate": 89.3}, {"label": "Route 66 Ag Cooperative", "value": 10.5, "on_time_rate": 89.0}, {"label": "Crossroads Hardware Distribution", "value": 10.3, "on_time_rate": 91.8}];
+
+(function() {
+  const rows = data_3;
+  const colors = rows.map(d => d.label === 'Ozark Building Supply' ? '#E74C3C' : '#1B4F72');
+  const fleetAvg = rows.filter(d => d.label !== 'Ozark Building Supply')
+                        .reduce((s, d) => s + d.value, 0) / (rows.length - 1);
+
+  Plotly.newPlot('chart-3', [{
+      type: 'bar',
+      x: rows.map(d => d.label),
+      y: rows.map(d => d.value),
+      marker: { color: colors },
+      text: rows.map(d => d.value.toFixed(1) + ' min'),
+      textposition: 'outside',
+      hovertemplate: '%{x}<br>Avg detention: %{y:.1f} min<extra></extra>'
+  }], {
+      title: 'Average detention minutes by customer — Ozark towers over the fleet average',
+      paper_bgcolor: 'white',
+      plot_bgcolor: 'white',
+      margin: { t: 60, b: 100, l: 60, r: 20 },
+      font: { family: '-apple-system, sans-serif' },
+      xaxis: { title: '', tickangle: -30 },
+      yaxis: { title: 'Avg detention (minutes)' },
+      shapes: [{
+          type: 'line', x0: -0.5, x1: rows.length - 0.5, y0: fleetAvg, y1: fleetAvg,
+          line: { color: '#95A5A6', width: 2 }
+      }],
+      annotations: [{
+          x: rows.length - 1, y: fleetAvg, yanchor: 'bottom',
+          text: 'Fleet avg (excl. Ozark): ' + fleetAvg.toFixed(1) + ' min',
+          showarrow: false, font: { color: '#52514e', size: 11 }
+      }]
+  }, { responsive: true, displayModeBar: false });
+})();
+</script>
+
+<!-- SECTION 4: Customer Concentration -->
+<section class="section" id="section-4">
+  <h2 class="section-title">Four Customers Are 78% of Revenue — And They're Not Equally Good</h2>
+  <p class="section-subtitle">Gross revenue hides which accounts are actually profitable and which carry hidden cash-flow risk.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">78.4%</div>
+      <div class="metric-label">Share of revenue from top 4 customers</div>
+      <div class="metric-delta bad">A slow month from any one shows up immediately in cash flow</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$680.60</div>
+      <div class="metric-label">Avg revenue per load, Sooner State Lumber (best account)</div>
+      <div class="metric-delta good">Highest-value customer in the book</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$237.67</div>
+      <div class="metric-label">Avg revenue per load, Crossroads Hardware (weakest account)</div>
+      <div class="metric-delta bad">Less than a third of Sooner State's value per load</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">~$9,500/mo</div>
+      <div class="metric-label">Revenue tied up beyond terms — Route 66 Ag Cooperative</div>
+      <div class="metric-delta bad">Pays on a de facto net-60 cycle against net-30 terms</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-4" style="height:380px;"></div>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr><th>Customer</th><th>% of Revenue</th><th>Avg $/Load</th><th>Payment Terms</th></tr>
+    </thead>
+    <tbody id="customer-table"></tbody>
+  </table>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Sooner State Lumber and Delta Farm &amp; Feed together are nearly 45% of revenue at the best per-load rates in the book, while Route 66 Ag Cooperative pays roughly a month late every cycle, perpetually tying up about $9,500 in receivables.</strong>
+    Concentration gives Curtis pricing leverage in theory, but real cash-flow exposure in practice if any one account slows down.
+  </div>
+</section>
+
+<script>
+const data_4 = [{"label": "Sooner State Lumber", "value": 355952.0, "pct": 23.2, "avg_per_load": 680.6, "terms": 30}, {"label": "Delta Farm & Feed", "value": 329776.0, "pct": 21.5, "avg_per_load": 594.19, "terms": 30}, {"label": "Heartland Grain Exchange", "value": 264355.0, "pct": 17.2, "avg_per_load": 467.89, "terms": 15}, {"label": "Route 66 Ag Cooperative", "value": 251205.0, "pct": 16.4, "avg_per_load": 460.08, "terms": 30}, {"label": "Ozark Building Supply", "value": 197412.0, "pct": 12.9, "avg_per_load": 414.73, "terms": 30}, {"label": "Crossroads Hardware Distribution", "value": 134047.0, "pct": 8.7, "avg_per_load": 237.67, "terms": 30}];
+
+(function() {
+  const rows = data_4;
+  Plotly.newPlot('chart-4', [{
+      type: 'bar',
+      x: rows.map(d => d.label),
+      y: rows.map(d => d.value),
+      marker: { color: '#1B4F72' },
+      text: rows.map(d => d.pct.toFixed(1) + '%'),
+      textposition: 'outside',
+      hovertemplate: '%{x}<br>Revenue: $%{y:,.0f}<extra></extra>'
+  }], {
+      title: 'Total revenue by customer — labels show % of total revenue',
+      paper_bgcolor: 'white',
+      plot_bgcolor: 'white',
+      margin: { t: 60, b: 100, l: 70, r: 20 },
+      font: { family: '-apple-system, sans-serif' },
+      xaxis: { title: '', tickangle: -30 },
+      yaxis: { title: 'Total revenue ($)' }
+  }, { responsive: true, displayModeBar: false });
+
+  const tbody = document.getElementById('customer-table');
+  rows.forEach(function(d) {
+      const tr = document.createElement('tr');
+      if (d.label === 'Route 66 Ag Cooperative') tr.className = 'highlight';
+      tr.innerHTML = '<td>' + d.label + '</td>' +
+                      '<td class="num">' + d.pct.toFixed(1) + '%</td>' +
+                      '<td class="num">$' + d.avg_per_load.toFixed(2) + '</td>' +
+                      '<td class="num">Net-' + d.terms + '</td>';
+      tbody.appendChild(tr);
+  });
+})();
+</script>
+
+<!-- SECTION 5: Driver Retention -->
+<section class="section" id="section-5">
+  <h2 class="section-title">Driver Turnover Is Concentrated in Recent Hires</h2>
+  <p class="section-subtitle">Turnover isn't random — every departure Bridgewell has had came from drivers hired within an 18-month window.</p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">30%</div>
+      <div class="metric-label">Termination rate, drivers hired since Jan 2025</div>
+      <div class="metric-delta bad">vs. 0% among drivers hired before Jan 2025</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">3 of 14</div>
+      <div class="metric-label">Total drivers terminated (21% of fleet)</div>
+      <div class="metric-delta bad">All three hired Jan&ndash;Jul 2025</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-5" style="height:340px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Every driver termination at Bridgewell has come from the same 18-month hiring cohort — 30% of drivers hired since January 2025 didn't make it, compared to zero departures among earlier hires.</strong>
+    That pattern points to onboarding or route assignment as the likely driver, not random attrition — worth investigating before the next new hire is lost.
+  </div>
+</section>
+
+<script>
+const data_5 = [{"label": "Hired before Jan 2025", "value": 0.0, "count": 4}, {"label": "Hired Jan 2025 or later", "value": 30.0, "count": 10}];
+
+(function() {
+  const rows = data_5;
+  const colors = rows.map(d => d.value > 0 ? '#E74C3C' : '#1B4F72');
+  Plotly.newPlot('chart-5', [{
+      type: 'bar',
+      x: rows.map(d => d.label),
+      y: rows.map(d => d.value),
+      marker: { color: colors },
+      text: rows.map(d => d.value.toFixed(0) + '% (n=' + d.count + ')'),
+      textposition: 'outside',
+      hovertemplate: '%{x}<br>Termination rate: %{y:.0f}%<extra></extra>'
+  }], {
+      title: 'Termination rate by hiring cohort',
+      paper_bgcolor: 'white',
+      plot_bgcolor: 'white',
+      margin: { t: 60, b: 60, l: 60, r: 20 },
+      font: { family: '-apple-system, sans-serif' },
+      xaxis: { title: '' },
+      yaxis: { title: 'Termination rate (%)', range: [0, 40] }
+  }, { responsive: true, displayModeBar: false });
+})();
+</script>
+
+<div class="pitch" id="whats-next">
+  <h2>What We'd Build For You</h2>
+  <p>
+    This report shows what we found in about an hour of analysis.
+    Imagine having a live operations platform built specifically for Bridgewell Transport —
+    real-time load tracking, driver performance dashboards, automated alerts when
+    metrics go off-track, and a financial view that updates itself daily.
+  </p>
+  <p style="margin-top:1rem; opacity:0.75;">
+    For Bridgewell specifically: a lane profitability tool that flags the Little Rock lane the moment it's offered a load, a truck health scorecard that makes the TRK-006 replace-vs-repair decision obvious, and a detention tracker that turns Ozark's dock delays into a number Curtis can bring straight into a rate renegotiation.
+  </p>
+  <a class="cta-btn" href="mailto:victorfoster@hotmail.com">Request Your Custom Platform</a>
+</div>
+
+<footer style="text-align:center; padding:2rem; color:#95A5A6; font-size:0.85rem;">
+  Generated by Carrier Demo Factory &middot;
+  <a href="https://your-domain.com" style="color:#95A5A6;">your-domain.com</a> &middot;
+  July 3, 2026
+</footer>
+
+</body>
+</html>

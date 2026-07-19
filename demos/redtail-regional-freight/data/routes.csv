@@ -1,0 +1,9 @@
+route_id,origin_city,origin_state,destination_city,destination_state,distance_miles,base_rate_per_mile
+AMA-DEN-REEFER,Amarillo,TX,Denver,CO,432,2.15
+AMA-OKC-VAN,Amarillo,TX,Oklahoma City,OK,261,2.35
+LUB-ABQ-VAN,Lubbock,TX,Albuquerque,NM,284,2.4
+AMA-HFD-AG,Amarillo,TX,Hereford,TX,51,3.1
+DEN-AMA-BACKHAUL,Denver,CO,Amarillo,TX,432,1.95
+AMA-LUB-VAN,Amarillo,TX,Lubbock,TX,123,2.55
+PLV-AMA-AG,Plainview,TX,Amarillo,TX,68,2.95
+AMA-OKC-BACKHAUL,Oklahoma City,OK,Amarillo,TX,261,1.9

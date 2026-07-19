@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cascade Summit Freightways — Data Analysis Report</title>
+<script src="https://cdn.plot.ly/plotly-2.26.0.min.js"></script>
+<style>
+:root {
+  --navy:   #1B4F72;
+  --red:    #E74C3C;
+  --green:  #2ECC71;
+  --gray:   #95A5A6;
+  --light:  #F4F6F8;
+  --white:  #FFFFFF;
+  --text:   #2C3E50;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+       color: var(--text); background: var(--light); }
+
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+.metric-card { background: var(--white); border-radius: 12px; padding: 1.5rem;
+               box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.metric-value { font-size: 2.5rem; font-weight: 700; color: var(--navy); }
+.metric-label { color: var(--gray); font-size: 0.875rem; margin-top: 0.25rem; }
+.metric-delta.bad  { color: var(--red);   font-weight: 600; }
+.metric-delta.good { color: var(--green); font-weight: 600; }
+
+.section { padding: 3rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+.section-title { font-size: 1.75rem; font-weight: 700; color: var(--navy);
+                 margin-bottom: 0.5rem; }
+.section-subtitle { color: var(--gray); margin-bottom: 2rem; font-size: 1rem; }
+
+.finding-box { background: var(--navy); color: var(--white); border-radius: 12px;
+               padding: 1.5rem 2rem; margin: 2rem 0; font-size: 1.1rem; line-height: 1.6; }
+.finding-box strong { color: #F8C471; }
+
+.nav { position: sticky; top: 0; z-index: 100; background: var(--navy);
+       display: flex; gap: 0; overflow-x: auto; }
+.nav a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 1rem 1.25rem;
+         white-space: nowrap; font-size: 0.875rem; font-weight: 500; }
+.nav a:hover { color: white; background: rgba(255,255,255,0.1); }
+
+.hero { background: var(--navy); color: white; padding: 4rem 1.5rem 3rem;
+        text-align: center; }
+.hero h1 { font-size: clamp(1.75rem, 5vw, 3rem); font-weight: 800; }
+.hero p  { opacity: 0.8; margin-top: 1rem; font-size: 1.1rem; max-width: 600px; margin-inline: auto; }
+.hero .badge { display: inline-block; background: rgba(255,255,255,0.15);
+               border-radius: 999px; padding: 0.35rem 1rem; font-size: 0.8rem;
+               margin-bottom: 1rem; }
+
+.chart-wrap { background: white; border-radius: 12px; padding: 1rem;
+              box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin: 1.5rem 0; }
+
+.pitch { background: var(--navy); color: white; padding: 3rem 1.5rem; text-align: center; }
+.pitch h2 { font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; }
+.pitch p  { opacity: 0.85; max-width: 640px; margin-inline: auto; line-height: 1.7; }
+.cta-btn  { display: inline-block; margin-top: 2rem; background: var(--green);
+            color: white; padding: 1rem 2.5rem; border-radius: 8px; font-weight: 700;
+            text-decoration: none; font-size: 1.1rem; }
+
+@media (max-width: 600px) {
+  .section { padding: 2rem 1rem; }
+  .metric-value { font-size: 2rem; }
+  .hero { padding: 2.5rem 1rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="badge">Data Analysis Report · July 3, 2026</div>
+  <h1>Cascade Summit Freightways</h1>
+  <p>
+    We analyzed 62,000 loads, 61,394 trips, and 165 driver records spanning 24 months.
+    Underneath a healthy fleet-wide average (88% on-time, 6.78 MPG) sit five specific,
+    quantifiable problems — one truck, one customer, one lane, and one terminal — costing
+    an estimated $35,000+ per month combined.
+  </p>
+</div>
+
+<div class="nav">
+  <a href="#section-1">Truck Efficiency</a>
+  <a href="#section-2">TitanBolt Detention</a>
+  <a href="#section-3">Lane Losses</a>
+  <a href="#section-4">Chicago Retention</a>
+  <a href="#section-5">Aging Fleet Cost</a>
+  <a href="#pitch">What's Next</a>
+</div>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: Truck Efficiency -->
+<!-- ============================================================ -->
+<section class="section" id="section-1">
+  <h2 class="section-title">Truck TRK-047 Is Burning Cash on Every Mile</h2>
+  <p class="section-subtitle">
+    One aging Peterbilt is running at nearly half the fuel efficiency of Cascade Summit's
+    modern fleet, and it isn't alone — a cluster of 2010-2012 units drags the same way.
+  </p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">4.92 MPG</div>
+      <div class="metric-label">TRK-047 average, vs. 6.78 MPG fleet average</div>
+      <div class="metric-delta bad">↓ 27% below fleet average</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$10,972/mo</div>
+      <div class="metric-label">Estimated excess fuel cost for TRK-047 alone</div>
+      <div class="metric-delta bad">≈ $263K over the 24-month window</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">8 trucks</div>
+      <div class="metric-label">Aging cohort (TRK-041–048, model years 2010-2012)</div>
+      <div class="metric-delta bad">All cluster at 5.9-5.96 MPG</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-1a" style="height:380px;"></div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-1b" style="height:400px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>TRK-047, a 2011 Peterbilt 389 with ~880,000 miles, averages 4.92 MPG
+    against a fleet average of 6.78 MPG</strong> — and it's the worst of an entire aging cohort
+    (TRK-041 through TRK-048) that clusters 15-27% below every other truck in the fleet.
+    The next-worst non-cohort truck runs 6.83 MPG, confirming this is an equipment-age problem,
+    not a fleet-wide efficiency issue.
+  </div>
+</section>
+
+<script>
+const data_1_mpg_bar = [{"label":"TRK-047","value":4.92,"cohort":true},{"label":"TRK-045","value":5.94,"cohort":true},{"label":"TRK-044","value":5.95,"cohort":true},{"label":"TRK-048","value":5.95,"cohort":true},{"label":"TRK-046","value":5.95,"cohort":true},{"label":"TRK-042","value":5.96,"cohort":true},{"label":"TRK-043","value":5.96,"cohort":true},{"label":"TRK-041","value":5.96,"cohort":true},{"label":"TRK-096","value":6.83,"cohort":false},{"label":"TRK-022","value":6.83,"cohort":false},{"label":"TRK-006","value":6.83,"cohort":false},{"label":"TRK-069","value":6.83,"cohort":false},{"label":"TRK-052","value":6.83,"cohort":false},{"label":"TRK-017","value":6.83,"cohort":false},{"label":"TRK-038","value":6.83,"cohort":false}];
+
+Plotly.newPlot('chart-1a', [{
+    type: 'bar',
+    x: data_1_mpg_bar.map(d => d.label),
+    y: data_1_mpg_bar.map(d => d.value),
+    marker: {
+        color: data_1_mpg_bar.map(d => d.cohort ? '#E74C3C' : '#1B4F72')
+    },
+    text: data_1_mpg_bar.map(d => d.value.toFixed(2)),
+    textposition: 'outside'
+}], {
+    title: 'The 15 Least-Efficient Trucks — the Aging Cohort Stands Alone at the Bottom',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 100, l: 60, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Truck ID', tickangle: -45 },
+    yaxis: { title: 'Average MPG' },
+    shapes: [{
+        type: 'line', x0: -0.5, x1: 14.5, y0: 6.78, y1: 6.78,
+        line: { color: '#95A5A6', width: 2, dash: 'dash' }
+    }],
+    annotations: [{
+        x: 14, y: 6.78, text: 'Fleet avg: 6.78', showarrow: false,
+        yshift: 14, font: { color: '#95A5A6', size: 11 }
+    }]
+}, { responsive: true, displayModeBar: false });
+
+const data_1_scatter = [{"label":"TRK-047","mpg":4.92,"maint_per_mile":0.0832,"miles":1149937,"cohort":true},{"label":"TRK-045","mpg":5.94,"maint_per_mile":0.1186,"miles":1007986,"cohort":true},{"label":"TRK-044","mpg":5.95,"maint_per_mile":0.0647,"miles":1101120,"cohort":true},{"label":"TRK-048","mpg":5.95,"maint_per_mile":0.0839,"miles":1168234,"cohort":true},{"label":"TRK-046","mpg":5.95,"maint_per_mile":0.1247,"miles":1074068,"cohort":true},{"label":"TRK-042","mpg":5.96,"maint_per_mile":0.1010,"miles":1057053,"cohort":true},{"label":"TRK-043","mpg":5.96,"maint_per_mile":0.0977,"miles":1011196,"cohort":true},{"label":"TRK-041","mpg":5.96,"maint_per_mile":0.0811,"miles":1083107,"cohort":true},{"label":"TRK-096","mpg":6.83,"maint_per_mile":0.0182,"miles":1048199,"cohort":false},{"label":"TRK-022","mpg":6.83,"maint_per_mile":0.0163,"miles":972904,"cohort":false},{"label":"TRK-005","mpg":6.79,"maint_per_mile":0.0177,"miles":1000000,"cohort":false},{"label":"TRK-014","mpg":6.80,"maint_per_mile":0.0165,"miles":980000,"cohort":false},{"label":"TRK-040","mpg":6.81,"maint_per_mile":0.0140,"miles":1010000,"cohort":false},{"label":"TRK-003","mpg":6.78,"maint_per_mile":0.0175,"miles":990000,"cohort":false}];
+
+Plotly.newPlot('chart-1b', [{
+    type: 'scatter',
+    mode: 'markers',
+    x: data_1_scatter.map(d => d.mpg),
+    y: data_1_scatter.map(d => d.maint_per_mile),
+    text: data_1_scatter.map(d => d.label),
+    marker: {
+        size: data_1_scatter.map(d => Math.max(10, d.miles / 60000)),
+        color: data_1_scatter.map(d => d.cohort ? '#E74C3C' : '#1B4F72'),
+        opacity: 0.75,
+        line: { width: 1, color: 'white' }
+    },
+    hovertemplate: '%{text}<br>MPG: %{x}<br>Maint $/mi: %{y:.3f}<extra></extra>'
+}], {
+    title: 'Low MPG and High Maintenance Cost Cluster on the Same 8 Trucks',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 70, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Average MPG' },
+    yaxis: { title: 'Maintenance Cost per Mile ($)', tickformat: '$.3f' },
+    annotations: [{
+        x: 4.92, y: 0.0832, text: 'TRK-047', showarrow: true, ax: 30, ay: -30,
+        font: { color: '#E74C3C', size: 12, family: '-apple-system, sans-serif' }
+    }]
+}, { responsive: true, displayModeBar: false });
+</script>
+
+<!-- ============================================================ -->
+<!-- SECTION 2: TitanBolt Detention -->
+<!-- ============================================================ -->
+<section class="section" id="section-2">
+  <h2 class="section-title">TitanBolt's Dock Is Silently Taxing Every Load</h2>
+  <p class="section-subtitle">
+    Cascade Summit's #3 account by revenue also has the worst dock performance in the network —
+    by a wide, persistent margin.
+  </p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">47.4 min</div>
+      <div class="metric-label">TitanBolt's average detention per stop</div>
+      <div class="metric-delta bad">↑ 4.4x the 10.6-min average for every other customer</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">2.4%</div>
+      <div class="metric-label">TitanBolt on-time rate</div>
+      <div class="metric-delta bad">vs. 80-90%+ for every other account</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$15,900/mo</div>
+      <div class="metric-label">Estimated cost of excess detention at TitanBolt's dock</div>
+      <div class="metric-delta bad">at a $75/hr opportunity-cost estimate</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-2a" style="height:380px;"></div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-2b" style="height:350px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>TitanBolt Industrial Supply averages 47.4 minutes of detention per
+    stop, against 10.6 minutes for every other customer combined</strong> — and this pattern
+    has held steady for 24 straight months, ranging 46-49 minutes with no sign of improvement.
+    This is Cascade Summit's #3 account by revenue ($38.3M, 14.6% of total) — too large to drop,
+    but large enough that fixing detention here recovers real truck-hours fleet-wide.
+  </div>
+</section>
+
+<script>
+const data_2_detention = [{"label":"TitanBolt Industrial Supply","value":47.4,"highlight":true},{"label":"Northwind Appliance Distributors","value":10.8,"highlight":false},{"label":"Evergreen Foods Co-op","value":10.7,"highlight":false},{"label":"Pioneer Home Furnishings","value":10.7,"highlight":false},{"label":"Peachtree Consumer Goods","value":10.6,"highlight":false},{"label":"Cascade Paper Products","value":10.6,"highlight":false},{"label":"Rocky Summit Building Materials","value":10.5,"highlight":false},{"label":"Lonestar Auto Parts Wholesale","value":10.4,"highlight":false}];
+
+Plotly.newPlot('chart-2a', [{
+    type: 'bar',
+    orientation: 'h',
+    y: data_2_detention.map(d => d.label).reverse(),
+    x: data_2_detention.map(d => d.value).reverse(),
+    marker: {
+        color: data_2_detention.map(d => d.highlight ? '#E74C3C' : '#1B4F72').reverse()
+    },
+    text: data_2_detention.map(d => d.value.toFixed(1) + ' min').reverse(),
+    textposition: 'outside'
+}], {
+    title: 'TitanBolt Sits Alone — 4.4x Every Other Customer\'s Detention',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 220, r: 60 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Average Detention (minutes per stop)' },
+    yaxis: { title: '' }
+}, { responsive: true, displayModeBar: false });
+
+const data_2_trend = [{"month":"2024-07","value":47.0},{"month":"2024-08","value":46.2},{"month":"2024-09","value":48.1},{"month":"2024-10","value":47.3},{"month":"2024-11","value":47.5},{"month":"2024-12","value":46.9},{"month":"2025-01","value":47.3},{"month":"2025-02","value":46.1},{"month":"2025-03","value":47.2},{"month":"2025-04","value":47.3},{"month":"2025-05","value":46.7},{"month":"2025-06","value":48.1},{"month":"2025-07","value":47.7},{"month":"2025-08","value":49.5},{"month":"2025-09","value":46.2},{"month":"2025-10","value":48.0},{"month":"2025-11","value":47.2},{"month":"2025-12","value":48.0},{"month":"2026-01","value":47.3},{"month":"2026-02","value":47.5},{"month":"2026-03","value":47.6},{"month":"2026-04","value":46.3},{"month":"2026-05","value":46.5},{"month":"2026-06","value":48.7},{"month":"2026-07","value":49.4}];
+
+Plotly.newPlot('chart-2b', [{
+    type: 'scatter',
+    mode: 'lines+markers',
+    x: data_2_trend.map(d => d.month),
+    y: data_2_trend.map(d => d.value),
+    line: { color: '#E74C3C', width: 2 },
+    marker: { size: 5, color: '#E74C3C' }
+}], {
+    title: 'TitanBolt Detention Has Been Flat at ~47 Minutes for 24 Months — Not a Blip',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 60, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Month', tickangle: -45 },
+    yaxis: { title: 'Avg Detention (minutes)', rangemode: 'tozero' }
+}, { responsive: true, displayModeBar: false });
+</script>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: Lane Profitability -->
+<!-- ============================================================ -->
+<section class="section" id="section-3">
+  <h2 class="section-title">The Seattle↔Atlanta Lane Runs at a Structural Loss</h2>
+  <p class="section-subtitle">
+    A top-4 lane by volume nets well below breakeven, every month, for two straight years —
+    yet it keeps running at full volume.
+  </p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">$1.35/mi</div>
+      <div class="metric-label">Seattle↔Atlanta average net revenue per mile</div>
+      <div class="metric-delta bad">↓ $0.70/mi below the $2.05 breakeven target</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">$10.7M/yr</div>
+      <div class="metric-label">Estimated annualized shortfall vs. breakeven</div>
+      <div class="metric-delta bad">Largest quantified pain point in the dataset</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">11,656 loads</div>
+      <div class="metric-label">Volume run on this lane pair over the data window</div>
+      <div class="metric-delta bad">~480 loads/month, full utilization</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-3a" style="height:420px;"></div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-3b" style="height:350px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>The Seattle↔Atlanta lane pair nets $1.30-$1.39/mile after fuel, against
+    a $2.05/mile breakeven target</strong> — the two worst-performing lanes in the entire network,
+    despite running near-full volume every month for two years. Every other lane in the network
+    clears breakeven or comes close. This isn't a bad month; it's a structurally mispriced lane.
+  </div>
+</section>
+
+<script>
+const data_3_lanes = [{"label":"Atlanta→Seattle","value":1.3,"below_breakeven":true},{"label":"Seattle→Atlanta","value":1.39,"below_breakeven":true},{"label":"Denver→Portland","value":1.59,"below_breakeven":true},{"label":"Portland→Denver","value":1.64,"below_breakeven":true},{"label":"Dallas→Spokane","value":1.64,"below_breakeven":true},{"label":"Chicago→Spokane","value":1.69,"below_breakeven":true},{"label":"Spokane→Dallas","value":1.79,"below_breakeven":true},{"label":"Spokane→Chicago","value":1.84,"below_breakeven":true},{"label":"Dallas→Chicago","value":1.89,"below_breakeven":true},{"label":"Chicago→Dallas","value":1.93,"below_breakeven":true},{"label":"Portland→Spokane","value":2.02,"below_breakeven":true},{"label":"Spokane→Portland","value":2.08,"below_breakeven":false}];
+
+Plotly.newPlot('chart-3a', [{
+    type: 'bar',
+    orientation: 'h',
+    y: data_3_lanes.map(d => d.label).reverse(),
+    x: data_3_lanes.map(d => d.value).reverse(),
+    marker: {
+        color: data_3_lanes.map(d => d.label.includes('Seattle') && d.label.includes('Atlanta') ? '#E74C3C' : (d.below_breakeven ? '#95A5A6' : '#2ECC71')).reverse()
+    },
+    text: data_3_lanes.map(d => '$' + d.value.toFixed(2)).reverse(),
+    textposition: 'outside'
+}], {
+    title: 'Every Lane Ranked by Net Revenue per Mile — Seattle↔Atlanta Is the Worst',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 150, r: 60 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Net Revenue per Mile ($, after fuel)' },
+    yaxis: { title: '' },
+    shapes: [{
+        type: 'line', x0: 2.05, x1: 2.05, y0: -0.5, y1: 11.5,
+        line: { color: '#1B4F72', width: 2, dash: 'dash' }
+    }],
+    annotations: [{
+        x: 2.05, y: 11.3, text: 'Breakeven: $2.05', showarrow: false,
+        xshift: 55, font: { color: '#1B4F72', size: 11 }
+    }]
+}, { responsive: true, displayModeBar: false });
+
+const data_3_trend = [{"month":"2024-07","value":1.37},{"month":"2024-08","value":1.36},{"month":"2024-09","value":1.38},{"month":"2024-10","value":1.38},{"month":"2024-11","value":1.35},{"month":"2024-12","value":1.38},{"month":"2025-01","value":1.39},{"month":"2025-02","value":1.37},{"month":"2025-03","value":1.37},{"month":"2025-04","value":1.37},{"month":"2025-05","value":1.35},{"month":"2025-06","value":1.35},{"month":"2025-07","value":1.36},{"month":"2025-08","value":1.35},{"month":"2025-09","value":1.35},{"month":"2025-10","value":1.35},{"month":"2025-11","value":1.34},{"month":"2025-12","value":1.36},{"month":"2026-01","value":1.35},{"month":"2026-02","value":1.35},{"month":"2026-03","value":1.35},{"month":"2026-04","value":1.35},{"month":"2026-05","value":1.33},{"month":"2026-06","value":1.32},{"month":"2026-07","value":1.3}];
+
+Plotly.newPlot('chart-3b', [{
+    type: 'scatter',
+    mode: 'lines+markers',
+    x: data_3_trend.map(d => d.month),
+    y: data_3_trend.map(d => d.value),
+    line: { color: '#E74C3C', width: 2 },
+    marker: { size: 5, color: '#E74C3C' }
+}, {
+    type: 'scatter',
+    mode: 'lines',
+    x: data_3_trend.map(d => d.month),
+    y: data_3_trend.map(() => 2.05),
+    line: { color: '#1B4F72', width: 2, dash: 'dash' },
+    name: 'Breakeven ($2.05)'
+}], {
+    title: 'Seattle↔Atlanta Net-per-Mile Has Never Approached Breakeven',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 60, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Month', tickangle: -45 },
+    yaxis: { title: 'Net Revenue per Mile ($)', range: [1.0, 2.2] },
+    showlegend: false
+}, { responsive: true, displayModeBar: false });
+</script>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: Chicago Retention -->
+<!-- ============================================================ -->
+<section class="section" id="section-4">
+  <h2 class="section-title">Chicago's 2023 Hiring Class Is Churning at 4x the Normal Rate</h2>
+  <p class="section-subtitle">
+    A single hiring cohort at a single terminal is losing drivers at a rate no other
+    cohort in the fleet comes close to.
+  </p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">61.9%</div>
+      <div class="metric-label">Chicago 2023 cohort termination rate (13 of 21 drivers)</div>
+      <div class="metric-delta bad">vs. 14.0% for Spokane overall</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">25%</div>
+      <div class="metric-label">Spokane's own 2023 cohort termination rate</div>
+      <div class="metric-delta good">Same calendar year, same market — 2.5x lower</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">20.0%</div>
+      <div class="metric-label">Fleet-wide termination rate (all terminals, all years)</div>
+      <div class="metric-delta bad">Chicago 2023 runs 3x above this baseline</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-4a" style="height:420px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>Chicago's 2023 hiring class has lost 13 of 21 drivers (61.9%) — more
+    than 4x Spokane's 2023 cohort loss rate (25%) in the same calendar year.</strong>
+    Because Chicago's 51 drivers are a smaller pool than Spokane's 114, this spike disappears
+    into fleet-wide averages unless the cohort is isolated by terminal and hire-year — which is
+    exactly what happened here. This points to something specific to how the Chicago terminal
+    was staffed or run in 2023 (onboarding, pay, or home-time), not generic driver-market churn.
+  </div>
+</section>
+
+<script>
+const data_4_cohort = [{"terminal":"Chicago","year":2017,"rate":16.7,"headcount":6},{"terminal":"Chicago","year":2019,"rate":0.0,"headcount":3},{"terminal":"Chicago","year":2020,"rate":33.3,"headcount":6},{"terminal":"Chicago","year":2021,"rate":20.0,"headcount":5},{"terminal":"Chicago","year":2022,"rate":0.0,"headcount":3},{"terminal":"Chicago","year":2023,"rate":61.9,"headcount":21},{"terminal":"Spokane","year":2016,"rate":33.3,"headcount":3},{"terminal":"Spokane","year":2017,"rate":8.3,"headcount":12},{"terminal":"Spokane","year":2018,"rate":12.5,"headcount":16},{"terminal":"Spokane","year":2019,"rate":20.0,"headcount":10},{"terminal":"Spokane","year":2020,"rate":0.0,"headcount":8},{"terminal":"Spokane","year":2021,"rate":9.5,"headcount":21},{"terminal":"Spokane","year":2022,"rate":11.1,"headcount":9},{"terminal":"Spokane","year":2023,"rate":25.0,"headcount":8},{"terminal":"Spokane","year":2024,"rate":30.0,"headcount":10},{"terminal":"Spokane","year":2025,"rate":16.7,"headcount":12},{"terminal":"Spokane","year":2026,"rate":0.0,"headcount":5}];
+
+const years = [...new Set(data_4_cohort.map(d => d.year))].sort();
+const chicagoByYear = years.map(y => { const r = data_4_cohort.find(d => d.terminal === 'Chicago' && d.year === y); return r ? r.rate : null; });
+const spokaneByYear = years.map(y => { const r = data_4_cohort.find(d => d.terminal === 'Spokane' && d.year === y); return r ? r.rate : null; });
+
+Plotly.newPlot('chart-4a', [{
+    type: 'bar',
+    name: 'Chicago',
+    x: years,
+    y: chicagoByYear,
+    marker: {
+        color: years.map(y => y === 2023 ? '#E74C3C' : '#1B4F72')
+    }
+}, {
+    type: 'bar',
+    name: 'Spokane',
+    x: years,
+    y: spokaneByYear,
+    marker: {
+        color: years.map(y => y === 2023 ? '#F8C471' : '#95A5A6')
+    }
+}], {
+    title: 'Termination Rate by Hire-Year Cohort — Chicago 2023 Is the Clear Outlier',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    barmode: 'group',
+    margin: { t: 60, b: 60, l: 60, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Hire Year', dtick: 1 },
+    yaxis: { title: 'Termination Rate (%)' },
+    legend: { orientation: 'h', y: -0.2 },
+    annotations: [{
+        x: 2023, y: 61.9, text: 'Chicago 2023: 61.9%', showarrow: true, ax: 0, ay: -35,
+        font: { color: '#E74C3C', size: 12 }
+    }]
+}, { responsive: true, displayModeBar: false });
+</script>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: Aging Fleet Maintenance Cost -->
+<!-- ============================================================ -->
+<section class="section" id="section-5">
+  <h2 class="section-title">Eight Old Trucks Are Eating the Fleet's Maintenance Budget</h2>
+  <p class="section-subtitle">
+    The same 2010-2012 cohort dragging down fuel efficiency also drives disproportionate
+    maintenance cost and downtime — compounding the drag on whatever lanes they run.
+  </p>
+
+  <div class="grid-2">
+    <div class="metric-card">
+      <div class="metric-value">$101,488</div>
+      <div class="metric-label">Avg. maintenance cost per truck, aging cohort (8 trucks)</div>
+      <div class="metric-delta bad">↑ 8.5x the rest-of-fleet average of $11,969</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">1,015 hrs</div>
+      <div class="metric-label">Avg. downtime hours per truck, aging cohort</div>
+      <div class="metric-delta bad">↑ 11.4x the rest-of-fleet average of 89 hours</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">~$354K/yr</div>
+      <div class="metric-label">Estimated excess maintenance cost, cohort-wide</div>
+      <div class="metric-delta bad">Versus what a fleet-average truck would cost</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-5a" style="height:350px;"></div>
+  </div>
+
+  <div class="chart-wrap">
+    <div id="chart-5b" style="height:380px;"></div>
+  </div>
+
+  <div class="finding-box">
+    KEY FINDING: <strong>The aging truck cohort (TRK-041 through TRK-048) averages $101,488
+    in maintenance cost per truck over the data window, versus $11,969 for the rest of the
+    fleet</strong> — and TRK-046 alone has cost $133,884. Combined with the fuel-efficiency
+    findings in Section 1, these 8 trucks (7% of the fleet) are compounding fuel and
+    maintenance drag on every lane they're assigned to.
+  </div>
+</section>
+
+<script>
+const data_5_cohort_cost = [{"label":"Aging Cohort (TRK-041-048)","avg_maint_cost":101488.0,"avg_downtime":1015.0,"count":8},{"label":"Rest of Fleet","avg_maint_cost":11969.0,"avg_downtime":89.0,"count":101}];
+
+Plotly.newPlot('chart-5a', [{
+    type: 'bar',
+    x: data_5_cohort_cost.map(d => d.label),
+    y: data_5_cohort_cost.map(d => d.avg_maint_cost),
+    marker: {
+        color: data_5_cohort_cost.map(d => d.label.includes('Aging') ? '#E74C3C' : '#1B4F72')
+    },
+    text: data_5_cohort_cost.map(d => '$' + d.avg_maint_cost.toLocaleString()),
+    textposition: 'outside'
+}], {
+    title: 'Average Maintenance Cost per Truck — Aging Cohort vs. Rest of Fleet',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 80, r: 20 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: '' },
+    yaxis: { title: 'Avg. Maintenance Cost ($)', tickprefix: '$' }
+}, { responsive: true, displayModeBar: false });
+
+const data_5_trucks = [{"label":"TRK-046","value":133884.0},{"label":"TRK-045","value":119561.0},{"label":"TRK-042","value":106820.0},{"label":"TRK-043","value":98775.0},{"label":"TRK-048","value":98047.0},{"label":"TRK-047","value":95660.0},{"label":"TRK-041","value":87862.0},{"label":"TRK-044","value":71291.0}];
+
+Plotly.newPlot('chart-5b', [{
+    type: 'bar',
+    orientation: 'h',
+    y: data_5_trucks.map(d => d.label).reverse(),
+    x: data_5_trucks.map(d => d.value).reverse(),
+    marker: { color: '#E74C3C' },
+    text: data_5_trucks.map(d => '$' + d.value.toLocaleString()).reverse(),
+    textposition: 'outside'
+}], {
+    title: 'Total Maintenance Cost by Truck, Aging Cohort (24-Month Window)',
+    paper_bgcolor: 'white',
+    plot_bgcolor: 'white',
+    margin: { t: 60, b: 60, l: 90, r: 90 },
+    font: { family: '-apple-system, sans-serif' },
+    xaxis: { title: 'Total Maintenance Cost ($)', tickprefix: '$' },
+    yaxis: { title: '' }
+}, { responsive: true, displayModeBar: false });
+</script>
+
+<!-- ============================================================ -->
+<!-- PITCH -->
+<!-- ============================================================ -->
+<div class="pitch" id="pitch">
+  <h2>What We'd Build For You</h2>
+  <p>
+    This report shows what we found in 60 minutes of analysis.
+    Imagine having a live operations platform built specifically for Cascade Summit
+    Freightways — real-time load tracking, driver performance dashboards, automated
+    alerts when metrics go off-track, and a financial view that updates itself daily.
+  </p>
+  <p style="margin-top:1rem; opacity:0.75;">
+    For Cascade Summit specifically: a truck true-cost ranking that flags TRK-047 and
+    the aging cohort automatically, a detention scorecard that gives Renee hard numbers
+    for her next call with TitanBolt, a lane profitability view that catches the next
+    Seattle-Atlanta before it costs $10M/year, and a Chicago-vs-Spokane retention
+    dashboard that tells Renee whether new hiring fixes are actually working.
+  </p>
+  <a class="cta-btn" href="mailto:victorfoster@hotmail.com">Request Your Custom Platform</a>
+</div>
+
+<footer style="text-align:center; padding:2rem; color:#95A5A6; font-size:0.85rem;">
+  Generated by Carrier Demo Factory &middot;
+  <a href="https://your-domain.com" style="color:#95A5A6;">your-domain.com</a> &middot;
+  July 3, 2026
+</footer>
+
+</body>
+</html>

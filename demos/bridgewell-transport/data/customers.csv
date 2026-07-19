@@ -1,0 +1,7 @@
+customer_id,customer_name,city,state,industry,payment_terms_days,account_status
+CUST-001,Ozark Building Supply,Joplin,MO,Building Materials,30,active
+CUST-002,Route 66 Ag Cooperative,Tulsa,OK,Agriculture,30,active
+CUST-003,Sooner State Lumber,Oklahoma City,OK,Building Materials,30,active
+CUST-004,Delta Farm & Feed,Little Rock,AR,Agriculture,30,active
+CUST-005,Crossroads Hardware Distribution,Springfield,MO,Building Materials,30,active
+CUST-006,Heartland Grain Exchange,Kansas City,MO,Agriculture,15,active

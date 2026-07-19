@@ -1,0 +1,111 @@
+truck_id,make,model,year,status,acquisition_date,current_odometer,fuel_type
+TRK-001,Volvo,VNL 760,2017,active,2017-12-09,384062,diesel
+TRK-002,Peterbilt,389,2024,active,2024-07-22,502265,diesel
+TRK-003,Kenworth,T680,2022,active,2022-10-01,502727,diesel
+TRK-004,Peterbilt,389,2016,active,2016-07-17,450717,diesel
+TRK-005,Peterbilt,579,2021,active,2021-01-19,410500,diesel
+TRK-006,Kenworth,T680,2016,active,2016-12-06,121331,diesel
+TRK-007,Peterbilt,579,2016,active,2016-07-25,325842,diesel
+TRK-008,Peterbilt,579,2021,active,2021-03-07,173675,diesel
+TRK-009,Volvo,VNL 760,2024,active,2024-09-23,300879,diesel
+TRK-010,Peterbilt,579,2024,shop,2024-05-10,330251,diesel
+TRK-011,Volvo,VNL 760,2019,active,2019-09-02,230416,diesel
+TRK-012,Volvo,VNL 760,2016,active,2016-05-18,187201,diesel
+TRK-013,Kenworth,T680,2017,active,2017-07-14,142446,diesel
+TRK-014,Kenworth,T680,2018,active,2018-11-22,416547,diesel
+TRK-015,Freightliner,Cascadia,2021,active,2021-09-24,145628,diesel
+TRK-016,Volvo,VNL 760,2018,active,2018-06-25,233576,diesel
+TRK-017,Peterbilt,389,2022,active,2022-09-18,393030,diesel
+TRK-018,Peterbilt,579,2023,active,2023-06-23,488660,diesel
+TRK-019,Peterbilt,389,2019,active,2019-03-11,391801,diesel
+TRK-020,Peterbilt,579,2017,active,2017-11-11,123239,diesel
+TRK-021,Freightliner,Cascadia,2021,active,2021-04-04,340305,diesel
+TRK-022,Peterbilt,389,2022,active,2022-07-31,260665,diesel
+TRK-023,Peterbilt,579,2017,active,2017-05-29,378299,diesel
+TRK-024,Volvo,VNL 760,2018,active,2018-06-27,248203,diesel
+TRK-025,Peterbilt,389,2021,active,2021-12-15,242525,diesel
+TRK-026,Peterbilt,579,2023,retired,2023-02-27,305335,diesel
+TRK-027,Kenworth,T680,2017,active,2017-03-01,307764,diesel
+TRK-028,Kenworth,T680,2021,active,2021-01-24,358949,diesel
+TRK-029,Freightliner,Cascadia,2020,active,2020-03-16,240325,diesel
+TRK-030,Freightliner,Cascadia,2023,active,2023-03-28,218784,diesel
+TRK-031,Peterbilt,579,2024,active,2024-06-01,405924,diesel
+TRK-032,Freightliner,Cascadia,2023,active,2023-05-15,460937,diesel
+TRK-033,Freightliner,Cascadia,2023,active,2023-08-28,236447,diesel
+TRK-034,Freightliner,Cascadia,2020,active,2020-05-16,499906,diesel
+TRK-035,Peterbilt,579,2020,active,2020-07-31,363611,diesel
+TRK-036,Volvo,VNL 760,2023,active,2023-07-14,464100,diesel
+TRK-037,Peterbilt,389,2020,active,2020-04-06,328775,diesel
+TRK-038,Freightliner,Cascadia,2019,active,2019-05-04,481530,diesel
+TRK-039,Peterbilt,579,2019,active,2019-09-30,247126,diesel
+TRK-040,Kenworth,T680,2021,active,2021-01-10,343049,diesel
+TRK-041,Peterbilt,389,2010,active,2010-09-01,858189,diesel
+TRK-042,Freightliner,Cascadia,2010,active,2010-01-02,763900,diesel
+TRK-043,Freightliner,Cascadia,2012,active,2012-02-08,857886,diesel
+TRK-044,Freightliner,Cascadia,2011,active,2011-01-24,759781,diesel
+TRK-045,Peterbilt,389,2011,active,2011-04-18,905655,diesel
+TRK-046,Freightliner,Cascadia,2012,active,2012-08-06,905049,diesel
+TRK-047,Peterbilt,389,2011,active,2011-10-27,745807,diesel
+TRK-048,Peterbilt,389,2011,active,2011-06-18,772350,diesel
+TRK-049,Volvo,VNL 760,2023,active,2023-12-29,392241,diesel
+TRK-050,Volvo,VNL 760,2019,active,2019-04-25,204864,diesel
+TRK-051,Freightliner,Cascadia,2022,active,2022-07-14,506223,diesel
+TRK-052,Freightliner,Cascadia,2020,active,2020-03-23,239953,diesel
+TRK-053,Peterbilt,389,2023,active,2023-02-19,148064,diesel
+TRK-054,Freightliner,Cascadia,2017,active,2017-01-14,353920,diesel
+TRK-055,Kenworth,T680,2019,active,2019-09-10,212755,diesel
+TRK-056,Peterbilt,389,2019,active,2019-05-12,425975,diesel
+TRK-057,Peterbilt,389,2023,active,2023-10-12,209741,diesel
+TRK-058,Freightliner,Cascadia,2016,active,2016-09-07,324574,diesel
+TRK-059,Freightliner,Cascadia,2016,active,2016-02-10,113372,diesel
+TRK-060,Peterbilt,389,2022,active,2022-11-09,345448,diesel
+TRK-061,Peterbilt,389,2020,active,2020-01-15,493444,diesel
+TRK-062,Peterbilt,579,2023,active,2023-09-14,498834,diesel
+TRK-063,Volvo,VNL 760,2020,shop,2020-02-26,506619,diesel
+TRK-064,Peterbilt,389,2019,active,2019-02-21,357555,diesel
+TRK-065,Peterbilt,389,2019,active,2019-04-18,106373,diesel
+TRK-066,Kenworth,T680,2020,active,2020-02-12,507814,diesel
+TRK-067,Peterbilt,389,2019,active,2019-01-31,281392,diesel
+TRK-068,Volvo,VNL 760,2021,active,2021-01-02,206141,diesel
+TRK-069,Kenworth,T680,2018,active,2018-06-16,139134,diesel
+TRK-070,Kenworth,T680,2022,active,2022-03-29,334173,diesel
+TRK-071,Volvo,VNL 760,2020,active,2020-03-11,225815,diesel
+TRK-072,Kenworth,T680,2023,active,2023-06-20,456363,diesel
+TRK-073,Peterbilt,389,2019,active,2019-12-29,377711,diesel
+TRK-074,Peterbilt,389,2024,active,2024-02-14,175188,diesel
+TRK-075,Freightliner,Cascadia,2018,active,2018-11-07,104495,diesel
+TRK-076,Peterbilt,389,2021,active,2021-02-12,395578,diesel
+TRK-077,Peterbilt,389,2018,active,2018-09-03,277691,diesel
+TRK-078,Kenworth,T680,2018,active,2018-09-21,109704,diesel
+TRK-079,Peterbilt,389,2020,active,2020-10-15,312407,diesel
+TRK-080,Peterbilt,389,2018,active,2018-04-25,190691,diesel
+TRK-081,Freightliner,Cascadia,2018,active,2018-12-18,301464,diesel
+TRK-082,Kenworth,T680,2017,active,2017-09-25,119671,diesel
+TRK-083,Peterbilt,579,2018,active,2018-03-07,184247,diesel
+TRK-084,Freightliner,Cascadia,2020,active,2020-04-17,493205,diesel
+TRK-085,Peterbilt,579,2023,active,2023-08-29,477248,diesel
+TRK-086,Kenworth,T680,2019,active,2019-08-20,301049,diesel
+TRK-087,Kenworth,T680,2024,active,2024-07-22,332780,diesel
+TRK-088,Peterbilt,389,2016,active,2016-04-20,297020,diesel
+TRK-089,Peterbilt,579,2017,active,2017-09-25,156697,diesel
+TRK-090,Freightliner,Cascadia,2020,active,2020-10-24,131752,diesel
+TRK-091,Freightliner,Cascadia,2021,active,2021-02-07,435195,diesel
+TRK-092,Freightliner,Cascadia,2018,active,2018-06-15,264103,diesel
+TRK-093,Peterbilt,579,2017,shop,2017-02-27,489975,diesel
+TRK-094,Peterbilt,579,2017,active,2017-06-04,210148,diesel
+TRK-095,Peterbilt,579,2022,active,2022-10-10,464737,diesel
+TRK-096,Peterbilt,579,2019,active,2019-03-27,131583,diesel
+TRK-097,Freightliner,Cascadia,2019,active,2019-06-13,358790,diesel
+TRK-098,Volvo,VNL 760,2020,active,2020-01-05,380974,diesel
+TRK-099,Peterbilt,389,2016,active,2016-05-02,370926,diesel
+TRK-100,Peterbilt,579,2016,active,2016-01-14,460091,diesel
+TRK-101,Freightliner,Cascadia,2020,active,2020-11-29,423108,diesel
+TRK-102,Freightliner,Cascadia,2017,active,2017-11-20,212699,diesel
+TRK-103,Volvo,VNL 760,2024,active,2024-08-17,347805,diesel
+TRK-104,Peterbilt,579,2019,active,2019-07-15,264847,diesel
+TRK-105,Peterbilt,389,2018,active,2018-09-10,220529,diesel
+TRK-106,Peterbilt,579,2021,active,2021-06-19,392170,diesel
+TRK-107,Freightliner,Cascadia,2017,active,2017-05-23,368954,diesel
+TRK-108,Peterbilt,389,2017,active,2017-02-25,466318,diesel
+TRK-109,Freightliner,Cascadia,2017,active,2017-05-01,387792,diesel
+TRK-110,Volvo,VNL 760,2019,active,2019-08-21,100422,diesel

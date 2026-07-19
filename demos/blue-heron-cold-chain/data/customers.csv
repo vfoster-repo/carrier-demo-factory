@@ -1,0 +1,7 @@
+customer_id,customer_name,city,state,industry,payment_terms_days,account_status
+CUST-01,Skagit Valley Produce,Mount Vernon,WA,Produce,30,active
+CUST-02,Bellingham Cold Storage,Bellingham,WA,Seafood,30,active
+CUST-03,Cascade Berry Growers,Burlington,WA,Produce,15,active
+CUST-04,Golden Gate Fresh Distributors,Oakland,CA,Distribution,45,active
+CUST-05,Pacific Coast Load Board Spot,Oakland,CA,Brokerage,30,active
+CUST-06,Evergreen Freight Match,Portland,OR,Brokerage,30,active

@@ -1,0 +1,9 @@
+customer_id,customer_name,city,state,industry,payment_terms_days,account_status
+CUST-01,Cascade Paper Products,Spokane,WA,Paper/Pulp,30,active
+CUST-02,Evergreen Foods Co-op,Portland,OR,Food/Grocery,30,active
+CUST-03,TitanBolt Industrial Supply,Dallas,TX,Industrial/Hardware,45,active
+CUST-04,Northwind Appliance Distributors,Chicago,IL,Appliances,30,active
+CUST-05,Rocky Summit Building Materials,Denver,CO,Building Materials,30,active
+CUST-06,Peachtree Consumer Goods,Atlanta,GA,Consumer Goods,45,active
+CUST-07,Lonestar Auto Parts Wholesale,Dallas,TX,Automotive Parts,30,active
+CUST-08,Pioneer Home Furnishings,Seattle,WA,Furniture,30,active
